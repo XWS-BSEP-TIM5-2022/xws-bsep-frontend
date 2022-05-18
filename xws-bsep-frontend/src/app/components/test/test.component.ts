@@ -18,14 +18,13 @@ export class TestComponent implements OnInit {
       password : "Kristina1234."
     }
     this.authService.login(user).subscribe((posts: any) => {
-      console.log(posts)
     }
     )
 
-    // this.testService.findAll().subscribe((posts: any) => {
-    //   console.log(posts)
-    // }
-    // )
+      this.testService.findAll().subscribe((posts: any) => {
+        console.log(posts)
+      }
+      )
   }
 
 }
