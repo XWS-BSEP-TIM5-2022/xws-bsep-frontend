@@ -18,10 +18,10 @@
 						<div class="col-lg-6">
 							<div class="cmp-info">
 								<div class="cm-logo">
-									<img src="images/cm-logo.png" alt="">
+									<!-- <img src="../../../images/cm-logo.png" alt=""> -->
 									<p>Workwise,  is a global freelancing platform and social networking where businesses and independent professionals connect and collaborate remotely</p>
 								</div><!--cm-logo end-->	
-								<img src="images/cm-main-img.png" alt="">			
+								<!-- <img src="../../../images/cm-main-img.png" alt="">			 -->
 							</div><!--cmp-info end-->
 						</div>
 						<div class="col-lg-6">
@@ -37,13 +37,13 @@
 										<div class="row">
 											<div class="col-lg-12 no-pdd">
 												<div class="sn-field">
-													<input type="text" name="username" placeholder="Username">
+													<input [(ngModel)]="username" type="text" name="username" placeholder="Username" autocomplete="off">
 													<i class="la la-user"></i>
 												</div><!--sn-field end-->
 											</div>
 											<div class="col-lg-12 no-pdd">
 												<div class="sn-field">
-													<input type="password" name="password" placeholder="Password">
+													<input [(ngModel)]="password" type="password" name="password" placeholder="Password" autocomplete="off">
 													<i class="la la-lock"></i>
 												</div>
 											</div>
@@ -60,17 +60,11 @@
 												</div>
 											</div>
 											<div class="col-lg-12 no-pdd">
-												<button type="submit" value="submit">Sign in</button>
+												<button type="submit" value="submit" (click)="login()">Sign in</button>
 											</div>
 										</div>
 									</form>
-									<div class="login-resources">
-										<h4>Login Via Social Account</h4>
-										<ul>
-											<li><a href="#" title="" class="fb"><i class="fa fa-facebook"></i>Login Via Facebook</a></li>
-											<li><a href="#" title="" class="tw"><i class="fa fa-twitter"></i>Login Via Twitter</a></li>
-										</ul>
-									</div><!--login-resources end-->
+
 								</div><!--sign_in_sec end-->
 								
 								<div class="sign_in_sec" id="tab-2"> 
@@ -108,13 +102,13 @@
 												</div>
 												<div class="col-lg-12 no-pdd">
 													<div class="sn-field">
-														<input type="password" name="password" placeholder="Password">
+														<input type="password" name="password" placeholder="Password" autocomplete="off">
 														<i class="la la-lock"></i>
 													</div>
 												</div>
 												<div class="col-lg-12 no-pdd">
 													<div class="sn-field">
-														<input type="password" name="repeat-password" placeholder="Repeat Password">
+														<input type="password" name="repeat-password" placeholder="Repeat Password" autocomplete="off">
 														<i class="la la-lock"></i>
 													</div>
 												</div>
@@ -152,13 +146,13 @@
 												</div>
 												<div class="col-lg-12 no-pdd">
 													<div class="sn-field">
-														<input type="password" name="password" placeholder="Password">
+														<input type="password" name="password" placeholder="Password" autocomplete="off">
 														<i class="la la-lock"></i>
 													</div>
 												</div>
 												<div class="col-lg-12 no-pdd">
 													<div class="sn-field">
-														<input type="password" name="repeat-password" placeholder="Repeat Password">
+														<input type="password" name="repeat-password" placeholder="Repeat Password" autocomplete="off">
 														<i class="la la-lock"></i>
 													</div>
 												</div>
@@ -187,19 +181,7 @@
 				</div><!--signin-pop end-->
 			</div><!--signin-popup end-->
 			<div class="footy-sec">
-				<div class="container">
-					<ul>
-						<li><a href="#" title="">Help Center</a></li>
-						<li><a href="#" title="">Privacy Policy</a></li>
-						<li><a href="#" title="">Community Guidelines</a></li>
-						<li><a href="#" title="">Cookies Policy</a></li>
-						<li><a href="#" title="">Career</a></li>
-						<li><a href="#" title="">Forum</a></li>
-						<li><a href="#" title="">Language</a></li>
-						<li><a href="#" title="">Copyright Policy</a></li>
-					</ul>
-					<p><img src="images/copy-icon.png" alt="">Copyright 2018</p>
-				</div>
+
 			</div><!--footy-sec end-->
 		</div><!--sign-in-page end-->
 

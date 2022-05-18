@@ -13,13 +13,13 @@ export class TestComponent implements OnInit {
 
   ngOnInit(): void {
 
-    var user = {
-      username : "TEAAAA",
-      password : "Jelena1!"
-    }
-    this.authService.login(user).subscribe((posts: any) => {
-    }
-    )
+    // var user = {
+    //   username : "TEAAAA",
+    //   password : "Jelena1!"
+    // }
+    // this.authService.login(user).subscribe((posts: any) => {
+    // }
+    // )
 
       this.testService.findAll().subscribe((posts: any) => {
         console.log(posts)
