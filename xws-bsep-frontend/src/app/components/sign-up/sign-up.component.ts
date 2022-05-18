@@ -1,3 +1,5 @@
+import { AuthService } from './../../services/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignUpComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService, private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
@@ -25,6 +28,43 @@ export class SignUpComponent implements OnInit {
 
   addEducation(){
     this.education.push(this.education.length);
+  }
+
+  signUp(){
+    var user = { 
+      "name": "Kristina",
+      "lastName": "Stojic",
+      "email": "kris@gmail.com",
+      "mobileNumber": "0653829384",
+      "gender": "Male",
+      "birthday": "1997-02-21T01:10:30Z",
+      "username": "kris",
+      "biography": "Vredan od malih nogu",
+      "password" : "Kristina1234.",
+      "isPublic": false,
+      "education": [],
+      "experience": [],
+      "skills": [
+          {
+              "id": "624b0cc336a1d6fd8c4cf0f6",
+              "name": "Java"
+          }
+      ],
+      "interests": [
+          {
+              "id": "624b0cc336a1d6fd8c4cf0f6",
+              "name": "Jasafasfadfva",
+              "description": "lalalalala"
+          }
+      ],
+      "role": "User"
+  
+  }
+
+  this.authService.signUp(user).subscribe((posts: any) => {
+    this.router.navigate(['']);
+
+  })
   }
 
 }

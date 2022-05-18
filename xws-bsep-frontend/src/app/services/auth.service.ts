@@ -16,16 +16,13 @@ export class AuthService {
   constructor(private http:HttpClient,private testService: TestService) { }
 
   private readonly loginPath = environment.backend_api + 'api/auth/login';
+  private readonly signUpPath = environment.backend_api + 'api/auth/register';
+
   logged: Boolean = false;
 
   private access_token = null;
 
   login(user) {
-    const loginHeaders = new HttpHeaders({
-      'Accept': 'application/json',
-       'Content-Type': 'application/json'
-    });
-
     const body = {
       'username': user.username,
       'password': user.password
@@ -50,6 +47,16 @@ export class AuthService {
 
   getToken() {
     return this.access_token;
+  }
+
+
+  signUp(user){
+    console.log(user)
+    return this.http.post(this.signUpPath, JSON.stringify(user))
+    .pipe(map((res: any) => {
+
+      alert(res)
+    }));
   }
 
 }
