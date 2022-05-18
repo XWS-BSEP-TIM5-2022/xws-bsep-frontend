@@ -31,9 +31,19 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.css",
+              "src/css/animate.css",
+              "src/css/bootstrap.min.css",
+              "src/css/line-awesome.css",
+              "src/css/line-awesome-font-awesome.min.css",
+              "src/css/font-awesome.min.css",
+              "src/lib/slick/slick.css",
+              "src/lib/slick/slick-theme.css",
+              "src/css/style.css",
+              "src/css/responsive.css"
             ],
-            "scripts": []
+            "scripts": [
+            ]
           },
           "configurations": {
             "production": {

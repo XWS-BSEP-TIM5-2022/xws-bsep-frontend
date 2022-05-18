@@ -14,8 +14,8 @@ export class TestComponent implements OnInit {
   ngOnInit(): void {
 
     var user = {
-      username : "kristina",
-      password : "Kristina1234."
+      username : "TEAAAA",
+      password : "Jelena1!"
     }
     this.authService.login(user).subscribe((posts: any) => {
     }
