@@ -13,8 +13,11 @@ export class TestService {
   private readonly testPath = environment.backend_api + 'post';
   private readonly loginPath = environment.backend_api + 'api/auth/login';
 
+
+  
   public findAll(): Observable<any[]>{
-    return this._http.get<any[]>(`${this.testPath}`)
+    
+       return this._http.get<any[]>(`${this.testPath}`)
   }
 
 
