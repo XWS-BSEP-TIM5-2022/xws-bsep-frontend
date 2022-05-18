@@ -25,13 +25,11 @@ export class AuthService {
       'Accept': 'application/json',
        'Content-Type': 'application/json'
     });
-    //console.log(user)
 
     const body = {
       'username': user.username,
       'password': user.password
     };
-    console.log(body)
 
     return this.http.post(this.loginPath, JSON.stringify(body))
       .pipe(map((res: any) => {
@@ -39,19 +37,14 @@ export class AuthService {
         this.logged = true;
         this.access_token = res.token;
 
-        console.log("token:" + this.access_token)
         let decoded: any = jwt_decode(res.token)
-        console.dir(res)
         localStorage.setItem("user", decoded.sub)
         localStorage.setItem("role", decoded.role)
         localStorage.setItem("jwt", res.token);
-
-        // console.log(localStorage.getItem("role"))
       }));
   }
 
   tokenIsPresent() {
-    console.log("TOKEEEEEEN: " + localStorage.getItem("jwt"))
     return localStorage.getItem("jwt") != undefined && localStorage.getItem("jwt") != null;
   }
 
