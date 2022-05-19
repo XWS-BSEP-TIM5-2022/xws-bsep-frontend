@@ -7,6 +7,7 @@ import { catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import jwt_decode from "jwt-decode";
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -55,8 +56,23 @@ export class AuthService {
     return this.http.post(this.signUpPath, JSON.stringify(user))
     .pipe(map((res: any) => {
 
-      alert(res)
-    }));
+    }))
+    .pipe(catchError(error => this.checkError(error)));
+    
+  }
+
+  private checkError(error: any): any {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: error.error.message,
+    })
+    // setTimeout(
+    //   function(){ 
+    //   location.reload(); 
+    //   }, 4000);
+
+    throw error;
   }
 
 }
