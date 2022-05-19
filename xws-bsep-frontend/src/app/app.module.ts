@@ -20,7 +20,7 @@ import { AccountRecoveryComponent } from './components/account-recovery/account-
     AppComponent,
     TestComponent,
     LoginComponent,
-    UserFeedComponent
+    UserFeedComponent,
     AccountRecoveryComponent
   ],
   imports: [

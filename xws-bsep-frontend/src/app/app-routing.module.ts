@@ -21,16 +21,17 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
+    path: 'accountRecovery',
+    component: AccountRecoveryComponent,
+  },
+  {
     path: 'feed',
     component: UserFeedComponent,
     canActivate: [RoleGuard], 
     data: { 
       expectedRole: 'User'  // ROLE GUARD - samo expectedRole moze da pristupi stranici
-  }, 
-  {
-    path: 'accountRecovery',
-    component: AccountRecoveryComponent,
-  },
+    }
+  }
 ];
 
 @NgModule({
