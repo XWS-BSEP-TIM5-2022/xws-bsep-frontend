@@ -14,6 +14,12 @@ export class LoginComponent implements OnInit {
 
   username: string = ""
   password: string = ""
+  email: string = ""
+  isPassless = false;
+  isLogin = true;
+  isSignup = false;
+  message = "";
+  isSubmitted = false;
 
   ngOnInit(): void {
   }
@@ -31,4 +37,22 @@ export class LoginComponent implements OnInit {
 
   }
 
+  onEmailChange(){
+    this.message = ""
+  }
+
+  passwordlessLogin(){
+    if(!(this.email.trim())){
+      this.message = "Write your email."
+      return
+    }
+
+    this.authService.passwordlessLogin({"email" : this.email}).subscribe((data) => {
+      this.isSubmitted = true; 
+    }, err => {
+      console.log(err)
+      this.message = "There is no acctivated acount with this email."
+    }) 
+  }
+ 
 }

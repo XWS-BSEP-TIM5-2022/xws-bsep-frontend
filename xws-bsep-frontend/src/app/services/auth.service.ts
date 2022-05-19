@@ -11,11 +11,12 @@ import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService { 
 
   constructor(private http:HttpClient,private testService: TestService) { }
 
   private readonly loginPath = environment.backend_api + 'api/auth/login';
+  private readonly passwordlessLoginPath = environment.backend_api + 'api/auth/passwordless-login';
   private readonly sendRecoveryCodePath = environment.backend_api + 'api/auth/sendCode';
   private readonly verifyRecoveryCodePath = environment.backend_api + 'api/auth/verifyCode';
   private readonly resetForgottenPasswordPath = environment.backend_api + 'api/auth/resetPassword';
@@ -48,6 +49,10 @@ export class AuthService {
       }));
   }
 
+  passwordlessLogin(body: {email: string}) {
+    return this.http.post(this.passwordlessLoginPath, JSON.stringify(body));
+  }
+ 
   tokenIsPresent() {
     return localStorage.getItem("jwt") != undefined && localStorage.getItem("jwt") != null;
   }
