@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
   login(){
     var user = {
       username : this.username,
@@ -27,8 +26,7 @@ export class LoginComponent implements OnInit {
 
     console.log(user.username)
     this.authService.login(user).subscribe((posts: any) => {
-      this.router.navigate(['/test']);
-
+      this.router.navigate(['/feed']);
     })
 
   }
