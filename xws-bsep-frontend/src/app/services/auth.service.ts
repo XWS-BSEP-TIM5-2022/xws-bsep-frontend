@@ -5,8 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import {environment} from "../../environments/environment";
 import { catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import jwt_decode from "jwt-decode";
+import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,7 @@ export class AuthService {
   logged: Boolean = false;
 
   private access_token = null;
+  public jwtHelper: JwtHelperService = new JwtHelperService();
 
   login(user) {
     const loginHeaders = new HttpHeaders({
@@ -48,8 +49,28 @@ export class AuthService {
     return localStorage.getItem("jwt") != undefined && localStorage.getItem("jwt") != null;
   }
 
+  roleIsPresent(){
+    return localStorage.getItem("role")!= undefined && localStorage.getItem("role") != null;
+  }
+
+  tokenIsExpired(){
+    if (localStorage.getItem("jwt") != undefined && localStorage.getItem("jwt") != null)  {
+      let token = JSON.parse(localStorage.getItem('jwt') || '{}');
+      console.log("token nije istekao")
+      return !this.jwtHelper.isTokenExpired(token);
+    }
+    return true;
+  }
+
   getToken() {
     return this.access_token;
+  }
+
+  isAuthenticated(): boolean {
+    if (this.tokenIsPresent() && this.roleIsPresent() /**&& !this.tokenIsExpired() **/){
+      return true;
+    }
+    return false;
   }
 
 }

@@ -13,19 +13,12 @@ import { UserService } from 'src/app/services/user.service';
 export class UserFeedComponent implements OnInit {
 
   constructor(private userService: UserService, private feedService: FeedService, private postService: PostService) { }
-  user: User;
+  user: User; // current user
   obj: any;
   posts: FeedPost[] = [];
+  postUser: User;
 
   ngOnInit(): void {
-    // let post1 = new FeedPost(); 
-    // post1.Id = '111';
-
-    // this.posts.push(post1)
-    // let poss1 = []
-    // poss1.p
-    // this.posts.
-
     this.loadUserData();
   }
 
@@ -36,7 +29,6 @@ export class UserFeedComponent implements OnInit {
       this.userService.getById(userId).subscribe(
         (user: any) => {
         this.user = user['user']
-        console.log(this.user.name)     // RESENO   
         this.loadFeed();
       })
     }
@@ -50,6 +42,13 @@ export class UserFeedComponent implements OnInit {
         (data: any[]) => { 
           let allPosts = data['AllPosts']
           this.posts = allPosts
+
+          for (let p of this.posts){
+            this.userService.getById(p.UserId).subscribe(
+              (user: any) => {
+                p.User = user['user']
+            })
+          }
       })
     }
   }

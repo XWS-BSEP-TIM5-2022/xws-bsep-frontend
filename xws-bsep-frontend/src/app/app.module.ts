@@ -10,6 +10,8 @@ import { TestComponent } from './components/test/test.component';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { UserFeedComponent } from './components/user-feed/user-feed.component';
+import { AuthGuardService } from './services/auth-guard.service';
+import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { UserFeedComponent } from './components/user-feed/user-feed.component';
     useClass: TokenInterceptor,
     multi: true
     }, 
-],
+    AuthGuardService,
+    JwtHelperService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

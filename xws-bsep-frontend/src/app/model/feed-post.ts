@@ -1,3 +1,5 @@
+import { User } from "./user";
+
 export class FeedPost {
     Id: string;
     Text: string;
@@ -8,4 +10,5 @@ export class FeedPost {
     // Dislikes: Dislike[];
     // Comments: Comment[];
     UserId: string;
+    User: User;
 }
