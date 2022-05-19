@@ -14,6 +14,7 @@ export class AccountRecoveryComponent implements OnInit {
   isHiddenDivEmail: boolean = false;
   isHiddenDivCode: boolean = true;
   isHiddenDivChangePass : boolean = true;
+  isHiddenDivResendCode: boolean = true;
 
   email: string = "";
   code: string = "";
@@ -25,22 +26,52 @@ export class AccountRecoveryComponent implements OnInit {
   }
 
   sendEmail() {
-    this.authService.sendRecoveryCode(this.email).subscribe(res => {
+    // TODO SD: validacija email
+    const body = {
+      "email": this.email
+    }
+    this.authService.sendRecoveryCode(body).subscribe(res => {
       this.authId = res["idAuth"]
       this.isHiddenDivEmail = true;
       this.isHiddenDivCode = false;
       this.isHiddenDivChangePass = true;
+      alert('Verification code is sent! Check your mail inbox!')
+    }, err => {
+      alert("Invalid email")
     })
   }
 
   sendCode() {
-    this.isHiddenDivEmail = true;
-    this.isHiddenDivCode = true;
-    this.isHiddenDivChangePass = false;
+    // TODO SD: validacija front
+    const body = {
+      "idAuth": this.authId,
+      "verificationCode": this.code.toString(),
+      "email": this.email
+    }
+    this.authService.VerifyRecoveryCode(body).subscribe(res => {
+      this.isHiddenDivEmail = true;
+      this.isHiddenDivCode = true;
+      this.isHiddenDivChangePass = false;
+    }, err => {
+      console.log(err)
+      alert(err.error.message)
+    })
   }
 
   resetPassword() {
-    this.router.navigate(['/']);
+    const body = {
+      "idAuth": this.authId,
+      "password": this.password,
+      "reenteredPassword": this.reenteredPassword
+    }
+    this.authService.ResetForgottenPassword(body).subscribe(res => {
+      alert('New password successfully set')
+      this.router.navigate(['/']);
+    }, err => {
+      console.log(err)
+      alert(err.error.message)
+    })
+   
   }
 
 }
