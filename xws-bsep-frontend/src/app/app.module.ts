@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { UserFeedComponent } from './components/user-feed/user-feed.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
+import { RoleGuardService } from './services/role-guard.service';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
     }, 
     AuthGuardService,
     JwtHelperService,
+    RoleGuardService
   ],
   bootstrap: [AppComponent]
 })

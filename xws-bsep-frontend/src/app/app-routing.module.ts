@@ -6,11 +6,14 @@ import { UserFeedComponent } from './components/user-feed/user-feed.component';
 import { 
   AuthGuardService as AuthGuard 
 } from './services/auth-guard.service';
+import { RoleGuardService 
+as RoleGuard } from './services/role-guard.service';
 
 const routes: Routes = [
   {
     path: 'test',
     component: TestComponent,
+    canActivate: [AuthGuard],   // AUTH GUARD - bilo koji ulgovani korisnik moze da pristupi stranici
   },
   {
     path: '',
@@ -19,7 +22,10 @@ const routes: Routes = [
   {
     path: 'feed',
     component: UserFeedComponent,
-    canActivate: [AuthGuard],
+    canActivate: [RoleGuard], 
+    data: { 
+      expectedRole: 'User'  // ROLE GUARD - samo expectedRole moze da pristupi stranici
+    } 
   },
 ];
 
