@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { UserFeedComponent } from './components/user-feed/user-feed.component';
+import { PasswordlessLoginComponent } from './components/passwordless-login/passwordless-login.component';
 import { 
   AuthGuardService as AuthGuard 
 } from './services/auth-guard.service';
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: '',
     component: LoginComponent,
+  },
+  {
+    path: 'passwordless-login',
+    component: PasswordlessLoginComponent,
   },
   {
     path: 'accountRecovery',
