@@ -9,12 +9,14 @@ import { AppComponent } from './app.component';
 import { TestComponent } from './components/test/test.component';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
+import { AccountRecoveryComponent } from './components/account-recovery/account-recovery.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TestComponent,
-    LoginComponent
+    LoginComponent,
+    AccountRecoveryComponent
   ],
   imports: [
     BrowserModule,

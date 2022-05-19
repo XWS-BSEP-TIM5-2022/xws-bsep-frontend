@@ -16,6 +16,9 @@ export class AuthService {
   constructor(private http:HttpClient,private testService: TestService) { }
 
   private readonly loginPath = environment.backend_api + 'api/auth/login';
+  private readonly sendRecoveryCodePath = environment.backend_api + 'api/auth/sendCode';
+  private readonly verifyRecoveryCodePath = environment.backend_api + 'api/auth/sendCode';
+  private readonly resetForgottenPasswordPath = environment.backend_api + 'api/auth/resetPassword';
   logged: Boolean = false;
 
   private access_token = null;
@@ -51,5 +54,13 @@ export class AuthService {
   getToken() {
     return this.access_token;
   }
+
+  sendRecoveryCode(email: string) {
+    const body = {
+      "email": email
+    }
+    return this.http.put(this.sendRecoveryCodePath, JSON.stringify(body));
+  }
+
 
 }
