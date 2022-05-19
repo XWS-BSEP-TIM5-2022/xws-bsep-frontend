@@ -8,6 +8,7 @@ import {
 } from './services/auth-guard.service';
 import { RoleGuardService 
 as RoleGuard } from './services/role-guard.service';
+import { AccountRecoveryComponent } from './components/account-recovery/account-recovery.component';
 
 const routes: Routes = [
   {
@@ -25,7 +26,10 @@ const routes: Routes = [
     canActivate: [RoleGuard], 
     data: { 
       expectedRole: 'User'  // ROLE GUARD - samo expectedRole moze da pristupi stranici
-    } 
+  }, 
+  {
+    path: 'accountRecovery',
+    component: AccountRecoveryComponent,
   },
 ];
 

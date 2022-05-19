@@ -13,6 +13,7 @@ import { UserFeedComponent } from './components/user-feed/user-feed.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { RoleGuardService } from './services/role-guard.service';
+import { AccountRecoveryComponent } from './components/account-recovery/account-recovery.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { RoleGuardService } from './services/role-guard.service';
     TestComponent,
     LoginComponent,
     UserFeedComponent
+    AccountRecoveryComponent
   ],
   imports: [
     BrowserModule,

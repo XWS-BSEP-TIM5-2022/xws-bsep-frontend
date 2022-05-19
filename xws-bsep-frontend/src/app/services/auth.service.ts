@@ -16,6 +16,9 @@ export class AuthService {
   constructor(private http:HttpClient,private testService: TestService) { }
 
   private readonly loginPath = environment.backend_api + 'api/auth/login';
+  private readonly sendRecoveryCodePath = environment.backend_api + 'api/auth/sendCode';
+  private readonly verifyRecoveryCodePath = environment.backend_api + 'api/auth/verifyCode';
+  private readonly resetForgottenPasswordPath = environment.backend_api + 'api/auth/resetPassword';
   logged: Boolean = false;
 
   private access_token = null;
@@ -23,7 +26,7 @@ export class AuthService {
 
   login(user) {
     const loginHeaders = new HttpHeaders({
-      'Accept': 'application/json',
+       'Accept': 'application/json',
        'Content-Type': 'application/json'
     });
 
@@ -73,4 +76,15 @@ export class AuthService {
     return false;
   }
 
+  sendRecoveryCode(body: {email: string}) {
+    return this.http.put(this.sendRecoveryCodePath, JSON.stringify(body));
+  }
+
+  VerifyRecoveryCode(body: {idAuth: string, verificationCode: string, email: string}){
+    return this.http.post(this.verifyRecoveryCodePath, JSON.stringify(body));
+  }
+
+  ResetForgottenPassword(body: {idAuth: string, password: string, reenteredPassword: string}) {
+    return this.http.put(this.resetForgottenPasswordPath, JSON.stringify(body));
+  }
 }
