@@ -17,6 +17,7 @@ export class UserFeedComponent implements OnInit {
   obj: any;
   posts: FeedPost[] = [];
   postUser: User;
+  visibleUserAcccountSettings: boolean = false;
 
   ngOnInit(): void {
     this.loadUserData();
@@ -51,6 +52,10 @@ export class UserFeedComponent implements OnInit {
           }
       })
     }
+  }
+
+  makeVisibleUserAcccountSettings() {
+    this.visibleUserAcccountSettings = !this.visibleUserAcccountSettings
   }
 
 }

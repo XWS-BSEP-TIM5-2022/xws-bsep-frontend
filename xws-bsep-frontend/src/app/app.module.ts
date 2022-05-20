@@ -15,7 +15,8 @@ import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { RoleGuardService } from './services/role-guard.service';
 import { AccountRecoveryComponent } from './components/account-recovery/account-recovery.component';
 import { PasswordlessLoginComponent } from './components/passwordless-login/passwordless-login.component';
-import { CommonModule } from '@angular/common'; 
+import { CommonModule } from '@angular/common';
+import { AccountSettingsComponent } from './components/account-settings/account-settings.component'; 
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CommonModule } from '@angular/common';
     LoginComponent,
     UserFeedComponent,
     AccountRecoveryComponent,
-    PasswordlessLoginComponent
+    PasswordlessLoginComponent,
+    AccountSettingsComponent
   ],
   imports: [
     BrowserModule,
