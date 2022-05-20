@@ -11,6 +11,14 @@ import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
+import { UserFeedComponent } from './components/user-feed/user-feed.component';
+import { AuthGuardService } from './services/auth-guard.service';
+import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
+import { RoleGuardService } from './services/role-guard.service';
+import { AccountRecoveryComponent } from './components/account-recovery/account-recovery.component';
+import { PasswordlessLoginComponent } from './components/passwordless-login/passwordless-login.component';
+import { CommonModule } from '@angular/common'; 
+
 
 @NgModule({
   declarations: [
@@ -18,10 +26,14 @@ import { ActivateAccountComponent } from './components/activate-account/activate
     TestComponent,
     LoginComponent,
     SignUpComponent,
-    ActivateAccountComponent
+    ActivateAccountComponent,
+    UserFeedComponent,
+    AccountRecoveryComponent,
+    PasswordlessLoginComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule, 
     AppRoutingModule,
     HttpClientModule,
     FormsModule
@@ -32,7 +44,10 @@ import { ActivateAccountComponent } from './components/activate-account/activate
     useClass: TokenInterceptor,
     multi: true
     }, 
-],
+    AuthGuardService,
+    JwtHelperService,
+    RoleGuardService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -21,10 +21,10 @@ export class TestComponent implements OnInit {
     // }
     // )
 
-      this.testService.findAll().subscribe((posts: any) => {
-        console.log(posts)
-      }
-      )
+      // this.testService.findAll().subscribe((posts: any) => {
+      //   console.log(posts)
+      // }
+      // )
   }
 
 }
