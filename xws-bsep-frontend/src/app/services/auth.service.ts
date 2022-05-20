@@ -18,6 +18,7 @@ export class AuthService {
 
   private readonly loginPath = environment.backend_api + 'api/auth/login';
   private readonly signUpPath = environment.backend_api + 'api/auth/register';
+  private readonly activateAccountPath = environment.backend_api + 'api/auth/activateAccount';
 
   logged: Boolean = false;
 
@@ -73,6 +74,11 @@ export class AuthService {
     //   }, 4000);
 
     throw error;
+  }
+
+  activateAccount(jwt): Observable<any> {
+    console.log(jwt)
+    return this.http.get<any>(`${this.activateAccountPath}/`+ jwt)
   }
 
 }

@@ -10,13 +10,15 @@ import { TestComponent } from './components/test/test.component';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TestComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    ActivateAccountComponent
   ],
   imports: [
     BrowserModule,
