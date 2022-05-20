@@ -48,7 +48,7 @@ export class PasswordlessLoginComponent implements OnInit {
       "verificationCode": this.code.toString(),
       "email": this.email
     }
-    this.authService.VerifyRecoveryCode(body).subscribe(res => {
+    this.authService.verifyRecoveryCode(body).subscribe(res => {
       this.isHiddenDivEmail = true;
       this.isHiddenDivCode = true;
       this.isHiddenDivChangePass = false;
@@ -64,7 +64,7 @@ export class PasswordlessLoginComponent implements OnInit {
       "password": this.password,
       "reenteredPassword": this.reenteredPassword
     }
-    this.authService.ResetForgottenPassword(body).subscribe(res => {
+    this.authService.resetForgottenPassword(body).subscribe(res => {
       alert('New password successfully set')
       this.router.navigate(['/']);
     }, err => {

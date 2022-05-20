@@ -175,10 +175,9 @@
                     <!--menu-btn end-->
 					
                     <div class="user-account">
-						<div class="user-info" >
+						<div class="user-info"  (click)="makeVisibleUserAcccountSettings()" style="cursor: pointer;">
 							<img src="http://via.placeholder.com/30x30" alt="">
-							<a (click)="makeVisibleUserAcccountSettings()" title="">John</a>
-							<!-- <p>{{user.name}}</p> -->
+							<a title="">{{user.name}}</a>
 							<i class="la la-sort-down"></i>
 						</div>
 						<div class="user-account-settingss active" *ngIf="visibleUserAcccountSettings">
