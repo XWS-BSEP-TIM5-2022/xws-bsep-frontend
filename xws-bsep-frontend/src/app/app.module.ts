@@ -15,7 +15,12 @@ import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { RoleGuardService } from './services/role-guard.service';
 import { AccountRecoveryComponent } from './components/account-recovery/account-recovery.component';
 import { PasswordlessLoginComponent } from './components/passwordless-login/passwordless-login.component';
-import { CommonModule } from '@angular/common'; 
+import { CommonModule } from '@angular/common';
+import { NewPostComponent } from './components/new-post/new-post.component'; 
+import { MatDialogModule } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -24,14 +29,19 @@ import { CommonModule } from '@angular/common';
     LoginComponent,
     UserFeedComponent,
     AccountRecoveryComponent,
-    PasswordlessLoginComponent
+    PasswordlessLoginComponent,
+    NewPostComponent,
   ],
   imports: [
     BrowserModule,
     CommonModule, 
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule,
+    MatSliderModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
   ],
   providers: [
     {
