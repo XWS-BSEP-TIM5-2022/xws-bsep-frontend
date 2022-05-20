@@ -19,11 +19,33 @@ export class LoginComponent implements OnInit {
   isLogin = true;
   isSignup = false;
   message = "";
+  messageLogin = "";
   isSubmitted = false; 
 
   ngOnInit(): void {}
 
-  login(){
+  login(){ 
+
+    this.username = this.username.trim()
+
+    if(!this.username){
+      this.messageLogin = "Write your username."
+      return
+    }
+
+    if(!this.password){
+      this.messageLogin = "Write your password."
+      return
+    }
+
+    let pattern = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
+
+    if(!pattern.test(this.password)){
+      this.messageLogin = "Password must contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character."
+      return
+    }
+    this.messageLogin = ""
+
     var user = {
       username : this.username,
       password : this.password
