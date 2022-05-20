@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -9,69 +9,35 @@ import { AuthService } from '../../services/auth.service';
 })
 export class PasswordlessLoginComponent implements OnInit {
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private route : ActivatedRoute, private authService : AuthService) { } 
+ 
+  jwt: string = "";
+  message : string = ""
+  showButton = false;
 
-  isHiddenDivEmail: boolean = false;
-  isHiddenDivCode: boolean = true;
-  isHiddenDivChangePass : boolean = true;
-  isHiddenDivResendCode: boolean = true;
+  ngOnInit() {
 
-  email: string = "";
-  code: string = "";
-  password: string = "";
-  reenteredPassword: string = "";
-  authId: string = "";
+    this.route.params.subscribe(params => {
+      this.jwt = params['jwt']; 
+    }); 
 
-  ngOnInit(): void {
-  }
-
-  sendEmail() {
-    // TODO SD: validacija email
-    const body = {
-      "email": this.email
-    }
-    this.authService.sendRecoveryCode(body).subscribe(res => {
-      this.authId = res["idAuth"]
-      this.isHiddenDivEmail = true;
-      this.isHiddenDivCode = false;
-      this.isHiddenDivChangePass = true;
-      alert('Verification code is sent! Check your mail inbox!')
-    }, err => {
-      alert("Invalid email")
-    })
-  }
-
-  sendCode() {
-    // TODO SD: validacija front
-    const body = {
-      "idAuth": this.authId,
-      "verificationCode": this.code.toString(),
-      "email": this.email
-    }
-    this.authService.VerifyRecoveryCode(body).subscribe(res => {
-      this.isHiddenDivEmail = true;
-      this.isHiddenDivCode = true;
-      this.isHiddenDivChangePass = false;
+    this.authService.confirmedPasswordlessLogin(this.jwt).subscribe((data) => {
+      this.message = "You are now successfully signed in!"
+      this.showButton = true;
     }, err => {
       console.log(err)
-      alert(err.error.message)
-    })
+      this.message = err.error.message
+    }) 
+ 
+  }
+ 
+  homePage(){ 
+
+    this.router.navigate(['/feed']); 
   }
 
-  resetPassword() {
-    const body = {
-      "idAuth": this.authId,
-      "password": this.password,
-      "reenteredPassword": this.reenteredPassword
-    }
-    this.authService.ResetForgottenPassword(body).subscribe(res => {
-      alert('New password successfully set')
-      this.router.navigate(['/']);
-    }, err => {
-      console.log(err)
-      alert(err.error.message)
-    })
-   
+  tryAgain(){
+    this.router.navigate(['/'])
   }
 
 }

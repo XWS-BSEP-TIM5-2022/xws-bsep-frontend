@@ -17,6 +17,7 @@ export class AuthService {
 
   private readonly loginPath = environment.backend_api + 'api/auth/login';
   private readonly passwordlessLoginPath = environment.backend_api + 'api/auth/passwordless-login';
+  private readonly confirmedPasslessPath = environment.backend_api + 'api/auth/confirm-email-login/'; 
   private readonly sendRecoveryCodePath = environment.backend_api + 'api/auth/sendCode';
   private readonly verifyRecoveryCodePath = environment.backend_api + 'api/auth/verifyCode';
   private readonly resetForgottenPasswordPath = environment.backend_api + 'api/auth/resetPassword';
@@ -51,6 +52,20 @@ export class AuthService {
 
   passwordlessLogin(body: {email: string}) {
     return this.http.post(this.passwordlessLoginPath, JSON.stringify(body));
+  }
+
+  confirmedPasswordlessLogin(jwt : string){
+    return this.http.get(this.confirmedPasslessPath + jwt)      
+    .pipe(map((res: any) => {
+
+      this.logged = true;
+      this.access_token = res.token;
+
+      let decoded: any = jwt_decode(res.token)
+      localStorage.setItem("user", decoded.sub)
+      localStorage.setItem("role", decoded.role)
+      localStorage.setItem("jwt", res.token);
+    }));
   }
  
   tokenIsPresent() {

@@ -26,6 +26,10 @@ const routes: Routes = [
     component: PasswordlessLoginComponent,
   },
   {
+    path: 'confirmed-mail/:jwt',
+    component: PasswordlessLoginComponent,
+  },
+  {
     path: 'accountRecovery',
     component: AccountRecoveryComponent,
   },
