@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { TestComponent } from './components/test/test.component';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
 import { UserFeedComponent } from './components/user-feed/user-feed.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
@@ -17,11 +19,14 @@ import { AccountRecoveryComponent } from './components/account-recovery/account-
 import { PasswordlessLoginComponent } from './components/passwordless-login/passwordless-login.component';
 import { CommonModule } from '@angular/common'; 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     TestComponent,
     LoginComponent,
+    SignUpComponent,
+    ActivateAccountComponent,
     UserFeedComponent,
     AccountRecoveryComponent,
     PasswordlessLoginComponent

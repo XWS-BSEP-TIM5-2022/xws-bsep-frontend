@@ -1,7 +1,9 @@
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { TestComponent } from './components/test/test.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
+import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
 import { UserFeedComponent } from './components/user-feed/user-feed.component';
 import { PasswordlessLoginComponent } from './components/passwordless-login/passwordless-login.component';
 import { 
@@ -20,6 +22,14 @@ const routes: Routes = [
   {
     path: '',
     component: LoginComponent,
+  },
+  {
+    path: 'sign-up',
+    component: SignUpComponent,
+  },
+  {
+    path: 'activate-account/:id',
+    component: ActivateAccountComponent,
   },
   {
     path: 'passwordless-login',
