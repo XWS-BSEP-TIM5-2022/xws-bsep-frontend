@@ -13,5 +13,5 @@ export class FeedPost {
     Dislikes: FeedDislike[];
     Comments: FeedComment[];
     UserId: string;
-    User: User;
+    User: User = new User;
 }

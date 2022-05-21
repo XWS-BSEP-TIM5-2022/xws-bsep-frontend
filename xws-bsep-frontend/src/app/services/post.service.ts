@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CommentDto } from '../model/comment-dto';
 import { Like } from '../model/like';
+import { Post } from '../model/post';
 import { PostDto } from '../model/post-dto';
 import { SuccessMessage } from '../model/success-message';
 
@@ -34,5 +35,9 @@ export class PostService {
 
   commentPost(dto: CommentDto): Observable<SuccessMessage>{
     return this.http.post<SuccessMessage>(`${this.postPath}/comment`, dto)    
+  }
+
+  addPost(post: Post): Observable<SuccessMessage>{
+    return this.http.post<SuccessMessage>(`${this.postPath}`, post)    
   }
 }

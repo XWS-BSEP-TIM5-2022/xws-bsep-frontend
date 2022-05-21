@@ -5,15 +5,15 @@ import { User } from "./user";
 
 export class Post {
     id: string;
-    text: string;
-    images: string[];
-    links: string[];
-    dateCreated: string;
-    likes: Like[];
-    dislikes: Dislike[];
-    comments: Comment[];
+    text: string = "";
+    images: string[] = [];
+    links: string[] = [];
+    dateCreated: string = "";
+    likes: Like[] = [];
+    dislikes: Dislike[] = [];
+    comments: Comment[] = [];
     userId: string;
-    user: User;
+    user: User = new User;
 }
 
 

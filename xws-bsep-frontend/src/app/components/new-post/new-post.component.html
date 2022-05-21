@@ -1,82 +1,47 @@
+<h2 mat-dialog-title>Create a post</h2>
+<mat-divider></mat-divider>
 <form #registrationForm = "ngForm" (ngSubmit)="save()" style="margin-top: 0.5vw; margin-left: 1vw; margin-right: 1vw; margin-bottom: 0.5vw;">
-    <div class="row">
+    <div class="row"  style="margin-bottom: -1.5vw;">
     <div class="col-md-6 mb-4">
-        <div class="form-outline">
-        <input type="text" id="firstName" class="form-control form-control-lg" />
-        <label class="form-label" for="firstName">First Name</label>
-        </div>
+        <p> {{ user.name }} {{ user.lastName }} </p>
+    </div> 
     </div>
-    <div class="col-md-6 mb-4">
-        <div class="form-outline">
-        <input type="text" id="lastName" class="form-control form-control-lg" >
-        <label class="form-label" for="lastName">Last Name</label>
-        </div>
+
+    <div class="row"  style="margin-bottom: -1.5vw;">
+    <div class="col-md-12 mb-4 pb-2">
+        <mat-form-field class="example-full-width" appearance="outline" style="width: 33vw;">  <!-- border-style: solid; border-color: gainsboro; border-width: 0.5px; -->
+            <textarea matInput style="height: 10vw;" [(ngModel)]="post.text" name="text" placeholder="What do you want to talk about?"></textarea>
+        </mat-form-field>
     </div>
     </div>
 
-    <div class="row">
-    <div class="col-md-6 mb-4 d-flex align-items-center">
-        <div class="form-outline datepicker w-100">
-        <input type="email"  class="form-control form-control-lg" id="email"/>
-        <label for="email" class="form-label">Email</label>
+    <!-- <div class="row">
+    <div class="col-md-12 mb-4 pb-2">
+        <div class="example-full-width">
+            <textarea matInput style="height: 10vw;" placeholder="What do you want to talk about?"></textarea>
         </div>
     </div>
-    <div class="col-md-6 mb-4 d-flex align-items-center">
-        <div class="form-outline datepicker w-100">
-        <input type="tel"  class="form-control form-control-lg" id="phoneNumber" name="phoneNumber"/>
-        <label for="phoneNumber" class="form-label">Phone number</label>
-        </div>
-    </div>
-    </div>
-
-    <div class="row">
-    <div class="col-md-6 mb-4 pb-2">
-        <div class="form-outline">
-        <input type="text" id="emailAddress" class="form-control form-control-lg"  name="street"/>
-        <label class="form-label" for="street">Street</label>
-        </div>
-    </div>
-    <div class="col-md-6 mb-4 pb-2">
-        <div class="form-outline">
-        <input type="text" id="city" class="form-control form-control-lg"  name="city"/>
-        <label class="form-label" for="city">City</label>
-        </div>
-    </div>
-    </div>
-
-    <div class="row">
-    <div class="col-md-6 mb-4 pb-2">
-        <div class="form-outline">
-        <input type="text" id="state" class="form-control form-control-lg" name="state"/>
-        <label class="form-label" for="state">State</label>
-        </div>
-    </div>
-    <div class="col-md-6 mb-4 pb-2">
-        <div class="form-outline">
-        <input type="tel" id="postalCode" class="form-control form-control-lg"  name="postalCode"/>
-        <label class="form-label" for="postalCode">Postal Code</label>
-        </div>
-    </div>
-    </div>
-
-    <div class="row">
-    <div class="col-md-6 mb-4 pb-2">
-        <div class="form-outline">
-        <input disabled type="password" id="password" class="form-control form-control-lg" name="password"/>
-        <label class="form-label" for="password">Password</label>
-        </div>
-    </div>
-    <div class="col-md-6 mb-4 pb-2">
-        <select class="form-control form-control-lg" name="type">
-          <option value="ROLE_ADMIN">Admin</option>
-          <option value="ROLE_SECRETARY">Secretary</option>
-        </select>
-        <label class="form-label" for="role">Role</label>
-    </div>
-    </div>
+    </div> -->
     
+    <div class="row" style="margin-bottom: -1vw;">
+        <div class="form-outline; col-md-10 mb-4 pb-2">
+            <input type="text"  [(ngModel)]="link" name="link" class="form-control" placeholder="Add a link"/>
+             &nbsp;&nbsp; <label> Added links: </label>
+
+             <ul *ngFor="let link of post.links; let i=index"> <!--POSTS -->
+                 <a href="{{link}}">{{ link }}</a> 
+            </ul>
+        </div>
+        <div class="col-md-1 mb-4 pb-2">
+            <button (click)="addLink()" style="border-style: none; background-color: white; width: 3vw; height: 2.5vw; font-size: 30px; margin-left: -2vw;" title="Add new link" ><i class="la la-plus"></i></button>
+        </div>
+        <div class="col-md-1 mb-4 pb-2">
+            <button (click)="addImage()" style="border-style: none; background-color: white; width: 3vw; height: 2.5vw; font-size: 30px; margin-left: -1.5vw;" title="Add new image" ><i class="la la-image"></i></button>
+        </div>
+    </div>
+
     <div class="mt-4 pt-2">
-    <input class="btn btn-success btn-lg center-div" type="submit" value="Submit" />
-    <input class="btn btn-lg center-div" (click)="onNoClick()" type="button" value="Cancel" />
+        <input class="btn btn-success btn-lg center-div" style="background-color: #e44d3a; color:white" type="submit" value="Submit" />
+        <input class="btn btn-lg center-div" (click)="onNoClick()" type="button" value="Cancel" />
     </div>
 </form>

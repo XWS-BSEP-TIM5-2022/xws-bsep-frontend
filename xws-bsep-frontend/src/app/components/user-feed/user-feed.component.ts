@@ -23,18 +23,17 @@ export class UserFeedComponent implements OnInit {
 
   constructor(private userService: UserService, private feedService: FeedService, private postService: PostService, public dialog: MatDialog) { }
 
-  user: User; // current user
-  obj: any;
+  user: User = new User; // current user
   feedPosts: FeedPost[] = [];
   posts: Post[] = [];
-  postUser: User;
   loaded: boolean = false;
-  numberOfLikes: number;
-  // commentText: string;
   feedActive: boolean = true;
   profileActive: boolean = false;
+  // postLoaded: boolean = false;
 
   ngOnInit(): void {
+    this.user.name = "";
+    this.user.lastName = "";
     this.loadUserData();
   }
 
@@ -113,6 +112,12 @@ export class UserFeedComponent implements OnInit {
           comment.id = l.Id;
           comment.userId = l.UserId;
           comment.text = l.Text;
+
+          this.userService.getById(comment.userId).subscribe(
+            (user: any) => { 
+              comment.user = user
+          })
+
           post.comments.push(comment)
         }
       }
@@ -155,6 +160,13 @@ export class UserFeedComponent implements OnInit {
               (user: any) => { 
                 p.user = user
             })
+
+            for (let c of p.comments){
+              this.userService.getById(c.userId).subscribe(
+                (user: any) => { 
+                  c.user = user
+              })            
+            }
           }
 
           this.posts = []
@@ -177,7 +189,6 @@ export class UserFeedComponent implements OnInit {
         }
       }
     )
-    //this.commentText = ""
   }
 
   like(postId: string){
