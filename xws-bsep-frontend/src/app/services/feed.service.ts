@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { FeedPost } from '../model/feed-post';
+import { FeedPost } from '../model/feed/feed-post';
 
 @Injectable({
   providedIn: 'root'

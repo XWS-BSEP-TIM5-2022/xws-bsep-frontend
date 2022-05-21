@@ -270,7 +270,7 @@
 													</a>
 												</li>
 												<li data-tab="info-dd">
-													<a routerLink="." (click)="openMyPosts()">
+													<a routerLink="." (click)="loadMyPosts()">
 														<span> <i class="la la-user"></i> Profile</span>
 													</a>
 												</li>
@@ -284,7 +284,7 @@
 													</a>
 												</li>
 												<li data-tab="info-dd" class="active">
-													<a routerLink="." (click)="openMyPosts()">
+													<a routerLink="." (click)="loadMyPosts()">
 														<span> <i class="la la-user"></i> Profile</span>
 													</a>
 												</li>
@@ -300,7 +300,7 @@
                                                         <div class="usy-dt">
 															<img src="http://via.placeholder.com/50x50" alt="">
 															<div class="usy-name">
-                                                                <h3>  {{ p.userId }} </h3>
+                                                                <h3>  {{ p.user['user'].name }} {{ p.user['user'].lastName }} </h3>
 																<span> <i class="la la-calendar"></i> {{ p.dateCreated }} </span>
                                                             </div>
                                                         </div>
@@ -327,10 +327,10 @@
                                                     <div class="job-status-bar">
                                                         <ul class="like-com">
                                                             <li>
-                                                                <a routerLink="."><i class="la la-heart"></i> Likes ({{ p.likes.length }}) </a>
+                                                                <a routerLink="." (click)="like(p.id)"><i class="la la-heart"></i> Likes ({{ p.likes.length }}) </a>
                                                             </li> 
 															<li>
-                                                                <a routerLink="."><i class="la la-thumbs-o-down"></i> Dislikes ({{ p.dislikes.length }})</a>
+                                                                <a routerLink="." (click)="dislike(p.id)"><i class="la la-thumbs-o-down"></i> Dislikes ({{ p.dislikes.length }})</a>
                                                             </li> 
                                                         </ul>
                                                         <a><i class="la la-comments"></i>Comments ({{ p.comments.length }})</a>
@@ -338,7 +338,7 @@
                                                 </div>
 											
 												<ul *ngFor="let c of p.comments"> 
-													<div class="comment-section" style="margin-bottom: 2vw; margin-top: -1vw;">
+													<div class="comment-section" style="margin-bottom: -2vw; margin-top: -1vw; ">
 														<div class="comment-sec">
 															<ul>
 																<li>
@@ -347,7 +347,7 @@
 																			<img src="http://via.placeholder.com/40x40" alt="">
 																		</div>
 																		<div class="comment">
-																			<h3> {{ c.userId }}</h3>
+																			<h3>  {{ p.user['user'].name }} {{ p.user['user'].lastName }} </h3>
 																			<span><img src="images/clock.png" alt="">  </span>
 																			<p> {{ c.text }} </p>
 																		</div>
@@ -355,21 +355,23 @@
 																</li>
 															</ul>
 														</div>
-														<div class="post-comment">
-															<div class="cm_img">
-																<img src="http://via.placeholder.com/40x40" alt="">
-															</div>
-															<div class="comment_box">
-																<form>
-																	<input type="text"  placeholder="Post a comment">
-																	<button type="submit" (click)="addComment(p.id)">Send</button>
-																</form>
-															</div>
-														</div>
 													</div>
 												</ul>
+												<div class="comment-section" style="margin-bottom: 2vw; margin-top: -1vw; ">
+													<div class="post-comment">
+														<div class="cm_img">
+															<img src="http://via.placeholder.com/40x40" alt="">
+														</div>
+														<div class="comment_box">
+															<form (ngSubmit)="comment(p.id, $event)">
+																<input type="text" placeholder="Post a comment" name="comment">
+																<button type="submit">Send</button>
+															</form>
+														</div>
+													</div>
+												</div>
 											</ul>
-
+											<br> <br>
                                             <!--post-bar end-->
 											<!-- <div class="post-bar">
 												<div class="post_topbar">

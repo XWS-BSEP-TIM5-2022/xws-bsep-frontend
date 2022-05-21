@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { FeedPost } from 'src/app/model/feed-post';
+import { FeedPost } from 'src/app/model/feed/feed-post';
 import { Comment } from 'src/app/model/comment';
 import { Post } from 'src/app/model/post';
 import { User } from 'src/app/model/user';
@@ -9,6 +9,10 @@ import { PostService } from 'src/app/services/post.service';
 import { UserService } from 'src/app/services/user.service';
 import { NewPostComponent } from '../new-post/new-post.component';
 import { Like } from 'src/app/model/like';
+import { Dislike } from 'src/app/model/dislike';
+import { PostDto } from 'src/app/model/post-dto';
+import { SuccessMessage } from 'src/app/model/success-message';
+import { CommentDto } from 'src/app/model/comment-dto';
 
 @Component({
   selector: 'app-user-feed',
@@ -26,7 +30,7 @@ export class UserFeedComponent implements OnInit {
   postUser: User;
   loaded: boolean = false;
   numberOfLikes: number;
-  newComment: Comment;
+  // commentText: string;
   feedActive: boolean = true;
   profileActive: boolean = false;
 
@@ -62,11 +66,6 @@ export class UserFeedComponent implements OnInit {
             let dateTime = p.DateCreated.split('T')
             let time = dateTime[1].split('.')
             p.DateCreated = dateTime[0] + '  ' + time[0]
-
-            this.userService.getById(p.UserId).subscribe(
-              (user: any) => { 
-                p.User = user
-            })
           }
 
           this.posts = []
@@ -85,11 +84,43 @@ export class UserFeedComponent implements OnInit {
       post.images = feedPost.Images;
       post.links = feedPost.Links;
       post.dateCreated = feedPost.DateCreated;
-      post.likes = feedPost.Likes;
-      post.dislikes = feedPost.Dislikes;
-      post.comments = feedPost.Comments;
+      post.likes = [];
+      post.dislikes = [];
+      post.comments = [];
       post.userId = feedPost.UserId
-      post.user = feedPost.User; 
+    
+      if (feedPost.Likes != undefined && feedPost.Likes != null){
+        for (let l of feedPost.Likes){
+          let like = new Like();
+          like.id = l.Id;
+          like.userId = l.UserId;
+          post.likes.push(like)          
+        }
+      }
+
+      if (feedPost.Dislikes != undefined && feedPost.Dislikes != null){
+        for (let l of feedPost.Dislikes){
+          let dislike = new Dislike();
+          dislike.id = l.Id;
+          dislike.userId = l.UserId;
+          post.dislikes.push(dislike)
+        }
+      }
+
+      if (feedPost.Comments != undefined && feedPost.Comments != null){
+        for (let l of feedPost.Comments){
+          let comment = new Comment();
+          comment.id = l.Id;
+          comment.userId = l.UserId;
+          comment.text = l.Text;
+          post.comments.push(comment)
+        }
+      }
+
+      this.userService.getById(post.userId).subscribe(
+        (user: any) => { 
+          post.user = user
+      })
 
       if (post.likes == null || post.likes == undefined){
         post.likes = []
@@ -101,11 +132,11 @@ export class UserFeedComponent implements OnInit {
         post.comments = []
       }
 
-      this.posts.push(post);  
+      this.posts.push(post); 
     }
   }
 
-  openMyPosts(){
+  loadMyPosts(){
     this.feedActive = false;
     this.profileActive = true;
     let userId =  localStorage.getItem("user");
@@ -132,8 +163,49 @@ export class UserFeedComponent implements OnInit {
     }
   }
 
-  addComment(id: string){
+  comment(postId: string, event: any){
+    let dto = new CommentDto();
+    dto.postId = postId;
+    dto.text = event.target.comment.value
+    console.log(dto.text)
+    this.postService.commentPost(dto).subscribe(
+      (data: SuccessMessage) => {
+        if (this.feedActive){
+          this.loadFeed();
+        } else {
+          this.loadMyPosts();
+        }
+      }
+    )
+    //this.commentText = ""
+  }
 
+  like(postId: string){
+    let dto = new PostDto();
+    dto.postId = postId;
+    this.postService.likePost(dto).subscribe(
+      (data: SuccessMessage) => {
+        if (this.feedActive){
+          this.loadFeed();
+        } else {
+          this.loadMyPosts();
+        }
+      }
+    )
+  }
+
+  dislike(postId: string){
+    let dto = new PostDto();
+    dto.postId = postId;
+    this.postService.dislikePost(dto).subscribe(
+      (data: SuccessMessage) => {
+        if (this.feedActive){
+          this.loadFeed();
+        } else {
+          this.loadMyPosts();
+        }
+      }
+    )
   }
 
   newPost(){
