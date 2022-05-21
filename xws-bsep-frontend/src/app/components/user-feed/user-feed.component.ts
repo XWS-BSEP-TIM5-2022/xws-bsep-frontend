@@ -61,15 +61,17 @@ export class UserFeedComponent implements OnInit {
         (data: any[]) => { 
           let allPosts = data['AllPosts']
 
-          for (let p of allPosts){
-            let dateTime = p.DateCreated.split('T')
-            let time = dateTime[1].split('.')
-            p.DateCreated = dateTime[0] + '  ' + time[0]
+          if (allPosts != undefined && allPosts != null){
+            for (let p of allPosts){
+              let dateTime = p.DateCreated.split('T')
+              let time = dateTime[1].split('.')
+              p.DateCreated = dateTime[0] + '  ' + time[0]
+            }
+            this.posts = []
+            this.feedPosts = allPosts
+            this.convertToPost();
           }
-
           this.posts = []
-          this.feedPosts = allPosts
-          this.convertToPost();
       })
     }
   }
@@ -179,7 +181,7 @@ export class UserFeedComponent implements OnInit {
     let dto = new CommentDto();
     dto.postId = postId;
     dto.text = event.target.comment.value
-    console.log(dto.text)
+    // console.log(dto.text)
     this.postService.commentPost(dto).subscribe(
       (data: SuccessMessage) => {
         if (this.feedActive){
@@ -218,6 +220,58 @@ export class UserFeedComponent implements OnInit {
       }
     )
   }
+
+  // userLikedPost(postId: string){
+  //   let userId =  localStorage.getItem("user");
+
+  //   this.postService.getById(postId).subscribe(
+  //     (data: Post) => {
+  //       console.log(data)
+  //       for(let like of data.likes){
+  //         if (like.userId == userId){
+  //           return true;
+  //         }
+  //       }
+  //       return false;
+  //     }
+  //   )
+  //   return false;
+  // }
+
+  // userDislikedPost(postId: string){
+  //   let userId =  localStorage.getItem("user");
+
+  //   this.postService.getById(postId).subscribe(
+  //     (data: Post) => {
+  //       console.log(data)
+  //       for(let like of data.dislikes){
+  //         if (like.userId == userId){
+  //           return true;
+  //         }
+  //       }
+  //       return false;
+  //     }
+  //   )
+  //   return false;
+
+  // }
+
+  // userNeutral(postId: string){
+  //   let userId =  localStorage.getItem("user");
+
+  //   this.postService.getById(postId).subscribe(
+  //     (data: Post) => {
+  //       console.log(data)
+  //       for(let like of data.likes){
+  //         if (like.userId == userId){
+  //           return false;
+  //         }
+  //       }
+  //       return true;
+  //     }
+  //   )
+  //   return true;
+  // }
 
   newPost(){
     const dialogRef = this.dialog.open(NewPostComponent, {

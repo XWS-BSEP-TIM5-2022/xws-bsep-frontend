@@ -25,6 +25,10 @@ export class PostService {
     return this.http.get<any[]>(`${this.postPath}/user/`+ id)    
   }
 
+  getById(id: string): Observable<Post> {
+    return this.http.get<Post>(`${this.postPath}/`+ id)    
+  }
+
   likePost(dto: PostDto): Observable<SuccessMessage>{
     return this.http.post<SuccessMessage>(`${this.postPath}/like`, dto)    
   }

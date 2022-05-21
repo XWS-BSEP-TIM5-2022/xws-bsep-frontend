@@ -307,7 +307,7 @@
                                                         </ul> -->
                                                     </div>
                                                     <div class="job-status-bar">
-                                                        <ul class="like-com">
+														<ul class="like-com">
                                                             <li>
                                                                 <a routerLink="." (click)="like(p.id)"><i class="la la-heart"></i> Likes ({{ p.likes.length }}) </a>
                                                             </li> 
@@ -315,6 +315,30 @@
                                                                 <a routerLink="." (click)="dislike(p.id)"><i class="la la-thumbs-o-down"></i> Dislikes ({{ p.dislikes.length }})</a>
                                                             </li> 
                                                         </ul>
+                                                        <!-- <ul class="like-com" *ngIf="userLikedPost(p.id)">
+                                                            <li>
+                                                                <a routerLink="." (click)="like(p.id)" style="color: red;"><i class="la la-heart"></i> Likes ({{ p.likes.length }}) </a>
+                                                            </li> 
+															<li>
+                                                                <a routerLink="." (click)="dislike(p.id)"><i class="la la-thumbs-o-down"></i> Dislikes ({{ p.dislikes.length }})</a>
+                                                            </li> 
+                                                        </ul>
+														<ul class="like-com" *ngIf="userDislikedPost(p.id)">
+                                                            <li>
+                                                                <a routerLink="." (click)="like(p.id)"><i class="la la-heart"></i> Likes ({{ p.likes.length }}) </a>
+                                                            </li> 
+															<li>
+                                                                <a routerLink="." (click)="dislike(p.id)"  style="color: red;"><i class="la la-thumbs-o-down"></i> Dislikes ({{ p.dislikes.length }})</a>
+                                                            </li> 
+                                                        </ul>
+														<ul class="like-com" *ngIf="userNeutral(p.id)">
+                                                            <li>
+                                                                <a routerLink="." (click)="like(p.id)"><i class="la la-heart"></i> Likes ({{ p.likes.length }}) </a>
+                                                            </li> 
+															<li>
+                                                                <a routerLink="." (click)="dislike(p.id)"><i class="la la-thumbs-o-down"></i> Dislikes ({{ p.dislikes.length }})</a>
+                                                            </li> 
+                                                        </ul> -->
                                                         <a><i class="la la-comments"></i>Comments ({{ p.comments.length }})</a>
                                                     </div>
                                                 </div>

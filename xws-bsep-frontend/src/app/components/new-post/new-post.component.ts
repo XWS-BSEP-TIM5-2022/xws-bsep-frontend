@@ -19,6 +19,7 @@ export class NewPostComponent implements OnInit {
   loaded: boolean = false;
   post: Post = new Post;
   link: string = "";
+  invalidLink: boolean = false;
 
   ngOnInit(): void {
     this.loadUserData();
@@ -37,14 +38,28 @@ export class NewPostComponent implements OnInit {
   }
 
   addLink(){
-    if (this.link != "" && this.link.trim() != ""){
+    if (this.link != "" && this.link.trim() != "" && this.validURL(this.link)){
       this.post.links.push(this.link);
+      this.invalidLink = false;
+    }
+    else{
+      this.invalidLink = true;
     }
     this.link = ""
   }
 
   addImage(){
     // TODO
+  }
+
+  validURL(str) {
+    var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+      '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+    return !!pattern.test(str);
   }
 
   save(){
