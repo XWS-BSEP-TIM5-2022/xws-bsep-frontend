@@ -1,6 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core'; 
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -20,8 +21,26 @@ export class LoginComponent implements OnInit {
   isSignup = false;
   message = "";
   messageLogin = "";
+  messageSignUp = "";
   isSubmitted = false; 
-
+  birth: any
+  user = {
+      "name": "",
+      "lastName": "",
+      "email": "",
+      "mobileNumber": "",
+      "gender": "",
+      "birthday": "",
+      "username": "",
+      "biography": "",
+      "password" : "",
+      "isPublic": false,
+      "role": ["User"],
+      "education": [],
+      "experience": [],
+      "skills": [],
+      "interests": []
+  }
   ngOnInit(): void {}
 
   login(){ 
@@ -117,4 +136,126 @@ export class LoginComponent implements OnInit {
 
     return false
   }
+
+  selectGender($event){
+    console.log($event.target.value)
+    var gender = $event.target.value
+    if(gender === 'Male'){
+      this.user.gender = "Male"
+    }else if(gender === 'Female'){
+      this.user.gender = "Female"
+    }
+
+  }
+
+  selectBirth(){
+    this.user.birthday = this.birth + "T00:00:00Z"
+  }
+
+  signUp(){
+
+    if(this.validateSignUp()){
+      return
+    }
+
+      console.log(this.user)
+      console.log("rodj: " + this.user.birthday)
+      this.authService.signUp(this.user).subscribe((posts: any) => {
+        
+        Swal.fire({
+          title: 'Please check your email',
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          }
+        })
+
+        window.location.reload()
+      })
+    
+  
+  }
+
+  validateSignUp() : boolean{
+    this.user.name = this.user.name.trim()
+    this.user.lastName = this.user.lastName.trim()
+    this.user.email = this.user.email.trim()
+    this.user.gender = this.user.gender.trim()
+    this.user.password = this.user.password.trim()
+    this.user.username = this.user.username.trim()
+    // provjeri:
+    // this.user.biography = this.user.biography.trim()
+    // this.user.mobileNumber = this.user.mobileNumber.trim()
+
+    if(!this.user.name){
+      this.messageSignUp = "Write your name."
+      return true
+    }
+
+    if(!this.user.lastName){
+      this.messageSignUp = "Write your lastname."
+      return true
+    }
+
+    if(!this.user.email){
+      this.messageSignUp = "Write your email."
+      return true
+    }
+
+    let patternEmail = new RegExp("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$") 
+
+    if(!patternEmail.test(this.user.email)){
+      this.messageSignUp = "Email is invalid."
+      return true
+    }
+
+    if(!this.user.username){
+      this.messageSignUp = "Write your username."
+      return true
+    }
+
+    if (/\s/.test(this.user.username)) {
+      this.messageLogin = "Username cannot contain whitespace."
+      return true
+    }
+
+    if(!this.user.gender){
+      this.messageSignUp = "Select your gender."
+      return true
+    }
+
+    if(!this.user.birthday){
+      this.messageSignUp = "Select your birthday."
+      return true
+    }
+
+    if(!this.user.password){
+      this.messageSignUp = "Write your password."
+      return true
+    }
+
+    if (/\s/.test(this.user.password)) {
+      this.messageSignUp = "Password cannot contain whitespace."
+      return true
+    }
+
+    if(this.user.password == this.user.username){
+      this.messageSignUp = "Password cannot be the same as username!"
+      return true
+    }
+
+    let pattern = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')
+
+    if(!pattern.test(this.user.password)){
+      this.messageSignUp = "Password must contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character."
+      return true
+    }
+    this.messageSignUp = ""
+
+
+    return false
+  }
+
 }
