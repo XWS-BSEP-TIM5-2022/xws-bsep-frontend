@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FeedPost } from 'src/app/model/feed/feed-post';
 import { Comment } from 'src/app/model/comment';
 import { Post } from 'src/app/model/post';
@@ -15,6 +15,8 @@ import { SuccessMessage } from 'src/app/model/success-message';
 import { CommentDto } from 'src/app/model/comment-dto';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { PostLikesComponent } from '../post-likes/post-likes.component';
+import { PostDislikesComponent } from '../post-dislikes/post-dislikes.component';
 
 @Component({
   selector: 'app-user-feed',
@@ -32,9 +34,6 @@ export class UserFeedComponent implements OnInit {
   loaded: boolean = false;
   feedActive: boolean = true;
   profileActive: boolean = false;
-  // postLoaded: boolean = false;
-  obj: any;
-  postUser: User;
   visibleUserAcccountSettings: boolean = false;
 
   ngOnInit(): void {
@@ -188,9 +187,14 @@ export class UserFeedComponent implements OnInit {
   }
 
   comment(postId: string, event: any){
+    var sanitize = require("mongo-sanitize"); // mongo-sanitize module 
+    // The sanitize function will strip out any keys that start with '$' in the input,
+    // so you can pass it to MongoDB without worrying about malicious users overwriting
+    // query selectors.
+
     let dto = new CommentDto();
     dto.postId = postId;
-    dto.text = event.target.comment.value
+    dto.text = sanitize(event.target.comment.value);
 
     if (dto.text != "" && dto.text.trim() != "" && dto.text != undefined){ 
       this.postService.commentPost(dto).subscribe(
@@ -249,6 +253,32 @@ export class UserFeedComponent implements OnInit {
     )
   }
   
+  seeLikes(postId: string){
+    const dialogRef = this.dialog.open(PostLikesComponent, {
+      width: '400px',
+      height: '230px',
+      data: {},
+    });
+    dialogRef.componentInstance.post.id = postId;
+
+    dialogRef.afterClosed().subscribe(result => {
+      window.location.reload();
+    });
+  }
+
+  seeDislikes(postId: string){
+    const dialogRef = this.dialog.open(PostDislikesComponent, {
+      width: '400px',
+      height: '230px',
+      data: {},
+    });
+    dialogRef.componentInstance.post.id = postId;
+
+    dialogRef.afterClosed().subscribe(result => {
+      window.location.reload();
+    });
+  }
+
   // userLikedPost(postId: string){
   //   let userId =  localStorage.getItem("user");
 

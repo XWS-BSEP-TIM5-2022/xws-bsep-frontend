@@ -27,6 +27,8 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatInputModule} from '@angular/material/input';
+import { PostLikesComponent } from './components/post-likes/post-likes.component';
+import { PostDislikesComponent } from './components/post-dislikes/post-dislikes.component';
 
 
 @NgModule({
@@ -41,6 +43,8 @@ import {MatInputModule} from '@angular/material/input';
     PasswordlessLoginComponent,
     AccountSettingsComponent,
     NewPostComponent,
+    PostLikesComponent,
+    PostDislikesComponent,
   ],
   imports: [
     BrowserModule,
