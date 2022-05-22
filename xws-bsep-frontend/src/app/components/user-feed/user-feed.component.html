@@ -157,11 +157,9 @@
                     <!--menu-btn end-->
 					
                     <div class="user-account">
-						<div class="user-info">
-							<img src="http://via.placeholder.com/30x30" alt="">
-							<a href="#" title="">John</a>
-							<i class="la la-sort-down"></i>
-						</div>
+						<button class="user-info" style="border-style: none; background-color: #e44d3a; color: white; font-weight: bold;" (click)="logout()">
+							Logout
+						</button>
 						<div class="user-account-settingss">
 							<h3>Online Status</h3>
 							<ul class="on-off-status">
@@ -234,7 +232,7 @@
 								</div><!--main-left-sidebar end-->
 
 								<div class="message-btn" style="display: flex; justify-content: center; margin: auto; float: left;">
-									<button mat-raised-button style="background-color: #e44d3a; color:white" (click)="newPost()" ><i class="la la-upload"></i> New Post</button>
+									<button mat-raised-button style="background-color: #e44d3a; color:white; font-weight: lighter;" (click)="newPost()" ><i class="la la-upload"></i> New Post</button>
 								</div>
 							</div>
 							<div class="col-lg-6">

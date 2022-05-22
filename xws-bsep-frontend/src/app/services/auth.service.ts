@@ -142,4 +142,10 @@ export class AuthService {
     return this.http.put(this.resetForgottenPasswordPath, JSON.stringify(body));
   }
 
+  logout(){
+    localStorage.removeItem('user');
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('role');
+    localStorage.clear();
+  }
 }
