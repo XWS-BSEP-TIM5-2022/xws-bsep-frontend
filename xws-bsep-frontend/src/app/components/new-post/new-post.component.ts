@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { InsertPost } from 'src/app/model/insert-post';
 import { Post } from 'src/app/model/post';
 import { SuccessMessage } from 'src/app/model/success-message';
 import { User } from 'src/app/model/user';
@@ -18,6 +19,7 @@ export class NewPostComponent implements OnInit {
   user: User;
   loaded: boolean = false;
   post: Post = new Post;
+  newPost: InsertPost = new InsertPost;
   link: string = "";
   invalidLink: boolean = false;
 
@@ -63,17 +65,28 @@ export class NewPostComponent implements OnInit {
   }
 
   save(){
-    this.post.dateCreated = "2022-05-08T09:37:53.539Z"
-    this.postService.addPost(this.post).subscribe(
-      (success: SuccessMessage) => {
-        console.log(success)
-        if (success.success == "success"){
-          alert("Post uspesno kreiran!")
-        } else {
-          alert("Post nije kreiran!")
-        }
-      })
+    if (this.post.text != undefined && this.post.text != "" && this.post.text.trim() != ""){
+      this.convertPost();
+      this.postService.addPost(this.newPost).subscribe(
+        (success: SuccessMessage) => {
+          console.log(success)
+          if (success.success == "success"){
+            alert("Post is successfully created!")
+          } else {
+            alert("Post was NOT created!")
+          }
+        })
       this.dialogRef.close();
+    } else {
+      alert("Text can not be empty!")
+    }
+  }
+
+  convertPost(){
+    this.newPost.id = this.post.id
+    this.newPost.text = this.post.text
+    this.newPost.links = this.post.links
+    this.newPost.images = this.post.images
   }
 
   onNoClick(){

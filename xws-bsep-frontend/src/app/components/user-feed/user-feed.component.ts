@@ -191,16 +191,20 @@ export class UserFeedComponent implements OnInit {
     let dto = new CommentDto();
     dto.postId = postId;
     dto.text = event.target.comment.value
-    // console.log(dto.text)
-    this.postService.commentPost(dto).subscribe(
-      (data: SuccessMessage) => {
-        if (this.feedActive){
-          this.loadFeed();
-        } else {
-          this.loadMyPosts();
+
+    if (dto.text != "" && dto.text.trim() != "" && dto.text != undefined){ 
+      this.postService.commentPost(dto).subscribe(
+        (data: SuccessMessage) => {
+          if (this.feedActive){
+            this.loadFeed();
+          } else {
+            this.loadMyPosts();
+          }
         }
-      }
-    )
+      )
+    } else {
+      alert('Comment can not be empty!')
+    }
   }
 
   like(postId: string){
@@ -231,6 +235,20 @@ export class UserFeedComponent implements OnInit {
     )
   }
 
+  neutral(postId: string){
+    let dto = new PostDto();
+    dto.postId = postId;
+    this.postService.neutralPost(dto).subscribe(
+      (data: SuccessMessage) => {
+        if (this.feedActive){
+          this.loadFeed();
+        } else {
+          this.loadMyPosts();
+        }
+      }
+    )
+  }
+  
   // userLikedPost(postId: string){
   //   let userId =  localStorage.getItem("user");
 
