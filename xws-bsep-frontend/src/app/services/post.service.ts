@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CommentDto } from '../model/comment-dto';
+import { InsertPost } from '../model/insert-post';
 import { Like } from '../model/like';
 import { Post } from '../model/post';
 import { PostDto } from '../model/post-dto';
@@ -41,7 +42,7 @@ export class PostService {
     return this.http.post<SuccessMessage>(`${this.postPath}/comment`, dto)    
   }
 
-  addPost(post: Post): Observable<SuccessMessage>{
+  addPost(post: InsertPost): Observable<SuccessMessage>{
     return this.http.post<SuccessMessage>(`${this.postPath}`, post)    
   }
 }
