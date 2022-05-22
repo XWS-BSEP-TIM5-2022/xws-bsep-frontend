@@ -55,10 +55,10 @@ const routes: Routes = [
   {
     path: 'account-setting',
     component: AccountSettingsComponent,
-    // canActivate: [RoleGuard], 
-    // data: { 
-    //   expectedRole: 'User' 
-    // }
+    canActivate: [RoleGuard], 
+    data: { 
+      expectedRole: 'User' //['User', 'Admin']
+    }
   }, 
 
 ];
