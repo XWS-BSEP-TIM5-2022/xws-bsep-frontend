@@ -39,7 +39,7 @@ import {MatInputModule} from '@angular/material/input';
     UserFeedComponent,
     AccountRecoveryComponent,
     PasswordlessLoginComponent,
-    AccountSettingsComponent
+    AccountSettingsComponent,
     NewPostComponent,
   ],
   imports: [

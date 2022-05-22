@@ -33,37 +33,6 @@ export class PasswordlessLoginComponent implements OnInit {
  
   homePage(){ 
 
-  sendCode() {
-    // TODO SD: validacija front
-    const body = {
-      "idAuth": this.authId,
-      "verificationCode": this.code.toString(),
-      "email": this.email
-    }
-    this.authService.verifyRecoveryCode(body).subscribe(res => {
-      this.isHiddenDivEmail = true;
-      this.isHiddenDivCode = true;
-      this.isHiddenDivChangePass = false;
-    }, err => {
-      console.log(err)
-      alert(err.error.message)
-    })
-  }
-
-  resetPassword() {
-    const body = {
-      "idAuth": this.authId,
-      "password": this.password,
-      "reenteredPassword": this.reenteredPassword
-    }
-    this.authService.resetForgottenPassword(body).subscribe(res => {
-      alert('New password successfully set')
-      this.router.navigate(['/']);
-    }, err => {
-      console.log(err)
-      alert(err.error.message)
-    })
-   
     this.router.navigate(['/feed']); 
   }
 

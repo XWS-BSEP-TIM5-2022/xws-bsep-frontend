@@ -21,12 +21,8 @@ import { CommentDto } from 'src/app/model/comment-dto';
 })
 export class UserFeedComponent implements OnInit {
 
-  constructor(private userService: UserService, private feedService: FeedService, private postService: PostService) { }
-  user: User; // current user
-  obj: any;
-  posts: FeedPost[] = [];
-  postUser: User;
-  visibleUserAcccountSettings: boolean = false;
+  
+  // postLoaded: boolean = false;
   constructor(private userService: UserService, private feedService: FeedService, private postService: PostService, public dialog: MatDialog) { }
 
   user: User = new User; // current user
@@ -36,6 +32,10 @@ export class UserFeedComponent implements OnInit {
   feedActive: boolean = true;
   profileActive: boolean = false;
   // postLoaded: boolean = false;
+  obj: any;
+  postUser: User;
+  visibleUserAcccountSettings: boolean = false;
+
 
   ngOnInit(): void {
     this.user.name = "";
