@@ -9,18 +9,18 @@ export class RoleGuardService implements CanActivate {
 
     const expectedRole = route.data['expectedRole'];
     const token = localStorage.getItem('jwt');
-    let role;
+    let roles;
     
     if (token != null){
       let jwtData = token.split('.')[1]
       let decodedJwtJsonData = window.atob(jwtData)
       let decodedJwtData = JSON.parse(decodedJwtJsonData)
 
-      role = decodedJwtData.role
-      console.log("rola je "+ role)
+      roles = decodedJwtData.roles
+      console.log("rola je "+ roles)
     }
 
-    if (!this.auth.isAuthenticated() || role!== expectedRole) {
+    if (!this.auth.isAuthenticated() || !roles.includes(expectedRole)) {
       this.router.navigate(['/']);
       return false;
     }
