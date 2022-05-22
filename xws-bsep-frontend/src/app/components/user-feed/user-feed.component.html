@@ -312,10 +312,12 @@
 														<ul class="like-com">
                                                             <li>
                                                                 <a routerLink="." title="Like" (click)="like(p.id)"><i class="la la-heart"></i> Likes ({{ p.likes.length }}) </a>
-                                                            </li> 
+																<a routerLink="." title="See likes" (click)="seeLikes(p.id)"><i class="la la-expand"></i>  </a>
+															</li> 
 															<li>
                                                                 <a routerLink="." title="Dislike" (click)="dislike(p.id)"><i class="la la-thumbs-o-down"></i> Dislikes ({{ p.dislikes.length }})</a>
-                                                            </li> 
+																<a routerLink="." title="See dislikes" (click)="seeDislikes(p.id)"><i class="la la-expand"></i>  </a>
+															</li> 
 															<li>
                                                                 <a routerLink="." title="Neutral reaction" (click)="neutral(p.id)"><i class="la la-meh-o"></i> </a>
                                                             </li>

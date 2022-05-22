@@ -1,0 +1,4 @@
+<p>Post liked by:</p>
+<ul *ngFor="let l of likes; let i = index"> 
+    <p> {{ l.user['user'].name }} {{ l.user['user'].lastName }} </p>
+</ul>
