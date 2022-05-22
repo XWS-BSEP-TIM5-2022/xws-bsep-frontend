@@ -83,9 +83,16 @@ export class NewPostComponent implements OnInit {
   }
 
   convertPost(){
+    var sanitize = require("mongo-sanitize"); // mongo-sanitize module 
+    // The sanitize function will strip out any keys that start with '$' in the input,
+    // so you can pass it to MongoDB without worrying about malicious users overwriting
+    // query selectors.
+
     this.newPost.id = this.post.id
-    this.newPost.text = this.post.text
-    this.newPost.links = this.post.links
+    this.newPost.text = sanitize(this.post.text)
+    for (let link of this.post.links){
+      this.newPost.links.push(sanitize(link));
+    }    
     this.newPost.images = this.post.images
   }
 

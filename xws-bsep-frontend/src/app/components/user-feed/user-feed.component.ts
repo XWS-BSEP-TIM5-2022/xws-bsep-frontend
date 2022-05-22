@@ -32,9 +32,6 @@ export class UserFeedComponent implements OnInit {
   loaded: boolean = false;
   feedActive: boolean = true;
   profileActive: boolean = false;
-  // postLoaded: boolean = false;
-  obj: any;
-  postUser: User;
   visibleUserAcccountSettings: boolean = false;
 
   ngOnInit(): void {
@@ -188,9 +185,14 @@ export class UserFeedComponent implements OnInit {
   }
 
   comment(postId: string, event: any){
+    var sanitize = require("mongo-sanitize"); // mongo-sanitize module 
+    // The sanitize function will strip out any keys that start with '$' in the input,
+    // so you can pass it to MongoDB without worrying about malicious users overwriting
+    // query selectors.
+
     let dto = new CommentDto();
     dto.postId = postId;
-    dto.text = event.target.comment.value
+    dto.text = sanitize(event.target.comment.value);
 
     if (dto.text != "" && dto.text.trim() != "" && dto.text != undefined){ 
       this.postService.commentPost(dto).subscribe(
