@@ -71,14 +71,14 @@ export class NewPostComponent implements OnInit {
         (success: SuccessMessage) => {
           console.log(success)
           if (success.success == "success"){
-            alert("Post uspesno kreiran!")
+            alert("Post is successfully created!")
           } else {
-            alert("Post nije kreiran!")
+            alert("Post was NOT created!")
           }
         })
       this.dialogRef.close();
     } else {
-      alert("Tekst post-a ne sme biti prazan!")
+      alert("Text can not be empty!")
     }
   }
 

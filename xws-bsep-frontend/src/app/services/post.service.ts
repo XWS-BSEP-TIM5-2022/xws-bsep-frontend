@@ -38,6 +38,10 @@ export class PostService {
     return this.http.post<SuccessMessage>(`${this.postPath}/dislike`, dto)    
   }
 
+  neutralPost(dto: PostDto): Observable<SuccessMessage>{
+    return this.http.post<SuccessMessage>(`${this.postPath}/neutral`, dto)    
+  }
+
   commentPost(dto: CommentDto): Observable<SuccessMessage>{
     return this.http.post<SuccessMessage>(`${this.postPath}/comment`, dto)    
   }

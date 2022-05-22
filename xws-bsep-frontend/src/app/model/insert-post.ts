@@ -8,9 +8,6 @@ export class InsertPost {
     text: string = "";
     images: string[] = [];
     links: string[] = [];
-    likes: Like[] = [];
-    dislikes: Dislike[] = [];
-    comments: Comment[] = [];
     userId: string;
     user: User = new User;
 }
