@@ -33,6 +33,9 @@ export class UserFeedComponent implements OnInit {
   feedActive: boolean = true;
   profileActive: boolean = false;
   // postLoaded: boolean = false;
+  obj: any;
+  postUser: User;
+  visibleUserAcccountSettings: boolean = false;
 
   ngOnInit(): void {
     this.user.name = "";
@@ -178,6 +181,10 @@ export class UserFeedComponent implements OnInit {
           this.posts = posts
       })
     }
+  }
+
+  makeVisibleUserAcccountSettings() {
+    this.visibleUserAcccountSettings = !this.visibleUserAcccountSettings
   }
 
   comment(postId: string, event: any){
