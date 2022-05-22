@@ -3,7 +3,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="//netdna.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
 	<div class="wrapper">
@@ -11,8 +10,8 @@
 			<div class="container">
 				<div class="header-data">
 					<div class="logo">
-						<a href="/feed" title=""><img src="assets/logo.png" alt="No image" height="40px" width="80px"></a>
-					</div><!--logo end-->
+						<a href="/feed" title=""><img src="assets/logo.png" alt="" height="40px" width="50px"></a>
+					</div>
 					<div class="search-bar">
 						<form>
 							<input type="text" name="search" placeholder="Search...">
@@ -161,17 +160,17 @@
 							</li>
 						</ul>
 					</nav><!--nav end-->
-					<div class="menu-btn">
+					<!-- <div class="menu-btn">
 						<a href="#" title=""><i class="fa fa-bars"></i></a>
-					</div><!--menu-btn end-->
+					</div>menu-btn end -->
 					<div class="user-account">
-						<div class="user-info">
+						<div class="user-info"  (click)="makeVisibleUserAcccountSettings()" style="cursor: pointer;">
 							<img src="http://via.placeholder.com/30x30" alt="">
-							<a href="#" title="">John</a>
+							<a title="">{{user.name}}</a>
 							<i class="la la-sort-down"></i>
 						</div>
-						<div class="user-account-settingss">
-							<h3>Online Status</h3>
+						<div class="user-account-settingss active" *ngIf="visibleUserAcccountSettings">
+							<!-- <h3>Online Status</h3>
 							<ul class="on-off-status">
 								<li>
 									<div class="fgt-sec">
@@ -198,10 +197,10 @@
 									<input type="text" name="search">
 									<button type="submit">Ok</button>
 								</form>
-							</div><!--search_form end-->
+							</div>search_form end -->
 							<h3>Setting</h3>
 							<ul class="us-links">
-								<li><a href="profile-account-setting.html" title="">Account Setting</a></li>
+								<li><a href="/account-setting" title="">Account Setting</a></li>
 								<li><a href="#" title="">Privacy</a></li>
 								<li><a href="#" title="">Faqs</a></li>
 								<li><a href="#" title="">Terms & Conditions</a></li>
