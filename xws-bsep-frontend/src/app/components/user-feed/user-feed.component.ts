@@ -13,6 +13,8 @@ import { Dislike } from 'src/app/model/dislike';
 import { PostDto } from 'src/app/model/post-dto';
 import { SuccessMessage } from 'src/app/model/success-message';
 import { CommentDto } from 'src/app/model/comment-dto';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-user-feed',
@@ -21,9 +23,8 @@ import { CommentDto } from 'src/app/model/comment-dto';
 })
 export class UserFeedComponent implements OnInit {
 
-  
-  // postLoaded: boolean = false;
-  constructor(private userService: UserService, private feedService: FeedService, private postService: PostService, public dialog: MatDialog) { }
+  constructor(private userService: UserService, private feedService: FeedService, private postService: PostService, public dialog: MatDialog,
+    private router: Router, private authService: AuthService) { }
 
   user: User = new User; // current user
   feedPosts: FeedPost[] = [];
@@ -35,7 +36,6 @@ export class UserFeedComponent implements OnInit {
   obj: any;
   postUser: User;
   visibleUserAcccountSettings: boolean = false;
-
 
   ngOnInit(): void {
     this.user.name = "";
@@ -310,5 +310,10 @@ export class UserFeedComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       window.location.reload();
     });
+  }
+
+  logout(){
+    this.authService.logout();
+    this.router.navigate(['']);  
   }
 }

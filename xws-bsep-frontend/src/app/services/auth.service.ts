@@ -143,6 +143,13 @@ export class AuthService {
     return this.http.put(this.resetForgottenPasswordPath, JSON.stringify(body));
   }
 
+  logout(){
+    localStorage.removeItem('user');
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('role');
+    localStorage.clear();
+  }
+
   changePassword(body: {oldPassword: string, newPassword: string, newReenteredPassword: string}) {
     return this.http.post(this.changePasswordPath, JSON.stringify(body));
   }
