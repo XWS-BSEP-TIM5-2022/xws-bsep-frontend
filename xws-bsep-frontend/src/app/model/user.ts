@@ -5,8 +5,8 @@ import { Skill } from "./skill";
 
 export class User {
     id: string;
-    name: string;
-    lastName: string;
+    name: string = "";
+    lastName: string = "";
     email: string;
     mobileNumber: string;
     gender: string;

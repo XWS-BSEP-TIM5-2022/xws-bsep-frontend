@@ -10,6 +10,8 @@ import { AppComponent } from './app.component';
 import { TestComponent } from './components/test/test.component';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
 import { UserFeedComponent } from './components/user-feed/user-feed.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
@@ -18,16 +20,27 @@ import { AccountRecoveryComponent } from './components/account-recovery/account-
 import { PasswordlessLoginComponent } from './components/passwordless-login/passwordless-login.component';
 import { CommonModule } from '@angular/common';
 import { AccountSettingsComponent } from './components/account-settings/account-settings.component'; 
+import { NewPostComponent } from './components/new-post/new-post.component'; 
+import { MatDialogModule } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatButtonModule } from '@angular/material/button';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatInputModule} from '@angular/material/input';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     TestComponent,
     LoginComponent,
+    SignUpComponent,
+    ActivateAccountComponent,
     UserFeedComponent,
     AccountRecoveryComponent,
     PasswordlessLoginComponent,
     AccountSettingsComponent
+    NewPostComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +49,12 @@ import { AccountSettingsComponent } from './components/account-settings/account-
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    MatDialogModule,
+    MatSliderModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatInputModule
   ],
   providers: [
     {
