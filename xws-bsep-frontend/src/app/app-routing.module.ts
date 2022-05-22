@@ -12,6 +12,7 @@ import {
 import { RoleGuardService 
 as RoleGuard } from './services/role-guard.service';
 import { AccountRecoveryComponent } from './components/account-recovery/account-recovery.component';
+import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
 
 const routes: Routes = [
   {
@@ -50,7 +51,16 @@ const routes: Routes = [
     data: { 
       expectedRole: 'User'  // ROLE GUARD - samo expectedRole moze da pristupi stranici
     }
-  }
+  }, 
+  {
+    path: 'account-setting',
+    component: AccountSettingsComponent,
+    canActivate: [RoleGuard], 
+    data: { 
+      expectedRole: 'User' //['User', 'Admin']
+    }
+  }, 
+
 ];
 
 @NgModule({

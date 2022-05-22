@@ -16,6 +16,7 @@
 			<div class="container">
 				<div class="header-data">
 					<div class="logo">
+						<a href="/feed" title=""><img src="assets/logo.png" alt="" height="40px" width="50px"></a>
 						<!-- <a href="index.html" title=""><img src="images/logo.png" alt=""></a> -->
 					</div>
                     <!--logo end-->
@@ -157,13 +158,13 @@
                     <!--menu-btn end-->
 					
                     <div class="user-account">
-						<div class="user-info">
+						<div class="user-info"  (click)="makeVisibleUserAcccountSettings()" style="cursor: pointer;">
 							<img src="http://via.placeholder.com/30x30" alt="">
-							<a href="#" title="">John</a>
+							<a title="">{{user.name}}</a>
 							<i class="la la-sort-down"></i>
 						</div>
-						<div class="user-account-settingss">
-							<h3>Online Status</h3>
+						<div class="user-account-settingss active" *ngIf="visibleUserAcccountSettings">
+							<!-- <h3>Online Status</h3>
 							<ul class="on-off-status">
 								<li>
 									<div class="fgt-sec">
@@ -190,15 +191,15 @@
 									<input type="text" name="search">
 									<button type="submit">Ok</button>
 								</form>
-							</div><!--search_form end-->
+							</div>search_form end -->
 							<h3>Setting</h3>
 							<ul class="us-links">
-								<li><a href="profile-account-setting.html" title="">Account Setting</a></li>
+								<li><a href="/account-setting" title="">Account Setting</a></li>
 								<li><a href="#" title="">Privacy</a></li>
 								<li><a href="#" title="">Faqs</a></li>
 								<li><a href="#" title="">Terms & Conditions</a></li>
 							</ul>
-							<h3 class="tc"><a href="sign-in.html" title="">Logout</a></h3>
+							<h3 class="tc"><a routerLink="." (click)="logout()">Logout</a></h3>
 						</div><!--user-account-settingss end-->
 					</div>
 				</div><!--header-data end-->
@@ -234,7 +235,7 @@
 								</div><!--main-left-sidebar end-->
 
 								<div class="message-btn" style="display: flex; justify-content: center; margin: auto; float: left;">
-									<button mat-raised-button style="background-color: #e44d3a; color:white" (click)="newPost()" ><i class="la la-upload"></i> New Post</button>
+									<button mat-raised-button style="background-color: #e44d3a; color:white; font-weight: lighter;" (click)="newPost()" ><i class="la la-upload"></i> New Post</button>
 								</div>
 							</div>
 							<div class="col-lg-6">
@@ -287,6 +288,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+													
 
                                                     <div class="job_descp">
                                                         <!-- <ul class="job-dt">
@@ -309,11 +311,14 @@
                                                     <div class="job-status-bar">
 														<ul class="like-com">
                                                             <li>
-                                                                <a routerLink="." (click)="like(p.id)"><i class="la la-heart"></i> Likes ({{ p.likes.length }}) </a>
+                                                                <a routerLink="." title="Like" (click)="like(p.id)"><i class="la la-heart"></i> Likes ({{ p.likes.length }}) </a>
                                                             </li> 
 															<li>
-                                                                <a routerLink="." (click)="dislike(p.id)"><i class="la la-thumbs-o-down"></i> Dislikes ({{ p.dislikes.length }})</a>
+                                                                <a routerLink="." title="Dislike" (click)="dislike(p.id)"><i class="la la-thumbs-o-down"></i> Dislikes ({{ p.dislikes.length }})</a>
                                                             </li> 
+															<li>
+                                                                <a routerLink="." title="Neutral reaction" (click)="neutral(p.id)"><i class="la la-meh-o"></i> </a>
+                                                            </li>
                                                         </ul>
                                                         <!-- <ul class="like-com" *ngIf="userLikedPost(p.id)">
                                                             <li>

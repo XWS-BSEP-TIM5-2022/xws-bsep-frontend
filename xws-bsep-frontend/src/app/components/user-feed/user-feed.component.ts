@@ -13,6 +13,8 @@ import { Dislike } from 'src/app/model/dislike';
 import { PostDto } from 'src/app/model/post-dto';
 import { SuccessMessage } from 'src/app/model/success-message';
 import { CommentDto } from 'src/app/model/comment-dto';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-user-feed',
@@ -21,7 +23,8 @@ import { CommentDto } from 'src/app/model/comment-dto';
 })
 export class UserFeedComponent implements OnInit {
 
-  constructor(private userService: UserService, private feedService: FeedService, private postService: PostService, public dialog: MatDialog) { }
+  constructor(private userService: UserService, private feedService: FeedService, private postService: PostService, public dialog: MatDialog,
+    private router: Router, private authService: AuthService) { }
 
   user: User = new User; // current user
   feedPosts: FeedPost[] = [];
@@ -30,6 +33,9 @@ export class UserFeedComponent implements OnInit {
   feedActive: boolean = true;
   profileActive: boolean = false;
   // postLoaded: boolean = false;
+  obj: any;
+  postUser: User;
+  visibleUserAcccountSettings: boolean = false;
 
   ngOnInit(): void {
     this.user.name = "";
@@ -177,20 +183,28 @@ export class UserFeedComponent implements OnInit {
     }
   }
 
+  makeVisibleUserAcccountSettings() {
+    this.visibleUserAcccountSettings = !this.visibleUserAcccountSettings
+  }
+
   comment(postId: string, event: any){
     let dto = new CommentDto();
     dto.postId = postId;
     dto.text = event.target.comment.value
-    // console.log(dto.text)
-    this.postService.commentPost(dto).subscribe(
-      (data: SuccessMessage) => {
-        if (this.feedActive){
-          this.loadFeed();
-        } else {
-          this.loadMyPosts();
+
+    if (dto.text != "" && dto.text.trim() != "" && dto.text != undefined){ 
+      this.postService.commentPost(dto).subscribe(
+        (data: SuccessMessage) => {
+          if (this.feedActive){
+            this.loadFeed();
+          } else {
+            this.loadMyPosts();
+          }
         }
-      }
-    )
+      )
+    } else {
+      alert('Comment can not be empty!')
+    }
   }
 
   like(postId: string){
@@ -221,6 +235,20 @@ export class UserFeedComponent implements OnInit {
     )
   }
 
+  neutral(postId: string){
+    let dto = new PostDto();
+    dto.postId = postId;
+    this.postService.neutralPost(dto).subscribe(
+      (data: SuccessMessage) => {
+        if (this.feedActive){
+          this.loadFeed();
+        } else {
+          this.loadMyPosts();
+        }
+      }
+    )
+  }
+  
   // userLikedPost(postId: string){
   //   let userId =  localStorage.getItem("user");
 
@@ -282,5 +310,10 @@ export class UserFeedComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       window.location.reload();
     });
+  }
+
+  logout(){
+    this.authService.logout();
+    this.router.navigate(['']);  
   }
 }
