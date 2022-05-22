@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from "@angular/common/http";
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,7 @@ import { RoleGuardService } from './services/role-guard.service';
 import { AccountRecoveryComponent } from './components/account-recovery/account-recovery.component';
 import { PasswordlessLoginComponent } from './components/passwordless-login/passwordless-login.component';
 import { CommonModule } from '@angular/common';
+import { AccountSettingsComponent } from './components/account-settings/account-settings.component'; 
 import { NewPostComponent } from './components/new-post/new-post.component'; 
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -37,6 +39,7 @@ import {MatInputModule} from '@angular/material/input';
     UserFeedComponent,
     AccountRecoveryComponent,
     PasswordlessLoginComponent,
+    AccountSettingsComponent,
     NewPostComponent,
   ],
   imports: [
@@ -45,6 +48,7 @@ import {MatInputModule} from '@angular/material/input';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     MatDialogModule,
     MatSliderModule,
     BrowserAnimationsModule,

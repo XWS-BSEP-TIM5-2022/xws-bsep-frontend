@@ -23,8 +23,9 @@ export class AuthService {
   private readonly passwordlessLoginPath = environment.backend_api + 'api/auth/passwordless-login';
   private readonly confirmedPasslessPath = environment.backend_api + 'api/auth/confirm-email-login/'; 
   private readonly sendRecoveryCodePath = environment.backend_api + 'api/auth/sendCode';
-  private readonly verifyRecoveryCodePath = environment.backend_api + 'api/auth/verifyCode';
+  private readonly verifyRecoveryCodePath = environment.backend_api + 'api/auth/verifyCode'; 
   private readonly resetForgottenPasswordPath = environment.backend_api + 'api/auth/resetPassword';
+  private readonly changePasswordPath = environment.backend_api + 'api/auth/changePassword';
   logged: Boolean = false;
 
   private access_token = null;
@@ -134,12 +135,15 @@ export class AuthService {
     return this.http.put(this.sendRecoveryCodePath, JSON.stringify(body));
   }
 
-  VerifyRecoveryCode(body: {idAuth: string, verificationCode: string, email: string}){
+  verifyRecoveryCode(body: {idAuth: string, verificationCode: string, email: string}){
     return this.http.post(this.verifyRecoveryCodePath, JSON.stringify(body));
   }
 
-  ResetForgottenPassword(body: {idAuth: string, password: string, reenteredPassword: string}) {
+  resetForgottenPassword(body: {idAuth: string, password: string, reenteredPassword: string}) {
     return this.http.put(this.resetForgottenPasswordPath, JSON.stringify(body));
   }
 
+  changePassword(body: {oldPassword: string, newPassword: string, newReenteredPassword: string}) {
+    return this.http.post(this.changePasswordPath, JSON.stringify(body));
+  }
 }
