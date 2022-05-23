@@ -150,6 +150,7 @@ export class UserFeedComponent implements OnInit {
     for (let p of this.posts){
       console.log(p.user['user'].name, p.user['user'].lastName) 
     }
+    
   }
 
   loadMyPosts(){
