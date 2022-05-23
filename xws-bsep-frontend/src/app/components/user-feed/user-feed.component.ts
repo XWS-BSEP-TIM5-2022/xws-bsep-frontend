@@ -261,9 +261,9 @@ export class UserFeedComponent implements OnInit {
     });
     dialogRef.componentInstance.post.id = postId;
 
-    dialogRef.afterClosed().subscribe(result => {
-      window.location.reload();
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   window.location.reload();
+    // });
   }
 
   seeDislikes(postId: string){
@@ -274,9 +274,9 @@ export class UserFeedComponent implements OnInit {
     });
     dialogRef.componentInstance.post.id = postId;
 
-    dialogRef.afterClosed().subscribe(result => {
-      window.location.reload();
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   window.location.reload();
+    // });
   }
 
   // userLikedPost(postId: string){
