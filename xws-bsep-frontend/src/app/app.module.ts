@@ -28,7 +28,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule} from '@angular/material/divider';
 import { MatInputModule} from '@angular/material/input';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
-
+import { MatDividerModule} from '@angular/material/divider';
+import { MatInputModule} from '@angular/material/input';
+import { PostLikesComponent } from './components/post-likes/post-likes.component';
+import { PostDislikesComponent } from './components/post-dislikes/post-dislikes.component';
 
 
 @NgModule({
@@ -43,6 +46,8 @@ import { MatSnackBarModule} from '@angular/material/snack-bar';
     PasswordlessLoginComponent,
     AccountSettingsComponent,
     NewPostComponent,
+    PostLikesComponent,
+    PostDislikesComponent,
   ],
   imports: [
     BrowserModule,

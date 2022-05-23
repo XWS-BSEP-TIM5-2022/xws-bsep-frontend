@@ -1,0 +1,4 @@
+<p>Post disliked by:</p>
+<ul *ngFor="let l of dislikes; let i = index"> 
+    <p> {{ l.user['user'].name }} {{ l.user['user'].lastName }} </p>
+</ul>
