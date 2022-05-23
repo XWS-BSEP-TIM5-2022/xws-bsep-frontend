@@ -49,6 +49,7 @@ export class UserFeedComponent implements OnInit {
       this.userService.getById(userId).subscribe(
         (user: any) => {
         this.user = user['user']
+        localStorage.setItem("loggedUserName", this.user.name)
         this.loaded = true;
 
         this.loadFeed();
