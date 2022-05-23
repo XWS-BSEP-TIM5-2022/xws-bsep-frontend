@@ -83,9 +83,15 @@ export class AuthService {
 
   tokenIsExpired(){
     if (localStorage.getItem("jwt") != undefined && localStorage.getItem("jwt") != null)  {
-      let token = JSON.parse(localStorage.getItem('jwt') || '{}');
-      console.log("token nije istekao")
-      return !this.jwtHelper.isTokenExpired(token);
+      let locStorageToken = localStorage.getItem("jwt")
+      // let token = JSON.parse(localStorage.getItem('jwt') || '{}');
+      if (!locStorageToken){
+        return true;
+      }
+      if(this.jwtHelper.isTokenExpired(locStorageToken)) {
+        console.log("Token je istekao")
+      }
+      return this.jwtHelper.isTokenExpired(locStorageToken);
     }
     return true;
   }
@@ -125,7 +131,7 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    if (this.tokenIsPresent() && this.roleIsPresent() /**&& !this.tokenIsExpired() **/){
+    if (this.tokenIsPresent() && this.roleIsPresent() && !this.tokenIsExpired()){
       return true;
     }
     return false;
