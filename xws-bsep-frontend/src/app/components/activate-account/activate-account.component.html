@@ -15,9 +15,11 @@
 			<div class="signin-popup" style="align-items: center;">
 				<div class="signin-pop2" style="height: 250px; width: 800px;">
 									<!-- <img src="../../../images/cm-logo.png" alt=""> -->
-                    <p style="font-size: 25px; text-align: center;">You have successfully activated your profile</p>
+                    <p *ngIf="!expired" style="font-size: 25px; text-align: center;">You have successfully activated your profile</p>
+					<p *ngIf="expired" style="font-size: 25px; text-align: center;">Token is expired.</p>
+
 <div class="child">
-    <button type="submit" value="submit" class="btn btn-danger" (click)="login()">Login</button>
+    <button *ngIf="!expired" type="submit" value="submit" class="btn btn-danger" (click)="login()">Login</button>
 </div>
                                         
 
