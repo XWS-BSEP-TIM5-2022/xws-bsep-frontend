@@ -128,6 +128,11 @@ export class AuthService {
   activateAccount(jwt): Observable<any> {
     console.log(jwt)
     return this.http.get<any>(`${this.activateAccountPath}/`+ jwt)
+    .pipe(map((res: any) => {
+
+    }))
+    .pipe(catchError(error => this.checkError(error)));
+
   }
 
   isAuthenticated(): boolean {
