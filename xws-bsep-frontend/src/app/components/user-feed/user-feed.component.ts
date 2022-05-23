@@ -83,7 +83,7 @@ export class UserFeedComponent implements OnInit {
 
   convertToPost(){  
     for(let feedPost of this.feedPosts){
-      let post = new Post();
+      let post = new Post;
 
       post.id = feedPost.Id
       post.text = feedPost.Text;
@@ -146,6 +146,11 @@ export class UserFeedComponent implements OnInit {
 
       this.posts.push(post); 
     }
+
+    for (let p of this.posts){
+      console.log(p.user['user'].name, p.user['user'].lastName) 
+    }
+    
   }
 
   loadMyPosts(){
@@ -284,7 +289,6 @@ export class UserFeedComponent implements OnInit {
 
   //   this.postService.getById(postId).subscribe(
   //     (data: Post) => {
-  //       console.log(data)
   //       for(let like of data.likes){
   //         if (like.userId == userId){
   //           return true;
@@ -301,7 +305,6 @@ export class UserFeedComponent implements OnInit {
 
   //   this.postService.getById(postId).subscribe(
   //     (data: Post) => {
-  //       console.log(data)
   //       for(let like of data.dislikes){
   //         if (like.userId == userId){
   //           return true;
@@ -319,7 +322,6 @@ export class UserFeedComponent implements OnInit {
 
   //   this.postService.getById(postId).subscribe(
   //     (data: Post) => {
-  //       console.log(data)
   //       for(let like of data.likes){
   //         if (like.userId == userId){
   //           return false;
