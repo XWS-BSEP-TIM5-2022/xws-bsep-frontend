@@ -25,8 +25,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatInputModule} from '@angular/material/input';
+import { MatDividerModule} from '@angular/material/divider';
+import { MatInputModule} from '@angular/material/input';
+import { MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 
 @NgModule({
@@ -54,7 +56,8 @@ import {MatInputModule} from '@angular/material/input';
     BrowserAnimationsModule,
     MatButtonModule,
     MatDividerModule,
-    MatInputModule
+    MatInputModule,
+    MatSnackBarModule,
   ],
   providers: [
     {
