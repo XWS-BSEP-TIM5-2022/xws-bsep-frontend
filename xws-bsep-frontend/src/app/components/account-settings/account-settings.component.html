@@ -324,7 +324,6 @@
 							  				</div>
 							  			</div><!--profile-bx-details end-->
 							  			<div class="pro-work-status">
-							  				<!-- <h4>Work Status  -  Last Months Working Status</h4> -->
 							  			</div><!--pro-work-status end-->
 							  		</div><!--acc-setting end-->
 							  	</div>
@@ -335,37 +334,33 @@
 											<div class="cp-field">
 												<h5>Old Password</h5>
 												<div class="cpp-fiel">
-													<input type="password" name="oldPassword" placeholder="Old Password">
-                                                    <i class="fa fa-lock"></i>
+													<input type="{{inputType1}}" name="oldPassword" placeholder="Old Password" [(ngModel)]="oldPassword">
+                                                    <i class="fa fa-eye-slash" aria-hidden="true" *ngIf="hiddenPassword1" (click)="makeOldPasswordVisible()"></i>
+                                                    <i class="fa fa-eye" aria-hidden="true" *ngIf="!hiddenPassword1" (click)="makeOldPasswordVisible()"></i>
 												</div>
-                                                <!-- <div *ngIf="submitted && f.oldPassword.errors" class="invalid-feedback">
-                                                    <div *ngIf="f.oldPassword.errors.required">Password is required</div>
-                                                    <div *ngIf="f.oldPassword.errors.minlength">
-                                                      Password must be at least 8 characters
-                                                    </div>
-                                                </div> -->
 											</div>
 											<div class="cp-field">
 												<h5>New Password</h5>
 												<div class="cpp-fiel">
-													<input type="password" name="newPassword" [(ngModel)]="newPassword" placeholder="New Password" required="true">
-													<i class="fa fa-lock"></i>
+													<input type="{{inputType2}}" name="newPassword" [(ngModel)]="newPassword" placeholder="New Password" required="true">
+													<i class="fa fa-eye-slash" aria-hidden="true" *ngIf="hiddenPassword2" (click)="makeNewPasswordVisible()"></i>
+                                                    <i class="fa fa-eye" aria-hidden="true" *ngIf="!hiddenPassword2" (click)="makeNewPasswordVisible()"></i>
 												</div>
 											</div>
 											<div class="cp-field">
 												<h5>Repeat Password</h5>
 												<div class="cpp-fiel">
-													<input type="password" name="newReenteredPassword" [(ngModel)]="newReenteredPassword" placeholder="Repeat Password">
-													<i class="fa fa-lock"></i>
+													<input type="{{inputType3}}" name="newReenteredPassword" [(ngModel)]="newReenteredPassword" placeholder="Repeat Password">
+													<i class="fa fa-eye-slash" aria-hidden="true" *ngIf="hiddenPassword3" (click)="makeNewReenteredPasswordVisible()"></i>
+                                                    <i class="fa fa-eye" aria-hidden="true" *ngIf="!hiddenPassword3" (click)="makeNewReenteredPasswordVisible()"></i>
 												</div>
 											</div>
 											<div class="cp-field">
-												<h5><a href="" title="">Forgot Password?</a></h5>
+												<!-- <h5><a href="" title="">Forgot Password?</a></h5> -->
 											</div>
 											<div class="save-stngs pd2">
 												<ul>
 													<li><button type="submit" (click)="changePassword()">Save Setting</button></li> <!-- (click)="changePassword()" -->
-													<!-- <li><button type="submit">Restore Setting</button></li> -->
 												</ul>
 											</div><!--save-stngs end-->
 										</form>
