@@ -29,7 +29,6 @@ export class SignUpComponent implements OnInit {
       "username": "",
       "biography": "",
       "password" : "",
-      "isPublic": false,
       "role": ["User"],
       "education": [],
       "experience": [],
