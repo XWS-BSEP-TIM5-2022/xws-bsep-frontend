@@ -41,7 +41,7 @@ const routes: Routes = [
     component: PasswordlessLoginComponent,
   },
   {
-    path: 'accountRecovery',
+    path: 'account-recovery',
     component: AccountRecoveryComponent,
   },
   {
