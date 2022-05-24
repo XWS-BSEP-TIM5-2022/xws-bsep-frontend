@@ -36,13 +36,13 @@ export class AccountRecoveryComponent implements OnInit {
   sendEmail() {
     if (this.email == ""){
       this._snackBar.open("Email is required", "Ok");
+      return;
     }
-
     let pattern = new RegExp("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$");
-
     if(!pattern.test(this.email)){
-      let msg = "Email is invalid";
+      let msg = "You have entered an invalid email address";
       this._snackBar.open(msg, "Ok");
+      return;
     }
     const body = {
       "email": this.email
@@ -55,16 +55,17 @@ export class AccountRecoveryComponent implements OnInit {
       this._snackBar.open('Verification code is sent! Check your mail inbox!', "Ok")
 
     }, err => {
-      this._snackBar.open("Invalid email", "Ok")
+      this._snackBar.open("There is no user with the entered email", "Ok")
     })
   }
 
   sendCode() {
-    if(this.code == "") {
+    // alert()
+    if(!this.code) {
       this._snackBar.open("Code is required", "Ok")
       return;
     }
-    if (this.code.length != this.countOfCodeNumbers) {
+    if (this.code.toString().length != 6) {
       this._snackBar.open("Code contains exactly "+ this.countOfCodeNumbers +" digits", "Ok")
       return;
     }
