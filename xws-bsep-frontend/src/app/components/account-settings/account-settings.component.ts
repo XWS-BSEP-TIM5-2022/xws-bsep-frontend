@@ -46,7 +46,6 @@ export class AccountSettingsComponent implements OnInit {
     }
 
   changePassword(){
-    // TODO SD: validacija na frontu
     if(this.changePasswordCriteria()) {
       return;
     }
