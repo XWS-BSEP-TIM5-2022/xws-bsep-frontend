@@ -14,4 +14,10 @@ export class FeedService {
 
   getFeed(userID: string){
     return this.http.get<any[]>(`${this.feedPath}/`+ userID)    
-  }}
+  }
+
+  getPublicPosts(){
+    return this.http.get<any[]>(`${this.feedPath}/public`)    
+  }
+
+}
