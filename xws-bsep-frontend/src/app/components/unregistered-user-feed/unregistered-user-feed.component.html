@@ -1,0 +1,222 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Feed</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+</head>
+
+<body>
+	<div class="wrapper">
+		<!-- <header>
+			<div class="container">
+				<div class="header-data">
+					<div class="logo">
+						<a href="/feed" title=""><img src="images/logo.png" alt="" height="40px" width="50px"></a>
+					</div>
+					
+					<nav>
+						<ul>
+							<li>
+								<a href="/login" title="">
+									Sign-in
+								</a>
+							</li>
+							<li>
+								<a href="sign-up" title="">
+									Sign-up
+								</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</header> -->
+
+		<section class="cover-sec">
+			<img src="http://via.placeholder.com/1600x600" alt="">
+		</section>
+
+		<main>
+			<div class="main-section">
+				<div class="container">
+					<div class="main-section-data">
+						<div class="row">
+							<div class="col-lg-3">
+								<br><br><br><br><br>
+								<div class="main-left-sidebar">
+									<div class="user_profile">		
+										<ul class="social_links">
+											<li><a title="" style="font-size: large;" routerLink="/sign-up"> <i class="la la-angle-right"></i> Want to join us? </a></li>
+											<!-- <li><input type="button" class="btn" style="display: block; background-color: #bbb; width: 100%;" value="Sign-up" routerLink="/sign-up" > </li>  -->
+											<li><a title="" style="font-size: large;" routerLink="/login"> <i class="la la-angle-right"></i> Already have an account?  </a></li>	
+											<!-- <li><input type="button" class="btn" style="display: block; background-color: #bbb; width: 100%;" value="Sign-in" routerLink="/login">  </li> -->
+										
+										</ul>
+									</div><!--user_profile end-->
+								</div><!--main-left-sidebar end-->
+
+							</div>
+							<div class="col-lg-6">
+								<div class="main-ws-sec">
+									
+                                    <div class="product-feed-tab current" id="feed-dd">
+                                        <div class="posts-section">
+                                            <ul *ngFor="let p of posts; let i=index"> <!--POSTS -->
+                                                <div class="post-bar">
+                                                    <div class="post_topbar">
+                                                        <div class="usy-dt">
+															<img src="http://via.placeholder.com/50x50" alt="">
+															<div class="usy-name">
+                                                                <h3> USER USER </h3> <!-- <h3>  {{ p.user['user'].name }} {{ p.user['user'].lastName }} </h3> -->   <!-- TODO USER -->
+																<span> <i class="la la-calendar"></i> {{ p.dateCreated }} </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+													
+                                                    <div class="job_descp">
+                                                        <p> {{ p.text }} </p>
+														
+														<ul *ngFor="let link of p.links"> <!--POSTS -->
+															<a href="{{link}}" > {{ link }} </a>
+														</ul>
+                                                    </div>
+                                                    <div class="job-status-bar">
+														<ul class="like-com">
+                                                            <li>
+                                                                <a routerLink="." title="Like" ><i class="la la-heart"></i> Likes ({{ p.likes.length }}) </a>
+																<a routerLink="." title="See likes" (click)="seeLikes(p.id)"><i class="la la-expand"></i>  </a>
+															</li> 
+															<li>
+                                                                <a routerLink="." title="Dislike"><i class="la la-thumbs-o-down"></i> Dislikes ({{ p.dislikes.length }})</a>
+																<a routerLink="." title="See dislikes" (click)="seeDislikes(p.id)"><i class="la la-expand"></i>  </a>
+															</li> 
+															<li>
+                                                                <a routerLink="." title="Neutral reaction"><i class="la la-meh-o"></i> </a>
+                                                            </li>
+                                                        </ul>
+                                                        <a><i class="la la-comments"></i>Comments ({{ p.comments.length }})</a>
+                                                    </div>
+                                                </div>
+											
+												<ul *ngFor="let c of p.comments"> 
+													<div class="comment-section" style="margin-bottom: 1vw; margin-top: -1vw; ">
+														<div class="comment-sec">
+															<ul>
+																<li>
+																	<div class="comment-list">
+																		<div class="bg-img">
+																			<img src="http://via.placeholder.com/40x40" alt="">
+																		</div>
+																		<div class="comment">
+																			<h3> USER USER </h3>  <!-- <h3>  {{ c.user['user'].name }} {{ c.user['user'].lastName }} </h3> --> <!-- TODO USER -->
+																			<p> {{ c.text }} </p>
+																		</div>
+																	</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</ul>
+											</ul>
+											<br> <br>
+										</div><!--posts-section end-->
+									</div><!--product-feed-tab end-->
+								</div><!--main-ws-sec end-->
+							</div>
+							
+							<!-- Suggestions -->
+							<div class="col-lg-3">
+								<div class="right-sidebar">
+									<div class="suggestions full-width">
+										<div class="sd-title">
+											<h3>Suggestions</h3>
+											<i class="la la-ellipsis-v"></i>
+										</div><!--sd-title end-->
+										<div class="suggestions-list">
+											<div class="suggestion-usd">
+												<!-- <img src="http://via.placeholder.com/35x35" alt=""> -->
+												<div class="sgt-text">
+													<h4>Jessica William</h4>
+													<span>Graphic Designer</span>
+												</div>
+												<span><i class="la la-plus"></i></span>
+											</div>
+											<div class="suggestion-usd">
+												<!-- <img src="http://via.placeholder.com/35x35" alt=""> -->
+												<div class="sgt-text">
+													<h4>John Doe</h4>
+													<span>PHP Developer</span>
+												</div>
+												<span><i class="la la-plus"></i></span>
+											</div>
+											<div class="suggestion-usd">
+												<!-- <img src="http://via.placeholder.com/35x35" alt=""> -->
+												<div class="sgt-text">
+													<h4>Poonam</h4>
+													<span>Wordpress Developer</span>
+												</div>
+												<span><i class="la la-plus"></i></span>
+											</div>
+											<div class="suggestion-usd">
+												<!-- <img src="http://via.placeholder.com/35x35" alt=""> -->
+												<div class="sgt-text">
+													<h4>Bill Gates</h4>
+													<span>C & C++ Developer</span>
+												</div>
+												<span><i class="la la-plus"></i></span>
+											</div>
+											<div class="suggestion-usd">
+												<!-- <img src="http://via.placeholder.com/35x35" alt=""> -->
+												<div class="sgt-text">
+													<h4>Jessica William</h4>
+													<span>Graphic Designer</span>
+												</div>
+												<span><i class="la la-plus"></i></span>
+											</div>
+											<div class="suggestion-usd">
+												<!-- <img src="http://via.placeholder.com/35x35" alt=""> -->
+												<div class="sgt-text">
+													<h4>John Doe</h4>
+													<span>PHP Developer</span>
+												</div>
+												<span><i class="la la-plus"></i></span>
+											</div>
+											<div class="view-more">
+												<a href="#" title="">View More</a>
+											</div>
+										</div><!--suggestions-list end-->
+									</div><!--suggestions end-->
+
+								</div><!--right-sidebar end-->
+							</div> <!-- Suggestions END -->
+							
+						</div>
+					</div><!-- main-section-data end-->
+				</div> 
+			</div>
+		</main>
+
+		<footer>
+			<div class="footy-sec mn no-margin">
+				<div class="container">
+					<ul>
+						<li><a href="#" title="">Help Center</a></li>
+						<li><a href="#" title="">Privacy Policy</a></li>
+						<li><a href="#" title="">Community Guidelines</a></li>
+						<li><a href="#" title="">Cookies Policy</a></li>
+						<li><a href="#" title="">Career</a></li>
+						<li><a href="#" title="">Forum</a></li>
+						<li><a href="#" title="">Language</a></li>
+						<li><a href="#" title="">Copyright Policy</a></li>
+					</ul>
+					<p>Copyright 2018</p>
+				</div>
+			</div>
+		</footer><!--footer end-->
+	</div><!--theme-layout end-->
+</body>
+</html>

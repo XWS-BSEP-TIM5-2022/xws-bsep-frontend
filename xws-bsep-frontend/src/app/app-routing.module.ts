@@ -13,6 +13,7 @@ import { RoleGuardService
 as RoleGuard } from './services/role-guard.service';
 import { AccountRecoveryComponent } from './components/account-recovery/account-recovery.component';
 import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
+import { UnregisteredUserFeedComponent } from './components/unregistered-user-feed/unregistered-user-feed.component';
 
 const routes: Routes = [
   {
@@ -21,7 +22,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],   // AUTH GUARD - bilo koji ulgovani korisnik moze da pristupi stranici
   },
   {
-    path: '',
+    path: 'login',
     component: LoginComponent,
   },
   {
@@ -60,7 +61,10 @@ const routes: Routes = [
       expectedRole: 'User' //['User', 'Admin']
     }
   }, 
-
+  {
+    path: '',
+    component: UnregisteredUserFeedComponent,
+  },
 ];
 
 @NgModule({

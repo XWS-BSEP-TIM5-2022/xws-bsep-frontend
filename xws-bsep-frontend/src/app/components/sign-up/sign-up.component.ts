@@ -105,7 +105,7 @@ export class SignUpComponent implements OnInit {
           popup: 'animate__animated animate__fadeOutUp'
         }
       })
-      this.router.navigate(['']);
+      this.router.navigate(['/login']);
 
     })
   }

@@ -26,11 +26,9 @@ export class ActivateAccountComponent implements OnInit {
 
   }
 
-
   login(){
     //console.log(this.expired)
-    this.router.navigate(['']);
-
+    this.router.navigate(['/login']);
   }
 
 }

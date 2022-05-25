@@ -265,10 +265,6 @@ export class UserFeedComponent implements OnInit {
       data: {},
     });
     dialogRef.componentInstance.post.id = postId;
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   window.location.reload();
-    // });
   }
 
   seeDislikes(postId: string){
@@ -278,60 +274,7 @@ export class UserFeedComponent implements OnInit {
       data: {},
     });
     dialogRef.componentInstance.post.id = postId;
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   window.location.reload();
-    // });
   }
-
-  // userLikedPost(postId: string){
-  //   let userId =  localStorage.getItem("user");
-
-  //   this.postService.getById(postId).subscribe(
-  //     (data: Post) => {
-  //       for(let like of data.likes){
-  //         if (like.userId == userId){
-  //           return true;
-  //         }
-  //       }
-  //       return false;
-  //     }
-  //   )
-  //   return false;
-  // }
-
-  // userDislikedPost(postId: string){
-  //   let userId =  localStorage.getItem("user");
-
-  //   this.postService.getById(postId).subscribe(
-  //     (data: Post) => {
-  //       for(let like of data.dislikes){
-  //         if (like.userId == userId){
-  //           return true;
-  //         }
-  //       }
-  //       return false;
-  //     }
-  //   )
-  //   return false;
-
-  // }
-
-  // userNeutral(postId: string){
-  //   let userId =  localStorage.getItem("user");
-
-  //   this.postService.getById(postId).subscribe(
-  //     (data: Post) => {
-  //       for(let like of data.likes){
-  //         if (like.userId == userId){
-  //           return false;
-  //         }
-  //       }
-  //       return true;
-  //     }
-  //   )
-  //   return true;
-  // }
 
   newPost(){
     const dialogRef = this.dialog.open(NewPostComponent, {

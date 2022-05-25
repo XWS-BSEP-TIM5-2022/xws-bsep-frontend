@@ -30,6 +30,7 @@ import { MatDividerModule} from '@angular/material/divider';
 import { MatInputModule} from '@angular/material/input';
 import { PostLikesComponent } from './components/post-likes/post-likes.component';
 import { PostDislikesComponent } from './components/post-dislikes/post-dislikes.component';
+import { UnregisteredUserFeedComponent } from './components/unregistered-user-feed/unregistered-user-feed.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { PostDislikesComponent } from './components/post-dislikes/post-dislikes.
     NewPostComponent,
     PostLikesComponent,
     PostDislikesComponent,
+    UnregisteredUserFeedComponent,
   ],
   imports: [
     BrowserModule,
