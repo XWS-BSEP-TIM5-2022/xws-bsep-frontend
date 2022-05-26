@@ -31,10 +31,12 @@ export class UserFeedComponent implements OnInit {
   user: User = new User; // current user
   feedPosts: FeedPost[] = [];
   posts: Post[] = [];
+  searchedPosts: Post[] = [];
   loaded: boolean = false;
   feedActive: boolean = true;
   profileActive: boolean = false;
   visibleUserAcccountSettings: boolean = false;
+  searchCriteria: string = "";
 
   ngOnInit(): void {
     this.user.name = "";
@@ -49,7 +51,6 @@ export class UserFeedComponent implements OnInit {
       this.userService.getById(userId).subscribe(
         (user: any) => {
         this.user = user['user']
-        this.loaded = true;
 
         this.loadFeed();
       })
@@ -144,19 +145,26 @@ export class UserFeedComponent implements OnInit {
         post.comments = []
       }
 
+      //console.log(post)
+
       this.posts.push(post); 
+      //console.log(this.posts.length)
+
     }
+  
+    this.searchedPosts = this.posts;
+    this.loaded = true;
 
     for (let p of this.posts){
       console.log(p.user['user'].name, p.user['user'].lastName) 
+      // console.log(this.posts)
     }
-    
   }
 
   loadMyPosts(){
     this.feedActive = false;
     this.profileActive = true;
-    let userId =  localStorage.getItem("user");
+    let userId = localStorage.getItem("user");
     
     if (userId != undefined){
       this.postService.getByUserId(userId).subscribe(
@@ -183,6 +191,7 @@ export class UserFeedComponent implements OnInit {
 
           this.posts = []
           this.posts = posts
+          this.searchedPosts = this.posts
       })
     }
   }
@@ -265,10 +274,6 @@ export class UserFeedComponent implements OnInit {
       data: {},
     });
     dialogRef.componentInstance.post.id = postId;
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   window.location.reload();
-    // });
   }
 
   seeDislikes(postId: string){
@@ -278,60 +283,7 @@ export class UserFeedComponent implements OnInit {
       data: {},
     });
     dialogRef.componentInstance.post.id = postId;
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   window.location.reload();
-    // });
   }
-
-  // userLikedPost(postId: string){
-  //   let userId =  localStorage.getItem("user");
-
-  //   this.postService.getById(postId).subscribe(
-  //     (data: Post) => {
-  //       for(let like of data.likes){
-  //         if (like.userId == userId){
-  //           return true;
-  //         }
-  //       }
-  //       return false;
-  //     }
-  //   )
-  //   return false;
-  // }
-
-  // userDislikedPost(postId: string){
-  //   let userId =  localStorage.getItem("user");
-
-  //   this.postService.getById(postId).subscribe(
-  //     (data: Post) => {
-  //       for(let like of data.dislikes){
-  //         if (like.userId == userId){
-  //           return true;
-  //         }
-  //       }
-  //       return false;
-  //     }
-  //   )
-  //   return false;
-
-  // }
-
-  // userNeutral(postId: string){
-  //   let userId =  localStorage.getItem("user");
-
-  //   this.postService.getById(postId).subscribe(
-  //     (data: Post) => {
-  //       for(let like of data.likes){
-  //         if (like.userId == userId){
-  //           return false;
-  //         }
-  //       }
-  //       return true;
-  //     }
-  //   )
-  //   return true;
-  // }
 
   newPost(){
     const dialogRef = this.dialog.open(NewPostComponent, {
@@ -347,5 +299,38 @@ export class UserFeedComponent implements OnInit {
   logout(){
     this.authService.logout();
     this.router.navigate(['']);  
+  }
+
+  search(){
+    this.posts = this.searchedPosts.filter(p =>
+      (p.text).toLowerCase().includes(this.searchCriteria.toLowerCase()) ||
+      (p.dateCreated).toLowerCase().includes(this.searchCriteria.toLowerCase())
+    )
+  }
+
+  searchFeed(){
+    this.feedActive = true;
+    this.profileActive = false;
+    this.posts = this.searchedPosts.filter(p =>
+      (p.text).toLowerCase().includes(this.searchCriteria.toLowerCase()) ||
+      (p.dateCreated).toLowerCase().includes(this.searchCriteria.toLowerCase())
+    )
+  }
+
+  searchProfile(){
+    this.feedActive = false;
+    this.profileActive = true;
+    this.posts = this.searchedPosts.filter(p =>
+      (p.text).toLowerCase().includes(this.searchCriteria.toLowerCase()) ||
+      (p.dateCreated).toLowerCase().includes(this.searchCriteria.toLowerCase())
+    )
+  }
+
+  seeProfile(id: string){
+    let userId =  localStorage.getItem("user");
+
+    if (id != userId){
+      this.router.navigate(['profile', id])
+    }
   }
 }

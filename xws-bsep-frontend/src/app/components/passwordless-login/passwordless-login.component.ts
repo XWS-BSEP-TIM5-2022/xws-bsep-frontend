@@ -37,7 +37,7 @@ export class PasswordlessLoginComponent implements OnInit {
   }
 
   tryAgain(){
-    this.router.navigate(['/'])
+    this.router.navigate(['/login'])
   }
 
 }

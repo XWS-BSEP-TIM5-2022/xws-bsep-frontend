@@ -9,82 +9,35 @@
 <meta name="keywords" content="" />
 </head>
 
-<body *ngIf="loaded">
+<body>
 	<div class="wrapper">
-		
-		<header>
+		<!-- <header>
 			<div class="container">
 				<div class="header-data">
 					<div class="logo">
-						<a href="/feed" title=""><img src="assets/logo.png" alt="" height="40px" width="50px"></a>
-						<!-- <a href="index.html" title=""><img src="images/logo.png" alt=""></a> -->
+						<a href="/feed" title=""><img src="images/logo.png" alt="" height="40px" width="50px"></a>
 					</div>
-                    <!--logo end-->
-					<div class="search-bar">
-						<form>
-							<input type="text" name="search" [(ngModel)]="searchCriteria" name="searchCriteria" placeholder="Search by post text...">
-							<button (click)="search()"><i class="la la-search"></i></button>
-						</form>
-					</div>
-                    <!--search-bar end-->
+					
 					<nav>
 						<ul>
 							<li>
-								<a href="/feed" title="">
-									Home
+								<a href="/login" title="">
+									Sign-in
 								</a>
 							</li>
 							<li>
-								<a href="companies.html" title="">
-									Companies
-								</a>
-							</li>
-							<li>
-								<a href="jobs.html" title="">
-									Jobs
-								</a>
-							</li>
-							<li>
-								<a href="#" title="" class="not-box-open">
-									Messages
-								</a>
-								<div class="notification-box msg">
-									<div class="nt-title">
-										<h4>Settings</h4>
-										<a href="#" title="">Clear all</a>
-									</div>
-								</div><!--notification-box end-->
-							</li>
-							<li>
-								<a href="#" title="" class="not-box-open">
-									Notification
+								<a href="sign-up" title="">
+									Sign-up
 								</a>
 							</li>
 						</ul>
-					</nav><!--nav end-->
-					
-                    <div class="user-account">
-						<div class="user-info"  (click)="makeVisibleUserAcccountSettings()" style="cursor: pointer;">
-							<a title="">{{user.name}}</a>
-							<i class="la la-sort-down"></i>
-						</div>
-						<div class="user-account-settingss active" *ngIf="visibleUserAcccountSettings">
-							<h3>Settings</h3>
-							<ul class="us-links">
-								<li><a href="/account-setting" title="">Account Setting</a></li>
-								<li><a href="#" title="">Privacy</a></li>
-								<li><a href="#" title="">Faqs</a></li>
-								<li><a href="#" title="">Terms & Conditions</a></li>
-							</ul>
-							<h3 class="tc"><a routerLink="." (click)="logout()">Logout</a></h3>
-						</div><!--user-account-settingss end-->
-					</div>
-				</div><!--header-data end-->
+					</nav>
+				</div>
 			</div>
-		</header><!--header end-->	
+		</header> -->
 
 		<section class="cover-sec">
-            <br> <br><br><br><br><br> <br><br><br><br>
+			<img src="http://via.placeholder.com/1600x600" alt="">
 		</section>
 
 		<main>
@@ -93,63 +46,30 @@
 					<div class="main-section-data">
 						<div class="row">
 							<div class="col-lg-3">
+								<br><br><br><br><br>
 								<div class="main-left-sidebar">
-									<div class="user_profile">
-										<div class="user-pro-img">
-											<img src="http://via.placeholder.com/170x170" alt="">
-											<a href="#" title=""><i class="fa fa-camera"></i></a>
-										</div><!--user-pro-img end-->
+									<div class="user_profile">		
 										<ul class="social_links">
-											<li><a title=""><i class="la la-user"></i> {{ user.name }} {{ user.lastName }} </a></li>
-											<li><a title=""><i class="la la-at"></i> {{ user.email }} </a></li>
-											<li><a title=""><i class="la la-phone"></i> {{ user.mobileNumber }}  </a></li>											
+											<li><a title="" style="font-size: large; color: red;" routerLink="/login"> <i class="la la-angle-right"></i> Want to join us? </a></li>
+											<!-- <li><input type="button" class="btn" style="display: block; background-color: #bbb; width: 100%;" value="Sign-up" routerLink="/sign-up" > </li>  -->
+											<li><a title="" style="font-size: large; color: red" routerLink="/login"> <i class="la la-angle-right"></i> Already have an account?  </a></li>	
+											<!-- <li><input type="button" class="btn" style="display: block; background-color: #bbb; width: 100%;" value="Sign-in" routerLink="/login">  </li> -->
+										
 										</ul>
 									</div><!--user_profile end-->
 								</div><!--main-left-sidebar end-->
 
-								<div class="message-btn" style="display: flex; justify-content: center; margin: auto; float: left;">
-									<button mat-raised-button style="background-color: #e44d3a; color:white; font-weight: lighter;" (click)="newPost()" ><i class="la la-upload"></i> New Post</button>
-								</div>
 							</div>
 							<div class="col-lg-6">
+								<div class="search-bar posts-section" style="margin-bottom: 2vw;">
+									<form>
+										<input type="text" [(ngModel)]="searchCriteria" name="searchCriteria" placeholder="Search by post text...">
+										<button style="background-color: #e44d3a; color: white;" (click)="search()"><i class="la la-search" style="color: white;"></i></button>
+									</form>
+									<br>
+								</div>
+								
 								<div class="main-ws-sec">
-									<div class="user-tab-sec">
-										<h3> {{ user.name }} {{ user.lastName }} </h3>       <!-- TODO: ime ulogovanog korisnika -->
-										<div class="star-descp">
-											<span> {{ user.biography }} </span>
-										</div><!--star-descp end-->
-										<div class="tab-feed st2" *ngIf="feedActive">
-											<ul>
-												<li data-tab="feed-dd" class="active">
-													<a routerLink="." (click)="loadFeed()">
-														<span> <i class="la la-home"></i> Feed </span>
-													</a>
-												</li>
-												<li data-tab="info-dd">
-													<a routerLink="." (click)="loadMyPosts()">
-														<span> <i class="la la-user"></i> My Profile</span>
-													</a>
-												</li>
-											</ul>
-										</div><!-- tab-feed end-->
-										<div class="tab-feed st2" *ngIf="profileActive">
-											<ul>
-												<li data-tab="feed-dd">
-													<a routerLink="." (click)="loadFeed()">
-														<span> <i class="la la-home"></i> Feed </span>
-													</a>
-												</li>
-												<li data-tab="info-dd" class="active">
-													<a routerLink="." (click)="loadMyPosts()">
-														<span> <i class="la la-user"></i> Profile</span>
-													</a>
-												</li>
-											</ul>
-										</div><!-- tab-feed end-->
-									</div><!--user-tab-sec end-->
-									
-									
-
                                     <div class="product-feed-tab current" id="feed-dd">
                                         <div class="posts-section">
                                             <ul *ngFor="let p of posts; let i=index"> <!--POSTS -->
@@ -164,33 +84,25 @@
                                                         </div>
                                                     </div>
 													
-
                                                     <div class="job_descp">
                                                         <p> {{ p.text }} </p>
 														
-														<ul *ngFor="let link of p.links"> <!-- LINKS -->
+														<ul *ngFor="let link of p.links"> <!--POSTS -->
 															<a href="{{link}}" > {{ link }} </a>
 														</ul>
-                                                        <!-- <ul class="skill-tags">
-                                                            <li><a href="#" title="">HTML</a></li>
-                                                            <li><a href="#" title="">PHP</a></li>
-                                                            <li><a href="#" title="">CSS</a></li>
-                                                            <li><a href="#" title="">Javascript</a></li>
-                                                            <li><a href="#" title="">Wordpress</a></li> 	
-                                                        </ul> -->
                                                     </div>
                                                     <div class="job-status-bar">
 														<ul class="like-com">
                                                             <li>
-                                                                <a routerLink="." title="Like" (click)="like(p.id)"><i class="la la-heart"></i> Likes ({{ p.likes.length }}) </a>
+                                                                <a routerLink="." title="Like" ><i class="la la-heart"></i> Likes ({{ p.likes.length }}) </a>
 																<a routerLink="." title="See likes" (click)="seeLikes(p.id)"><i class="la la-expand"></i>  </a>
 															</li> 
 															<li>
-                                                                <a routerLink="." title="Dislike" (click)="dislike(p.id)"><i class="la la-thumbs-o-down"></i> Dislikes ({{ p.dislikes.length }})</a>
+                                                                <a routerLink="." title="Dislike"><i class="la la-thumbs-o-down"></i> Dislikes ({{ p.dislikes.length }})</a>
 																<a routerLink="." title="See dislikes" (click)="seeDislikes(p.id)"><i class="la la-expand"></i>  </a>
 															</li> 
 															<li>
-                                                                <a routerLink="." title="Neutral reaction" (click)="neutral(p.id)"><i class="la la-meh-o"></i> </a>
+                                                                <a routerLink="." title="Neutral reaction"><i class="la la-meh-o"></i> </a>
                                                             </li>
                                                         </ul>
                                                         <a><i class="la la-comments"></i>Comments ({{ p.comments.length }})</a>
@@ -198,7 +110,7 @@
                                                 </div>
 											
 												<ul *ngFor="let c of p.comments"> 
-													<div class="comment-section" style="margin-bottom: -2vw; margin-top: -1vw; ">
+													<div class="comment-section" style="margin-bottom: 1vw; margin-top: -1vw; ">
 														<div class="comment-sec">
 															<ul>
 																<li>
@@ -207,7 +119,7 @@
 																			<img src="http://via.placeholder.com/40x40" alt="">
 																		</div>
 																		<div class="comment">
-																			<h3>  {{ c.user['user'].name }} {{ c.user['user'].lastName }} </h3>
+																			<h3>  {{ c.user['user'].name }} {{ c.user['user'].lastName }} </h3> <!-- TODO USER -->
 																			<p> {{ c.text }} </p>
 																		</div>
 																	</div>
@@ -216,31 +128,16 @@
 														</div>
 													</div>
 												</ul>
-												<div class="comment-section" style="margin-bottom: 2vw; margin-top: -1vw; ">
-													<div class="post-comment">
-														<div class="cm_img">
-															<img src="http://via.placeholder.com/40x40" alt="">
-														</div>
-														<div class="comment_box">
-															<form (ngSubmit)="comment(p.id, $event)">
-																<input type="text" placeholder="Post a comment" name="comment">
-																<button type="submit">Send</button>
-															</form>
-														</div>
-													</div>
-												</div>
 											</ul>
 											<br> <br>
 										</div><!--posts-section end-->
 									</div><!--product-feed-tab end-->
 								</div><!--main-ws-sec end-->
 							</div>
+							
+							<!-- Suggestions -->
 							<div class="col-lg-3">
 								<div class="right-sidebar">
-									<div class="message-btn">
-										<a href="#" title=""><i class="fa fa-envelope"></i> Message </a>
-									</div>
-									
 									<div class="suggestions full-width">
 										<div class="sd-title">
 											<h3>Suggestions</h3>
@@ -300,8 +197,10 @@
 											</div>
 										</div><!--suggestions-list end-->
 									</div><!--suggestions end-->
+
 								</div><!--right-sidebar end-->
-							</div>
+							</div> <!-- Suggestions END -->
+							
 						</div>
 					</div><!-- main-section-data end-->
 				</div> 

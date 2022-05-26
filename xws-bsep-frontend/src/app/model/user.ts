@@ -4,7 +4,7 @@ import { Interest } from "./interest";
 import { Skill } from "./skill";
 
 export class User {
-    id: string;
+    id: string = "";
     name: string = "";
     lastName: string = "";
     email: string;

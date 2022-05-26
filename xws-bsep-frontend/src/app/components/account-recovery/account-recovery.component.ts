@@ -95,7 +95,7 @@ export class AccountRecoveryComponent implements OnInit {
     }
     this.authService.resetForgottenPassword(body).subscribe(res => {
       this._snackBar.open('New password successfully set', "Ok")
-      this.router.navigate(['/']);
+      this.router.navigate(['/login']);
     }, err => {
       console.log(err)
       this._snackBar.open(err.error.message, "Ok")
