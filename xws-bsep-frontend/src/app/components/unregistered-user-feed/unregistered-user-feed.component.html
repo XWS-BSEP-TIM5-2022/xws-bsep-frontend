@@ -50,9 +50,9 @@
 								<div class="main-left-sidebar">
 									<div class="user_profile">		
 										<ul class="social_links">
-											<li><a title="" style="font-size: large;" routerLink="/login"> <i class="la la-angle-right"></i> Want to join us? </a></li>
+											<li><a title="" style="font-size: large; color: red;" routerLink="/login"> <i class="la la-angle-right"></i> Want to join us? </a></li>
 											<!-- <li><input type="button" class="btn" style="display: block; background-color: #bbb; width: 100%;" value="Sign-up" routerLink="/sign-up" > </li>  -->
-											<li><a title="" style="font-size: large;" routerLink="/login"> <i class="la la-angle-right"></i> Already have an account?  </a></li>	
+											<li><a title="" style="font-size: large; color: red" routerLink="/login"> <i class="la la-angle-right"></i> Already have an account?  </a></li>	
 											<!-- <li><input type="button" class="btn" style="display: block; background-color: #bbb; width: 100%;" value="Sign-in" routerLink="/login">  </li> -->
 										
 										</ul>
@@ -61,8 +61,15 @@
 
 							</div>
 							<div class="col-lg-6">
+								<div class="search-bar posts-section" style="margin-bottom: 2vw;">
+									<form>
+										<input type="text" [(ngModel)]="searchCriteria" name="searchCriteria" placeholder="Search by post text...">
+										<button style="background-color: #e44d3a; color: white;" (click)="search()"><i class="la la-search" style="color: white;"></i></button>
+									</form>
+									<br>
+								</div>
+								
 								<div class="main-ws-sec">
-									
                                     <div class="product-feed-tab current" id="feed-dd">
                                         <div class="posts-section">
                                             <ul *ngFor="let p of posts; let i=index"> <!--POSTS -->

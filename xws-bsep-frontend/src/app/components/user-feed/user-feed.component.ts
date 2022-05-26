@@ -31,10 +31,12 @@ export class UserFeedComponent implements OnInit {
   user: User = new User; // current user
   feedPosts: FeedPost[] = [];
   posts: Post[] = [];
+  searchedPosts: Post[] = [];
   loaded: boolean = false;
   feedActive: boolean = true;
   profileActive: boolean = false;
   visibleUserAcccountSettings: boolean = false;
+  searchCriteria: string = "";
 
   ngOnInit(): void {
     this.user.name = "";
@@ -149,15 +151,14 @@ export class UserFeedComponent implements OnInit {
       //console.log(this.posts.length)
 
     }
-
+  
+    this.searchedPosts = this.posts;
     this.loaded = true;
 
     for (let p of this.posts){
       console.log(p.user['user'].name, p.user['user'].lastName) 
       // console.log(this.posts)
     }
-
-
   }
 
   loadMyPosts(){
@@ -190,6 +191,7 @@ export class UserFeedComponent implements OnInit {
 
           this.posts = []
           this.posts = posts
+          this.searchedPosts = this.posts
       })
     }
   }
@@ -297,5 +299,30 @@ export class UserFeedComponent implements OnInit {
   logout(){
     this.authService.logout();
     this.router.navigate(['']);  
+  }
+
+  search(){
+    this.posts = this.searchedPosts.filter(p =>
+      (p.text).toLowerCase().includes(this.searchCriteria.toLowerCase()) ||
+      (p.dateCreated).toLowerCase().includes(this.searchCriteria.toLowerCase())
+    )
+  }
+
+  searchFeed(){
+    this.feedActive = true;
+    this.profileActive = false;
+    this.posts = this.searchedPosts.filter(p =>
+      (p.text).toLowerCase().includes(this.searchCriteria.toLowerCase()) ||
+      (p.dateCreated).toLowerCase().includes(this.searchCriteria.toLowerCase())
+    )
+  }
+
+  searchProfile(){
+    this.feedActive = false;
+    this.profileActive = true;
+    this.posts = this.searchedPosts.filter(p =>
+      (p.text).toLowerCase().includes(this.searchCriteria.toLowerCase()) ||
+      (p.dateCreated).toLowerCase().includes(this.searchCriteria.toLowerCase())
+    )
   }
 }

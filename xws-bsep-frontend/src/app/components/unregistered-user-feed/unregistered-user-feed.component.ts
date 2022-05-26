@@ -23,6 +23,8 @@ export class UnregisteredUserFeedComponent implements OnInit {
   constructor(public dialog: MatDialog, private router: Router, private feedService: FeedService, private userService: UserService) { }
   posts: Post[] = [];
   feedPosts: FeedPost[] = [];
+  searchCriteria: string = "";
+  searchedPosts: Post[] = [];
 
   ngOnInit(): void {
     this.loadPostsFromPublicAccounts();
@@ -112,6 +114,8 @@ export class UnregisteredUserFeedComponent implements OnInit {
       this.posts.push(post); 
     }
 
+    this.searchedPosts = this.posts;
+
     // for (let p of this.posts){
     //   console.log(p.user['user']) 
     // } 
@@ -135,4 +139,12 @@ export class UnregisteredUserFeedComponent implements OnInit {
     dialogRef.componentInstance.post.id = postId;
   }
 
+  search(){
+    this.posts = this.searchedPosts.filter(p =>
+          (p.text).toLowerCase().includes(this.searchCriteria.toLowerCase()) ||
+          (p.dateCreated).toLowerCase().includes(this.searchCriteria.toLowerCase())
+    )
+
+    console.log("searched: ", this.posts)
+  }
 }
