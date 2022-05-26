@@ -158,7 +158,7 @@
                                                         <div class="usy-dt">
 															<img src="http://via.placeholder.com/50x50" alt="">
 															<div class="usy-name">
-                                                                <h3>  {{ p.user['user'].name }} {{ p.user['user'].lastName }} </h3>
+																<a routerLink="." title="Show profile" (click)="seeProfile(p.userId)"> <h3>  {{ p.user['user'].name }} {{ p.user['user'].lastName }} </h3> </a>   <!-- TODO USER -->
 																<span> <i class="la la-calendar"></i> {{ p.dateCreated }} </span>
                                                             </div>
                                                         </div>

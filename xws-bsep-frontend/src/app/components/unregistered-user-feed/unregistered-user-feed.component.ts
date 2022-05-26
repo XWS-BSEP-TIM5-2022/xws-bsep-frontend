@@ -21,6 +21,7 @@ import { PostLikesComponent } from '../post-likes/post-likes.component';
 export class UnregisteredUserFeedComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private router: Router, private feedService: FeedService, private userService: UserService) { }
+  
   posts: Post[] = [];
   feedPosts: FeedPost[] = [];
   searchCriteria: string = "";
@@ -49,7 +50,6 @@ export class UnregisteredUserFeedComponent implements OnInit {
 
   convertToPost(){  
     for(let feedPost of this.feedPosts){
-      console.log(feedPost)
       let post = new Post;
 
       post.id = feedPost.Id
@@ -144,7 +144,9 @@ export class UnregisteredUserFeedComponent implements OnInit {
           (p.text).toLowerCase().includes(this.searchCriteria.toLowerCase()) ||
           (p.dateCreated).toLowerCase().includes(this.searchCriteria.toLowerCase())
     )
+  }
 
-    console.log("searched: ", this.posts)
+  seeProfile(id: string){
+    this.router.navigate(['public-profile', id])
   }
 }

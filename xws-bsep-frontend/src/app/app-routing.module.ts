@@ -14,6 +14,8 @@ as RoleGuard } from './services/role-guard.service';
 import { AccountRecoveryComponent } from './components/account-recovery/account-recovery.component';
 import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
 import { UnregisteredUserFeedComponent } from './components/unregistered-user-feed/unregistered-user-feed.component';
+import { UserProfilePublicComponent } from './components/user-profile-public/user-profile-public.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 const routes: Routes = [
   {
@@ -64,6 +66,18 @@ const routes: Routes = [
   {
     path: '',
     component: UnregisteredUserFeedComponent,
+  },
+  {
+    path: 'public-profile/:id',
+    component: UserProfilePublicComponent,  // postoji provera unutar komponente
+  },
+  {
+    path: 'profile/:id',
+    component: UserProfileComponent,
+    canActivate: [RoleGuard], 
+    data: { 
+      expectedRole: 'User' //['User', 'Admin']
+    }
   },
 ];
 

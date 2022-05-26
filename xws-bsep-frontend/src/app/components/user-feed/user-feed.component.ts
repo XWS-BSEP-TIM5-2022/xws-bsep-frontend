@@ -164,7 +164,7 @@ export class UserFeedComponent implements OnInit {
   loadMyPosts(){
     this.feedActive = false;
     this.profileActive = true;
-    let userId =  localStorage.getItem("user");
+    let userId = localStorage.getItem("user");
     
     if (userId != undefined){
       this.postService.getByUserId(userId).subscribe(
@@ -324,5 +324,13 @@ export class UserFeedComponent implements OnInit {
       (p.text).toLowerCase().includes(this.searchCriteria.toLowerCase()) ||
       (p.dateCreated).toLowerCase().includes(this.searchCriteria.toLowerCase())
     )
+  }
+
+  seeProfile(id: string){
+    let userId =  localStorage.getItem("user");
+
+    if (id != userId){
+      this.router.navigate(['profile', id])
+    }
   }
 }

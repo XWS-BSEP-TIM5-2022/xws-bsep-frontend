@@ -9,35 +9,39 @@
 <meta name="keywords" content="" />
 </head>
 
-<body>
+<body *ngIf="loaded">
 	<div class="wrapper">
-		<!-- <header>
+		
+		<header>
 			<div class="container">
 				<div class="header-data">
 					<div class="logo">
-						<a href="/feed" title=""><img src="images/logo.png" alt="" height="40px" width="50px"></a>
+						<a href="/feed" title=""><img src="assets/logo.png" alt="" height="40px" width="50px"></a>
+						<!-- <a href="index.html" title=""><img src="images/logo.png" alt=""></a> -->
 					</div>
-					
+                    <!--logo end-->
+					<div class="search-bar">
+						<form>
+							<input type="text" name="search" [(ngModel)]="searchCriteria" name="searchCriteria" placeholder="Search by post text...">
+							<button (click)="search()"><i class="la la-search"></i></button>
+						</form>
+					</div>
+                    <!--search-bar end-->
 					<nav>
 						<ul>
 							<li>
-								<a href="/login" title="">
-									Sign-in
-								</a>
-							</li>
-							<li>
-								<a href="sign-up" title="">
-									Sign-up
+								<a href="/feed" title="">
+									Home
 								</a>
 							</li>
 						</ul>
-					</nav>
-				</div>
+					</nav><!--nav end-->
+				</div><!--header-data end-->
 			</div>
-		</header> -->
+		</header><!--header end-->	
 
 		<section class="cover-sec">
-			<img src="http://via.placeholder.com/1600x600" alt="">
+            <br> <br><br><br><br><br> <br><br><br><br>
 		</section>
 
 		<main>
@@ -46,30 +50,29 @@
 					<div class="main-section-data">
 						<div class="row">
 							<div class="col-lg-3">
-								<br><br><br><br><br>
 								<div class="main-left-sidebar">
-									<div class="user_profile">		
+									<div class="user_profile">
+										<div class="user-pro-img">
+											<img src="http://via.placeholder.com/170x170" alt="">
+											<a href="#" title=""><i class="fa fa-camera"></i></a>
+										</div><!--user-pro-img end-->
 										<ul class="social_links">
-											<li><a title="" style="font-size: large; color: red;" routerLink="/login"> <i class="la la-angle-right"></i> Want to join us? </a></li>
-											<!-- <li><input type="button" class="btn" style="display: block; background-color: #bbb; width: 100%;" value="Sign-up" routerLink="/sign-up" > </li>  -->
-											<li><a title="" style="font-size: large; color: red" routerLink="/login"> <i class="la la-angle-right"></i> Already have an account?  </a></li>	
-											<!-- <li><input type="button" class="btn" style="display: block; background-color: #bbb; width: 100%;" value="Sign-in" routerLink="/login">  </li> -->
-										
+											<li><a title=""><i class="la la-user"></i> {{ user.name }} {{ user.lastName }} </a></li>
+											<li><a title=""><i class="la la-at"></i> {{ user.email }} </a></li>
+											<li><a title=""><i class="la la-phone"></i> {{ user.mobileNumber }}  </a></li>											
 										</ul>
 									</div><!--user_profile end-->
 								</div><!--main-left-sidebar end-->
-
 							</div>
 							<div class="col-lg-6">
-								<div class="search-bar posts-section" style="margin-bottom: 2vw;">
-									<form>
-										<input type="text" [(ngModel)]="searchCriteria" name="searchCriteria" placeholder="Search by post text...">
-										<button style="background-color: #e44d3a; color: white;" (click)="search()"><i class="la la-search" style="color: white;"></i></button>
-									</form>
-									<br>
-								</div>
-								
 								<div class="main-ws-sec">
+									<div class="user-tab-sec">
+										<h3> {{ user.name }} {{ user.lastName }} </h3>       <!-- TODO: ime ulogovanog korisnika -->
+										<div class="star-descp">
+											<span> {{ user.biography }} </span>
+										</div><!--star-descp end-->
+									</div><!--user-tab-sec end-->
+
                                     <div class="product-feed-tab current" id="feed-dd">
                                         <div class="posts-section">
                                             <ul *ngFor="let p of posts; let i=index"> <!--POSTS -->
@@ -78,31 +81,30 @@
                                                         <div class="usy-dt">
 															<img src="http://via.placeholder.com/50x50" alt="">
 															<div class="usy-name">
-																<a routerLink="." title="Show profile" (click)="seeProfile(p.userId)"> <h3>  {{ p.user['user'].name }} {{ p.user['user'].lastName }} </h3> </a>   <!-- TODO USER -->
+                                                                <h3>  {{ p.user['user'].name }} {{ p.user['user'].lastName }} </h3>
 																<span> <i class="la la-calendar"></i> {{ p.dateCreated }} </span>
                                                             </div>
                                                         </div>
-                                                    </div>
-													
+                                                    </div>				
+
                                                     <div class="job_descp">
                                                         <p> {{ p.text }} </p>
-														
-														<ul *ngFor="let link of p.links"> <!--POSTS -->
+														<ul *ngFor="let link of p.links"> <!-- LINKS -->
 															<a href="{{link}}" > {{ link }} </a>
 														</ul>
                                                     </div>
                                                     <div class="job-status-bar">
 														<ul class="like-com">
                                                             <li>
-                                                                <a routerLink="." title="Like" ><i class="la la-heart"></i> Likes ({{ p.likes.length }}) </a>
+                                                                <a routerLink="." title="Like" (click)="like(p.id)"><i class="la la-heart"></i> Likes ({{ p.likes.length }}) </a>
 																<a routerLink="." title="See likes" (click)="seeLikes(p.id)"><i class="la la-expand"></i>  </a>
 															</li> 
 															<li>
-                                                                <a routerLink="." title="Dislike"><i class="la la-thumbs-o-down"></i> Dislikes ({{ p.dislikes.length }})</a>
+                                                                <a routerLink="." title="Dislike" (click)="dislike(p.id)"><i class="la la-thumbs-o-down"></i> Dislikes ({{ p.dislikes.length }})</a>
 																<a routerLink="." title="See dislikes" (click)="seeDislikes(p.id)"><i class="la la-expand"></i>  </a>
 															</li> 
 															<li>
-                                                                <a routerLink="." title="Neutral reaction"><i class="la la-meh-o"></i> </a>
+                                                                <a routerLink="." title="Neutral reaction" (click)="neutral(p.id)"><i class="la la-meh-o"></i> </a>
                                                             </li>
                                                         </ul>
                                                         <a><i class="la la-comments"></i>Comments ({{ p.comments.length }})</a>
@@ -110,7 +112,7 @@
                                                 </div>
 											
 												<ul *ngFor="let c of p.comments"> 
-													<div class="comment-section" style="margin-bottom: 1vw; margin-top: -1vw; ">
+													<div class="comment-section" style="margin-bottom: -2vw; margin-top: -1vw; ">
 														<div class="comment-sec">
 															<ul>
 																<li>
@@ -128,16 +130,31 @@
 														</div>
 													</div>
 												</ul>
+												<div class="comment-section" style="margin-bottom: 2vw; margin-top: -1vw; ">
+													<div class="post-comment">
+														<div class="cm_img">
+															<img src="http://via.placeholder.com/40x40" alt="">
+														</div>
+														<div class="comment_box">
+															<form (ngSubmit)="comment(p.id, $event)">
+																<input type="text" placeholder="Post a comment" name="comment">
+																<button type="submit">Send</button>
+															</form>
+														</div>
+													</div>
+												</div>
 											</ul>
-											<br> <br>
+											<br>
 										</div><!--posts-section end-->
 									</div><!--product-feed-tab end-->
 								</div><!--main-ws-sec end-->
 							</div>
-							
-							<!-- Suggestions -->
 							<div class="col-lg-3">
 								<div class="right-sidebar">
+									<div class="message-btn">
+										<a href="#" title=""><i class="fa fa-envelope"></i> Message </a>
+									</div>
+									
 									<div class="suggestions full-width">
 										<div class="sd-title">
 											<h3>Suggestions</h3>
@@ -197,10 +214,8 @@
 											</div>
 										</div><!--suggestions-list end-->
 									</div><!--suggestions end-->
-
 								</div><!--right-sidebar end-->
-							</div> <!-- Suggestions END -->
-							
+							</div>
 						</div>
 					</div><!-- main-section-data end-->
 				</div> 
