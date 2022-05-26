@@ -112,9 +112,9 @@ export class UnregisteredUserFeedComponent implements OnInit {
       this.posts.push(post); 
     }
 
-    for (let p of this.posts){
-      console.log(p.user['user']) 
-    } 
+    // for (let p of this.posts){
+    //   console.log(p.user['user']) 
+    // } 
   }
 
   seeLikes(postId: string){

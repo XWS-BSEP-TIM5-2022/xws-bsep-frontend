@@ -50,7 +50,7 @@
 								<div class="main-left-sidebar">
 									<div class="user_profile">		
 										<ul class="social_links">
-											<li><a title="" style="font-size: large;" routerLink="/sign-up"> <i class="la la-angle-right"></i> Want to join us? </a></li>
+											<li><a title="" style="font-size: large;" routerLink="/login"> <i class="la la-angle-right"></i> Want to join us? </a></li>
 											<!-- <li><input type="button" class="btn" style="display: block; background-color: #bbb; width: 100%;" value="Sign-up" routerLink="/sign-up" > </li>  -->
 											<li><a title="" style="font-size: large;" routerLink="/login"> <i class="la la-angle-right"></i> Already have an account?  </a></li>	
 											<!-- <li><input type="button" class="btn" style="display: block; background-color: #bbb; width: 100%;" value="Sign-in" routerLink="/login">  </li> -->
@@ -71,7 +71,7 @@
                                                         <div class="usy-dt">
 															<img src="http://via.placeholder.com/50x50" alt="">
 															<div class="usy-name">
-                                                                <h3> {{ p.userId }} </h3> <!-- <h3>  {{ p.user['user'].name }} {{ p.user['user'].lastName }} </h3> -->   <!-- TODO USER -->
+                                                                 <h3>  {{ p.user['user'].name }} {{ p.user['user'].lastName }} </h3>   <!-- TODO USER -->
 																<span> <i class="la la-calendar"></i> {{ p.dateCreated }} </span>
                                                             </div>
                                                         </div>
@@ -112,7 +112,7 @@
 																			<img src="http://via.placeholder.com/40x40" alt="">
 																		</div>
 																		<div class="comment">
-																			<h3> {{ p.userId }} </h3>  <!-- <h3>  {{ c.user['user'].name }} {{ c.user['user'].lastName }} </h3> --> <!-- TODO USER -->
+																			<h3>  {{ c.user['user'].name }} {{ c.user['user'].lastName }} </h3> <!-- TODO USER -->
 																			<p> {{ c.text }} </p>
 																		</div>
 																	</div>

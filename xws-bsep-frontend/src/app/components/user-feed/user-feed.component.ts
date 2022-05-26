@@ -49,7 +49,6 @@ export class UserFeedComponent implements OnInit {
       this.userService.getById(userId).subscribe(
         (user: any) => {
         this.user = user['user']
-        this.loaded = true;
 
         this.loadFeed();
       })
@@ -144,13 +143,21 @@ export class UserFeedComponent implements OnInit {
         post.comments = []
       }
 
+      //console.log(post)
+
       this.posts.push(post); 
+      //console.log(this.posts.length)
+
     }
+
+    this.loaded = true;
 
     for (let p of this.posts){
       console.log(p.user['user'].name, p.user['user'].lastName) 
+      // console.log(this.posts)
     }
-    
+
+
   }
 
   loadMyPosts(){
