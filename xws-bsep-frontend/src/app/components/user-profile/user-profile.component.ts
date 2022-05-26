@@ -28,6 +28,12 @@ export class UserProfileComponent implements OnInit {
   loaded: boolean = false;
   searchCriteria: string = "";
   
+  // TODO: ako ne treba, obrisati komponentu
+
+  // ako je profil privatan
+  // dodati proveru da li trenutno ulogovani korisnik prati ovaj profil 
+  // ako ne prati, sakriti postove + dodati dugme follow
+  
   ngOnInit(): void {
     //@ts-ignore 
     this.id = this._route.snapshot.paramMap.get('id')!;

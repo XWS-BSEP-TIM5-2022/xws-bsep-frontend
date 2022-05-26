@@ -14,6 +14,7 @@ import { PostLikesComponent } from '../post-likes/post-likes.component';
   styleUrls: ['./user-profile-public.component.scss']
 })
 export class UserProfilePublicComponent implements OnInit {
+  // ova komponenta prikazuje samo javne profile za neregistrovane korisnike
 
   constructor(private _route: ActivatedRoute, private userService: UserService, private postService: PostService, public dialog: MatDialog,
     private router: Router) { }
