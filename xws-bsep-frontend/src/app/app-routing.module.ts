@@ -1,3 +1,4 @@
+import { ProfilesComponent } from './components/profiles/profiles.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { TestComponent } from './components/test/test.component';
 import { NgModule } from '@angular/core';
@@ -62,7 +63,14 @@ const routes: Routes = [
     data: { 
       expectedRole: 'User' //['User', 'Admin']
     }
-  }, 
+  },
+  
+  {
+    path: 'user-profiles',
+    component: ProfilesComponent,
+    canActivate: [AuthGuard],   // AUTH GUARD - bilo koji ulgovani korisnik moze da pristupi stranici
+  },
+ 
   {
     path: '',
     component: UnregisteredUserFeedComponent,
@@ -79,6 +87,7 @@ const routes: Routes = [
       expectedRole: 'User' //['User', 'Admin']
     }
   },
+
 ];
 
 @NgModule({

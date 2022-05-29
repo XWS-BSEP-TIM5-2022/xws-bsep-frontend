@@ -31,6 +31,8 @@ import { MatDividerModule} from '@angular/material/divider';
 import { MatInputModule} from '@angular/material/input';
 import { PostLikesComponent } from './components/post-likes/post-likes.component';
 import { PostDislikesComponent } from './components/post-dislikes/post-dislikes.component';
+import { ProfilesComponent } from './components/profiles/profiles.component';
+import { HeaderComponent } from './components/header/header.component';
 import { UnregisteredUserFeedComponent } from './components/unregistered-user-feed/unregistered-user-feed.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserProfilePublicComponent } from './components/user-profile-public/user-profile-public.component';
@@ -49,6 +51,8 @@ import { UserProfilePublicComponent } from './components/user-profile-public/use
     NewPostComponent,
     PostLikesComponent,
     PostDislikesComponent,
+    ProfilesComponent,
+    HeaderComponent,
     UnregisteredUserFeedComponent,
     UserProfileComponent,
     UserProfilePublicComponent,
