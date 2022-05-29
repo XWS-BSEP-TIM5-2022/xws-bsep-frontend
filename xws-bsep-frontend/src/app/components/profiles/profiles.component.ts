@@ -14,26 +14,34 @@ export class ProfilesComponent implements OnInit {
   users: User[]  = []
   pending: boolean = false
   loggedUser = localStorage.getItem("email")
+  loggedUserId = localStorage.getItem("user")
 
   ngOnInit(): void {
     this.userService.getAll().subscribe(
-      (data: any[]) => {
+      (data: User[]) => {
         this.users = data['users']
         console.log(this.users)
 
+        for(let u of this.users){
+            this.connectionService.checkConnection(this.loggedUserId,u.id).subscribe((res: any) => {
+              u.isConnected = res.connected
+              console.log(u.isConnected)
+            })
+         }
       })
 
+   
   }
 
-  connect(user){
+  connect(user, id){
     var followDTO = {
       "userID": user.id,
       "isPublic": user.isPublic
     }
 
-    this.connectionService.connect(followDTO).subscribe((posts: any) => {
-
-    })
+     this.connectionService.connect(followDTO).subscribe((posts: any) => {
+        window.location.reload()
+     })
   }
 
 }

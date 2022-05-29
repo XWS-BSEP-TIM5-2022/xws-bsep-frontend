@@ -19,4 +19,5 @@ export class User {
     interests: Interest[];
     isActive: boolean;
     role: string;
+    isConnected: boolean;
 }
