@@ -44,6 +44,9 @@ export class UnregisteredUserFeedComponent implements OnInit {
             }
             this.feedPosts = allPosts
             this.convertToPost();
+          } else {
+            this.posts = []
+            this.searchedPosts = this.posts;
           }
       })
   }

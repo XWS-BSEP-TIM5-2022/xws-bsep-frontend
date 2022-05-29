@@ -51,7 +51,6 @@ export class UserFeedComponent implements OnInit {
       this.userService.getById(userId).subscribe(
         (user: any) => {
         this.user = user['user']
-
         this.loadFeed();
       })
     }
@@ -66,6 +65,7 @@ export class UserFeedComponent implements OnInit {
       this.feedService.getFeed(userId).subscribe(
         (data: any[]) => { 
           let allPosts = data['AllPosts']
+          console.log(allPosts)
 
           if (allPosts != undefined && allPosts != null){
             for (let p of allPosts){
@@ -76,8 +76,11 @@ export class UserFeedComponent implements OnInit {
             this.posts = []
             this.feedPosts = allPosts
             this.convertToPost();
+          } else {
+            this.posts = []
+            this.searchedPosts = this.posts;
+            this.loaded = true;
           }
-          this.posts = []
       })
     }
   }
@@ -155,11 +158,11 @@ export class UserFeedComponent implements OnInit {
     this.searchedPosts = this.posts;
     this.loaded = true;
 
-    for (let p of this.posts){
-      console.log(p.user['user'].name, p.user['user'].lastName) 
-      // console.log(this.posts)
-    }
-  }
+  //   for (let p of this.posts){
+  //     // console.log(p.user['user'].name, p.user['user'].lastName) 
+  //     console.log(this.posts)
+  //   } 
+ }
 
   loadMyPosts(){
     this.feedActive = false;
