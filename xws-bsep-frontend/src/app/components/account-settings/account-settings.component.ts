@@ -175,4 +175,26 @@ export class AccountSettingsComponent implements OnInit {
     console.log(this.requestTab)
 
   }
+
+  acceptRequest(id){
+    console.log("odobravam")
+    var dto = {
+      "userID": id
+    }
+
+    this.connectionService.approveRequest(dto).subscribe((res: any) => {
+      window.location.reload()
+    })
+  }
+
+  rejectRequest(id){
+    console.log("odbijam")
+    var dto = {
+      "userID": id
+    }
+
+    this.connectionService.rejectRequest(dto).subscribe((res: any) => {
+      window.location.reload()
+    })
+  }
 }

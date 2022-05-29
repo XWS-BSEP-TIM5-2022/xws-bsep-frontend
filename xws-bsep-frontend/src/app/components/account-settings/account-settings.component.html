@@ -459,8 +459,8 @@
 							  					</div>
 							  					<div class="accept-feat">
 							  						<ul>
-							  							<li><button type="submit" class="accept-req">Accept</button></li>
-							  							<li><button type="submit" class="close-req"><i class="la la-close"></i></button></li>
+							  							<li><button type="submit" class="accept-req" (click)="acceptRequest(u.id)">Accept</button></li>
+							  							<li><button type="submit" class="close-req" (click)="rejectRequest(u.id)"><i class="la la-close"></i></button></li>
 							  						</ul>
 							  					</div><!--accept-feat end-->
 							  				</div><!--request-detailse end-->

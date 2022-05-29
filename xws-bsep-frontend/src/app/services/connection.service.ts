@@ -23,4 +23,12 @@ export class ConnectionService {
   getAllRequests(userID){
     return this.http.get<any[]>(`${this.connectionPath}/user/` + `${userID}/` + `requests`)
   }
+
+  approveRequest(dto){
+    return this.http.put(`${this.connectionPath}/approve`, JSON.stringify(dto));
+  }
+
+  rejectRequest(dto){
+    return this.http.put(`${this.connectionPath}/reject`, JSON.stringify(dto));
+  }
 }
