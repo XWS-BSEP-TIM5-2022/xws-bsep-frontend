@@ -39,6 +39,10 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { UserProfilePublicComponent } from './components/user-profile-public/user-profile-public.component';
 import { UpdateBiographyComponent } from './components/update-user-modals/update-biography/update-biography.component';
 import { UpdateBasicInfoComponent } from './components/update-user-modals/update-basic-info/update-basic-info.component';
+import { UpdateSkillsComponent } from './components/update-user-modals/update-skills/update-skills.component';
+import { UpdateInterestsComponent } from './components/update-user-modals/update-interests/update-interests.component';
+import { UpdateExperienceComponent } from './components/update-user-modals/update-experience/update-experience.component';
+import { UpdateEducationComponent } from './components/update-user-modals/update-education/update-education.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +65,10 @@ import { UpdateBasicInfoComponent } from './components/update-user-modals/update
     UserProfilePublicComponent,
     UpdateBiographyComponent,
     UpdateBasicInfoComponent,
+    UpdateSkillsComponent,
+    UpdateInterestsComponent,
+    UpdateExperienceComponent,
+    UpdateEducationComponent,
   ],
   imports: [
     BrowserModule,

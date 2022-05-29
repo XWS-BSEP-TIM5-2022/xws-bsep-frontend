@@ -40,7 +40,7 @@ export class UpdateBiographyComponent implements OnInit {
 
     if (this.user.biography != undefined && this.user.biography != "" && this.user.biography.trim() != ""){
 
-      this.userService.updateBasicInfo(this.user).subscribe(
+      this.userService.update(this.user).subscribe(
         (success: SuccessMessage) => {
           console.log(success)
           if (success.success == "success"){

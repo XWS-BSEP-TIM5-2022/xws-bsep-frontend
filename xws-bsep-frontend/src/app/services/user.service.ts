@@ -23,8 +23,8 @@ export class UserService {
     return this.http.get<any[]>(`${this.userPath}`)    
   }
 
-  updateBasicInfo(user: User): Observable<SuccessMessage>{
-    return this.http.put<SuccessMessage>(`${this.userPath}/updateBasicInfo`, user)    
+  update(user: User): Observable<SuccessMessage>{
+    return this.http.put<SuccessMessage>(`${this.userPath}/update`, user)    
   }
   
 }

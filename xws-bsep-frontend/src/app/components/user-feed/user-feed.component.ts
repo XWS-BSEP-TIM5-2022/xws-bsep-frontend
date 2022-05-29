@@ -20,6 +20,7 @@ import { PostDislikesComponent } from '../post-dislikes/post-dislikes.component'
 import { UpdateBiographyComponent } from '../update-user-modals/update-biography/update-biography.component'; 
 import { UpdateBasicInfoComponent } from '../update-user-modals/update-basic-info/update-basic-info.component'; 
 import { DatePipe } from '@angular/common'; 
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-user-feed',
@@ -378,5 +379,36 @@ export class UserFeedComponent implements OnInit {
     });
   }
 
+  deleteSkill(id){ 
+
+    this.user.skills.forEach((skill,index)=>{
+      if(skill.id == id){
+        this.user.skills.splice(index,1);
+      } 
+    });
+    this.updateUser()
+
+  }
+
+  updateUser(){
+
+    this.userService.update(this.user).subscribe(
+      (success: SuccessMessage) => {
+        console.log(success)
+        if (success.success == "success"){
+          Swal.fire({
+            icon: 'success',
+            title: 'Yay!',
+            text: 'Successfully updates!',
+          })    
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong. Please try again.',
+          })   
+        }
+      }) 
+  }
 
 }

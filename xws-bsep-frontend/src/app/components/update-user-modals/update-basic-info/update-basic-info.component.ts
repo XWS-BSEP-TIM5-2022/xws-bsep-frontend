@@ -93,7 +93,7 @@ export class UpdateBasicInfoComponent implements OnInit {
     
     this.editedUser.gender = this.genderControl.value
 
-    this.userService.updateBasicInfo(this.editedUser).subscribe(
+    this.userService.update(this.editedUser).subscribe(
       (success: SuccessMessage) => {
         console.log(success)
         if (success.success == "success"){
