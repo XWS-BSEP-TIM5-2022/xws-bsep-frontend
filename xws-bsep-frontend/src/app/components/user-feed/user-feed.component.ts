@@ -390,6 +390,17 @@ export class UserFeedComponent implements OnInit {
 
   }
 
+  deleteInterest(id){ 
+
+    this.user.interests.forEach((interest,index)=>{
+      if(interest.id == id){
+        this.user.interests.splice(index,1);
+      } 
+    });
+    this.updateUser()
+
+  }
+
   updateUser(){
 
     this.userService.update(this.user).subscribe(
