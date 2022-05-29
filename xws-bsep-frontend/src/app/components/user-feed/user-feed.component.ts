@@ -52,6 +52,8 @@ export class UserFeedComponent implements OnInit {
         (user: any) => {
         this.user = user['user']
         localStorage.setItem("loggedUserName", this.user.name)
+        localStorage.setItem("email", this.user.email)
+
         this.loaded = true;
         this.loadFeed();
       })
