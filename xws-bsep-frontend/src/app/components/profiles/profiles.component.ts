@@ -13,7 +13,7 @@ export class ProfilesComponent implements OnInit {
   constructor(private userService: UserService, private connectionService: ConnectionService) { }
   users: User[]  = []
   pending: boolean = false
- 
+  loggedUser = localStorage.getItem("email")
 
   ngOnInit(): void {
     this.userService.getAll().subscribe(

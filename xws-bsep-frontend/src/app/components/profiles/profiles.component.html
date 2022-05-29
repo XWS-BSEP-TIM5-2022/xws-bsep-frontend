@@ -14,7 +14,7 @@
 				<div class="companies-list">
 					<div class="row">
 						<div class="col-lg-3 col-md-4 col-sm-6 col-12" *ngFor="let u of users">
-							<div class="company_profile_info" >
+							<div class="company_profile_info" *ngIf="loggedUser !== u.email">
 								<div class="company-up-info">
 									<img src="http://via.placeholder.com/91x91" alt="">
 									<h3>{{u.name}} {{u.lastName}}</h3>
