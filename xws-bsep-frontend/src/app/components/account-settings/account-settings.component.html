@@ -219,9 +219,9 @@
 								<div class="nav nav-tabs" id="nav-tab" role="tablist">
 								    <a class="nav-item nav-link" id="nav-acc-tab" data-toggle="tab" href="#nav-acc" role="tab" aria-controls="nav-acc" aria-selected="true"><i class="la la-cogs"></i>Account Setting</a>
 								    <a class="nav-item nav-link" id="nav-status-tab" data-toggle="tab" href="#nav-status" role="tab" aria-controls="nav-status" aria-selected="false"><i class="fa fa-line-chart"></i>Status</a>
-								    <a class="nav-item nav-link active" id="nav-password-tab" data-toggle="tab" href="#nav-password" role="tab" aria-controls="nav-password" aria-selected="false"><i class="fa fa-lock"></i>Change Password</a>
+								    <a class="nav-item nav-link"  style="cursor: pointer;" [ngClass]="{'active': this.changePassTab === true}" id="nav-password-tab" data-toggle="tab" (click)="changePass()" role="tab" aria-controls="nav-password" aria-selected="false"><i class="fa fa-lock"></i>Change Password</a>
 								    <a class="nav-item nav-link" id="nav-notification-tab" data-toggle="tab" href="#nav-notification" role="tab" aria-controls="nav-notification" aria-selected="false"><i class="fa fa-flash"></i>Notifications</a>
-								    <a class="nav-item nav-link" id="nav-requests-tab" data-toggle="tab" href="#nav-requests" role="tab" aria-controls="nav-requests" aria-selected="false"><i class="fa fa-group"></i>Requests</a>
+								    <a class="nav-item nav-link"   style="cursor: pointer;"[ngClass]="{'active': this.requestTab === true}" id="nav-requests-tab" data-toggle="tab" (click)="requests()" role="tab" aria-controls="nav-requests" aria-selected="false"><i class="fa fa-group"></i>Requests</a>
 								    <a class="nav-item nav-link" id="security-login" data-toggle="tab" href="#security-login" role="tab" aria-controls="security-login" aria-selected="false"><i class="fa fa-user-secret"></i>Security and Login</a>
 								    <a class="nav-item nav-link" id="privacy" data-toggle="tab" href="#privacy" role="tab" aria-controls="privacy" aria-selected="false"><i class="fa fa-paw"></i>Privacy</a>
 								    <a class="nav-item nav-link" id="blockking" data-toggle="tab" href="#blockking" role="tab" aria-controls="blockking" aria-selected="false"><i class="fa fa-cc-diners-club"></i>Blocking</a>
@@ -324,7 +324,7 @@
 							  			</div><!--pro-work-status end-->
 							  		</div><!--acc-setting end-->
 							  	</div>
-							  	<div class="tab-pane fade show active" id="nav-password active" role="tabpanel" aria-labelledby="nav-password-tab">
+							  	<div class="tab-pane fade " [ngClass]="{'show': this.changePassTab === true, 'active': this.changePassTab === true}" id="nav-password" role="tabpanel" aria-labelledby="nav-password-tab">
 							  		<div class="acc-setting">
 										<h3>Account Setting</h3>
 										<form>
@@ -364,10 +364,10 @@
                                         </div>
 									</div><!--acc-setting end-->
 							  	</div>
-							  	<div class="tab-pane fade" id="nav-notification" role="tabpanel" aria-labelledby="nav-notification-tab">
-							  		<div class="acc-setting">
-							  			<h3>Notifications</h3>
-							  			<div class="notifications-list">
+							  	<div class="tab-pane fade " id="nav-notification " role="tabpanel" aria-labelledby="nav-notification-tab">
+							  		<!-- <div class="acc-setting">
+							  			<h3>Notifications</h3> -->
+							  			<!-- <div class="notifications-list">
 							  				<div class="notfication-details">
 								  				<div class="noty-user-img">
 								  					<img src="http://via.placeholder.com/35x35" alt="">
@@ -375,8 +375,8 @@
 								  				<div class="notification-info">
 								  					<h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
 								  					<span>2 min ago</span>
-								  				</div><!--notification-info -->
-							  				</div><!--notfication-details end-->
+								  				</div>
+							  				</div>
 							  				<div class="notfication-details">
 								  				<div class="noty-user-img">
 								  					<img src="http://via.placeholder.com/35x35" alt="">
@@ -384,8 +384,8 @@
 								  				<div class="notification-info">
 								  					<h3><a href="#" title="">Poonam Verma</a> Bid on your Latest project.</h3>
 								  					<span>2 min ago</span>
-								  				</div><!--notification-info -->
-							  				</div><!--notfication-details end-->
+								  				</div>
+							  				</div>
 							  				<div class="notfication-details">
 								  				<div class="noty-user-img">
 								  					<img src="http://via.placeholder.com/35x35" alt="">
@@ -393,8 +393,8 @@
 								  				<div class="notification-info">
 								  					<h3><a href="#" title="">Tonney Dhman</a> Comment on your project.</h3>
 								  					<span>2 min ago</span>
-								  				</div><!--notification-info -->
-							  				</div><!--notfication-details end-->
+								  				</div>
+							  				</div>
 							  				<div class="notfication-details">
 								  				<div class="noty-user-img">
 								  					<img src="http://via.placeholder.com/35x35" alt="">
@@ -402,8 +402,8 @@
 								  				<div class="notification-info">
 								  					<h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
 								  					<span>2 min ago</span>
-								  				</div><!--notification-info -->
-							  				</div><!--notfication-details end-->
+								  				</div>
+							  				</div>
 							  				<div class="notfication-details">
 								  				<div class="noty-user-img">
 								  					<img src="http://via.placeholder.com/35x35" alt="">
@@ -411,8 +411,8 @@
 								  				<div class="notification-info">
 								  					<h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
 								  					<span>2 min ago</span>
-								  				</div><!--notification-info -->
-							  				</div><!--notfication-details end-->
+								  				</div>
+							  				</div>
 							  				<div class="notfication-details">
 								  				<div class="noty-user-img">
 								  					<img src="http://via.placeholder.com/35x35" alt="">
@@ -420,8 +420,8 @@
 								  				<div class="notification-info">
 								  					<h3><a href="#" title="">Poonam Verma </a> Bid on your Latest project.</h3>
 								  					<span>2 min ago</span>
-								  				</div><!--notification-info -->
-							  				</div><!--notfication-details end-->
+								  				</div>
+							  				</div>
 							  				<div class="notfication-details">
 								  				<div class="noty-user-img">
 								  					<img src="http://via.placeholder.com/35x35" alt="">
@@ -429,8 +429,8 @@
 								  				<div class="notification-info">
 								  					<h3><a href="#" title="">Tonney Dhman</a> Comment on your project</h3>
 								  					<span>2 min ago</span>
-								  				</div><!--notification-info -->
-							  				</div><!--notfication-details end-->
+								  				</div>
+							  				</div>
 							  				<div class="notfication-details">
 								  				<div class="noty-user-img">
 								  					<img src="http://via.placeholder.com/35x35" alt="">
@@ -438,12 +438,14 @@
 								  				<div class="notification-info">
 								  					<h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
 								  					<span>2 min ago</span>
-								  				</div><!--notification-info -->
-							  				</div><!--notfication-details end-->
-							  			</div><!--notifications-list end-->
-							  		</div><!--acc-setting end-->
+								  				</div>
+							  				</div>
+							  			</div> -->
+										  <!--notifications-list end-->
+							  		<!-- </div> -->
+									  <!--acc-setting end-->
 							  	</div>
-							  	<div class="tab-pane fade" id="nav-requests" role="tabpanel" aria-labelledby="nav-requests-tab">
+							  	<div class="tab-pane fade" [ngClass]="{'show': this.requestTab === true, 'active': this.requestTab === true}" id="nav-requests active" role="tabpanel" aria-labelledby="nav-requests-tab">
 							  		<div class="acc-setting">
 							  			<h3>Requests</h3>
 							  			<div class="requests-list">

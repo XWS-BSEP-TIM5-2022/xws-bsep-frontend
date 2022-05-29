@@ -30,6 +30,8 @@ export class AccountSettingsComponent implements OnInit {
   inputType2: string = "password";
   hiddenPassword3: boolean = true;
   inputType3: string = "password";
+  requestTab = false;
+  changePassTab = true;
 
   ngOnInit(): void {
     this.loadUserData();
@@ -129,5 +131,21 @@ export class AccountSettingsComponent implements OnInit {
     } else {
       this.inputType3 = "text";
     }
+  }
+
+
+  requests(){
+    this.requestTab = true;
+    this.changePassTab = false;
+
+    console.log(this.requestTab)
+  }
+
+
+  changePass(){
+    this.changePassTab = true;
+    this.requestTab = false;
+    console.log(this.requestTab)
+
   }
 }
