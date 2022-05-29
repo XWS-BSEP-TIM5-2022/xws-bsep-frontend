@@ -17,7 +17,9 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostLikesComponent } from '../post-likes/post-likes.component';
 import { PostDislikesComponent } from '../post-dislikes/post-dislikes.component';
-import { UpdateBiographyComponent } from '../update-user-modals/update-biography/update-biography.component';
+import { UpdateBiographyComponent } from '../update-user-modals/update-biography/update-biography.component'; 
+import { UpdateBasicInfoComponent } from '../update-user-modals/update-basic-info/update-basic-info.component'; 
+import { DatePipe } from '@angular/common'; 
 
 @Component({
   selector: 'app-user-feed',
@@ -39,6 +41,7 @@ export class UserFeedComponent implements OnInit {
   informationsActive: boolean = false;
   visibleUserAcccountSettings: boolean = false;
   searchCriteria: string = "";
+  stringBirthday : any;
 
   ngOnInit(): void {
     this.user.name = "";
@@ -54,7 +57,9 @@ export class UserFeedComponent implements OnInit {
         (user: any) => {
         this.user = user['user']
         localStorage.setItem("loggedUserName", this.user.name)
-        this.loaded = true;
+        this.loaded = true; 
+        const datepipe: DatePipe = new DatePipe('en-US')
+        this.stringBirthday = datepipe.transform(this.user.birthday, 'dd-MMMM-YYYY')
         this.loadFeed();
       })
     }
@@ -350,6 +355,18 @@ export class UserFeedComponent implements OnInit {
     this.informationsActive = true; 
   }
 
+  editInfo(){    
+    const dialogRef = this.dialog.open(UpdateBasicInfoComponent, {
+    width: '40vw',
+    data: {},
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    window.location.reload();
+  });
+
+  }
+
   updateBiography(){
     const dialogRef = this.dialog.open(UpdateBiographyComponent, {
       width: '40vw',
@@ -360,4 +377,6 @@ export class UserFeedComponent implements OnInit {
       window.location.reload();
     });
   }
+
+
 }

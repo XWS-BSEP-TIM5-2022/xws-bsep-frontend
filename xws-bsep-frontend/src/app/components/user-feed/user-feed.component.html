@@ -114,7 +114,13 @@
 										<ul class="social_links">
 											<li><a title=""><i class="la la-user"></i> {{ user.name }} {{ user.lastName }} </a></li>
 											<li><a title=""><i class="la la-at"></i> {{ user.email }} </a></li>
-											<li><a title=""><i class="la la-phone"></i> {{ user.mobileNumber }}  </a></li>											
+											<li><a title=""><i class="la la-phone"></i> {{ user.mobileNumber }}  </a></li>	
+											<li><a title=""><i class="la la-heart"></i> {{ user.gender }}  </a></li>	
+											<li><a title=""><i class="la la-calendar"></i> {{ stringBirthday }}  </a></li>
+											<li> 
+												<button mat-raised-button class="edit-info" 
+												(click)="editInfo()" ><i class="fa fa-pencil"></i> Edit info</button>
+											</li>											
 										</ul>
 									</div><!--user_profile end-->
 								</div><!--main-left-sidebar end-->

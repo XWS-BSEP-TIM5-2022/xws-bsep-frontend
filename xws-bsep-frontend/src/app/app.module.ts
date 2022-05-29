@@ -29,6 +29,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatDividerModule} from '@angular/material/divider';
 import { MatInputModule} from '@angular/material/input';
+import { MatSelectModule} from '@angular/material/select';
 import { PostLikesComponent } from './components/post-likes/post-likes.component';
 import { PostDislikesComponent } from './components/post-dislikes/post-dislikes.component';
 import { ProfilesComponent } from './components/profiles/profiles.component';
@@ -37,6 +38,7 @@ import { UnregisteredUserFeedComponent } from './components/unregistered-user-fe
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserProfilePublicComponent } from './components/user-profile-public/user-profile-public.component';
 import { UpdateBiographyComponent } from './components/update-user-modals/update-biography/update-biography.component';
+import { UpdateBasicInfoComponent } from './components/update-user-modals/update-basic-info/update-basic-info.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,7 @@ import { UpdateBiographyComponent } from './components/update-user-modals/update
     UserProfileComponent,
     UserProfilePublicComponent,
     UpdateBiographyComponent,
+    UpdateBasicInfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,6 +75,7 @@ import { UpdateBiographyComponent } from './components/update-user-modals/update
     MatButtonModule,
     MatDividerModule,
     MatInputModule,
+    MatSelectModule,
     MatSnackBarModule,
     RouterModule
   ],

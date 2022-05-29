@@ -15,8 +15,7 @@ export class UpdateBiographyComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<UpdateBiographyComponent>, 
     private userService: UserService) { }
 
-  user: User;
-  loaded: boolean = false;
+  user: User; 
   newBiography : string = ""
 
   ngOnInit(): void {
@@ -29,8 +28,7 @@ export class UpdateBiographyComponent implements OnInit {
     if (userId != undefined){
       this.userService.getById(userId).subscribe(
         (user: any) => {
-        this.user = user['user'] 
-        this.loaded = true;
+        this.user = user['user']  
       })
     }
   }
