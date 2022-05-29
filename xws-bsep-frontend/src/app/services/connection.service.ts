@@ -13,7 +13,6 @@ export class ConnectionService {
   private readonly connectionPath = environment.backend_api + 'connection';
 
   connect(dto){
-    console.log(dto)
     return this.http.post(this.connectionPath, JSON.stringify(dto));
   }
 

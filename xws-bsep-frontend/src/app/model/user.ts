@@ -20,4 +20,5 @@ export class User {
     isActive: boolean;
     role: string;
     isConnected: boolean;
+    request: boolean;
 }

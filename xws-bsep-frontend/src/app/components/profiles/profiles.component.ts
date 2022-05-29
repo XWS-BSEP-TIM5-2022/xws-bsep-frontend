@@ -25,7 +25,8 @@ export class ProfilesComponent implements OnInit {
         for(let u of this.users){
             this.connectionService.checkConnection(this.loggedUserId,u.id).subscribe((res: any) => {
               u.isConnected = res.connected
-              console.log(u.isConnected)
+              u.request = res.request
+              console.log(res)
             })
          }
       })
@@ -39,8 +40,10 @@ export class ProfilesComponent implements OnInit {
       "isPublic": user.isPublic
     }
 
-     this.connectionService.connect(followDTO).subscribe((posts: any) => {
-        window.location.reload()
+     this.connectionService.connect(followDTO).subscribe((res: any) => {
+       user.request = res.connected
+       console.log(user.request)
+       window.location.reload()
      })
   }
 
