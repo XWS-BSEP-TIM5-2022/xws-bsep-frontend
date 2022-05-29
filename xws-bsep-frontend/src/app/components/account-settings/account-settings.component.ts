@@ -1,3 +1,4 @@
+import { ConnectionService } from './../../services/connection.service';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { AbstractControl, FormBuilder, FormGroup, Validators, ValidatorFn, FormControl } from '@angular/forms';
@@ -16,7 +17,8 @@ export class AccountSettingsComponent implements OnInit {
       private authService: AuthService, 
       private formBuilder: FormBuilder,
       private userService: UserService,
-      private _snackBar: MatSnackBar) { }
+      private _snackBar: MatSnackBar,
+      private connectionService: ConnectionService) { }
       
   user: User;
   oldPassword: string = "";
@@ -33,8 +35,11 @@ export class AccountSettingsComponent implements OnInit {
   requestTab = false;
   changePassTab = true;
 
+  users: User[]  = []
+
   ngOnInit(): void {
     this.loadUserData();
+    this.getAllRequests();
   }
 
   loadUserData(){
@@ -45,6 +50,28 @@ export class AccountSettingsComponent implements OnInit {
         this.user = user['user']
         })
       }
+    }
+
+    getAllRequests(){
+      let userId =  localStorage.getItem("user");
+
+      this.connectionService.getAllRequests(userId).subscribe(
+        (data: User[]) => {
+          this.users = data['users']
+          this.getUsersFromRequest(this.users);
+      })
+
+    }
+
+    getUsersFromRequest(data){
+      this.users = []
+
+      for(let u of data){
+        this.userService.getById(u.userID).subscribe((data: User) => {
+          this.users.push(data['user'])
+        })
+      }
+
     }
 
   changePassword(){

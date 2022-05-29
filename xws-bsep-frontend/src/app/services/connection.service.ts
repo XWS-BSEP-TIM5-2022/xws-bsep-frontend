@@ -16,17 +16,11 @@ export class ConnectionService {
     return this.http.post(this.connectionPath, JSON.stringify(dto));
   }
 
-
-  private checkError(error: any): any {
-    console.log(error)
-
-    throw error;
+  checkConnection(userID, userIDb){
+    return this.http.get(`${this.connectionPath}/user/` + `${userID}/` + `checkConnection/` + `${userIDb}`)
   }
 
-  checkConnection(userID, userIDb){
-    // console.log(userID + ": " + userIDb)
-
-    return this.http.get(`${this.connectionPath}/user/` + `${userID}/` + `checkConnection/` + `${userIDb}`)
-    
+  getAllRequests(userID){
+    return this.http.get<any[]>(`${this.connectionPath}/user/` + `${userID}/` + `requests`)
   }
 }
