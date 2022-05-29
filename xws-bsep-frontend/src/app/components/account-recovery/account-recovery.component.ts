@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -9,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class AccountRecoveryComponent implements OnInit {
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService, private _snackBar: MatSnackBar) { }
 
   isHiddenDivEmail: boolean = false;
   isHiddenDivCode: boolean = true;
@@ -22,11 +23,27 @@ export class AccountRecoveryComponent implements OnInit {
   reenteredPassword: string = "";
   authId: string = "";
 
+  hiddenPassword1: boolean = true;
+  inputType1: string = "password";
+  hiddenPassword2: boolean = true;
+  inputType2: string = "password";
+
+  countOfCodeNumbers = 6;
+
   ngOnInit(): void {
   }
 
   sendEmail() {
-    // TODO SD: validacija email
+    if (this.email == ""){
+      this._snackBar.open("Email is required", "Ok");
+      return;
+    }
+    let pattern = new RegExp("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$");
+    if(!pattern.test(this.email)){
+      let msg = "You have entered an invalid email address";
+      this._snackBar.open(msg, "Ok");
+      return;
+    }
     const body = {
       "email": this.email
     }
@@ -35,14 +52,23 @@ export class AccountRecoveryComponent implements OnInit {
       this.isHiddenDivEmail = true;
       this.isHiddenDivCode = false;
       this.isHiddenDivChangePass = true;
-      alert('Verification code is sent! Check your mail inbox!')
+      this._snackBar.open('Verification code is sent! Check your mail inbox!', "Ok")
+
     }, err => {
-      alert("Invalid email")
+      this._snackBar.open("There is no user with the entered email", "Ok")
     })
   }
 
   sendCode() {
-    // TODO SD: validacija front
+    // alert()
+    if(!this.code) {
+      this._snackBar.open("Code is required", "Ok")
+      return;
+    }
+    if (this.code.toString().length != 6) {
+      this._snackBar.open("Code contains exactly "+ this.countOfCodeNumbers +" digits", "Ok")
+      return;
+    }
     const body = {
       "idAuth": this.authId,
       "verificationCode": this.code.toString(),
@@ -54,24 +80,75 @@ export class AccountRecoveryComponent implements OnInit {
       this.isHiddenDivChangePass = false;
     }, err => {
       console.log(err)
-      alert(err.error.message)
+      this._snackBar.open(err.error.message, "Ok")
     })
   }
 
   resetPassword() {
+    if(this.changePasswordCriteria()) {
+      return;
+    }
     const body = {
       "idAuth": this.authId,
       "password": this.password,
       "reenteredPassword": this.reenteredPassword
     }
     this.authService.resetForgottenPassword(body).subscribe(res => {
-      alert('New password successfully set')
-      this.router.navigate(['/']);
+      this._snackBar.open('New password successfully set', "Ok")
+      this.router.navigate(['/login']);
     }, err => {
       console.log(err)
-      alert(err.error.message)
+      this._snackBar.open(err.error.message, "Ok")
     })
-   
   }
 
+  changePasswordCriteria() {
+    if(!this.password || !this.reenteredPassword){
+      this._snackBar.open("All fields are mandatory", "Ok")
+      return true;
+    }
+    if(!this.isValid(this.password)){
+      return true;
+    }
+    if(!this.isValid(this.reenteredPassword)) {
+      return true;
+    }
+    if(this.password != this.reenteredPassword) {
+      this._snackBar.open("Passwords do not match", "Ok")
+      return true;
+    }
+    return false;
+  }
+
+  isValid(password: string) {
+    let pattern = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[-+_!@#$%^&*.,?:;<>=`~\\]\x22\x27\(\)\{\}\|\/\[\\\\?]).{8,}$')
+    if(!pattern.test(password)){
+      let message = "Password must contain minimum 8 characters,"+
+      " at least one uppercase letter, one lowercase letter, one number and one special character.";
+      this._snackBar.open(message, "Ok");
+      return false;
+    }
+    return true;
+  }
+
+  makeNewPasswordVisible() {
+    this.hiddenPassword1 = !this.hiddenPassword1;
+    if(this.hiddenPassword1) {
+      this.inputType1 = "password";
+    } else {
+      this.inputType1 = "text";
+    }
+  }
+
+  makeNewReenteredPasswordVisible() {
+    this.hiddenPassword2 = !this.hiddenPassword2;
+    if(this.hiddenPassword2) {
+      this.inputType2 = "password";
+    } else {
+      this.inputType2 = "text";
+    }
+  }
+
+
 }
+

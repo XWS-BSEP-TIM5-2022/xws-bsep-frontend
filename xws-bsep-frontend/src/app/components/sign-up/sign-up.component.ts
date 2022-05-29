@@ -29,7 +29,6 @@ export class SignUpComponent implements OnInit {
       "username": "",
       "biography": "",
       "password" : "",
-      "isPublic": false,
       "role": ["User"],
       "education": [],
       "experience": [],
@@ -106,7 +105,7 @@ export class SignUpComponent implements OnInit {
           popup: 'animate__animated animate__fadeOutUp'
         }
       })
-      this.router.navigate(['']);
+      this.router.navigate(['/login']);
 
     })
   }

@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from "@angular/common/http";
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import {RouterModule} from "@angular/router";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,6 +33,9 @@ import { PostLikesComponent } from './components/post-likes/post-likes.component
 import { PostDislikesComponent } from './components/post-dislikes/post-dislikes.component';
 import { ProfilesComponent } from './components/profiles/profiles.component';
 import { HeaderComponent } from './components/header/header.component';
+import { UnregisteredUserFeedComponent } from './components/unregistered-user-feed/unregistered-user-feed.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { UserProfilePublicComponent } from './components/user-profile-public/user-profile-public.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +53,9 @@ import { HeaderComponent } from './components/header/header.component';
     PostDislikesComponent,
     ProfilesComponent,
     HeaderComponent,
+    UnregisteredUserFeedComponent,
+    UserProfileComponent,
+    UserProfilePublicComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +71,7 @@ import { HeaderComponent } from './components/header/header.component';
     MatDividerModule,
     MatInputModule,
     MatSnackBarModule,
+    RouterModule
   ],
   providers: [
     {

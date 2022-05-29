@@ -31,10 +31,12 @@ export class UserFeedComponent implements OnInit {
   user: User = new User; // current user
   feedPosts: FeedPost[] = [];
   posts: Post[] = [];
+  searchedPosts: Post[] = [];
   loaded: boolean = false;
   feedActive: boolean = true;
   profileActive: boolean = false;
   visibleUserAcccountSettings: boolean = false;
+  searchCriteria: string = "";
 
   ngOnInit(): void {
     this.user.name = "";
@@ -51,7 +53,6 @@ export class UserFeedComponent implements OnInit {
         this.user = user['user']
         localStorage.setItem("loggedUserName", this.user.name)
         this.loaded = true;
-
         this.loadFeed();
       })
     }
@@ -66,6 +67,7 @@ export class UserFeedComponent implements OnInit {
       this.feedService.getFeed(userId).subscribe(
         (data: any[]) => { 
           let allPosts = data['AllPosts']
+          console.log(allPosts)
 
           if (allPosts != undefined && allPosts != null){
             for (let p of allPosts){
@@ -76,15 +78,18 @@ export class UserFeedComponent implements OnInit {
             this.posts = []
             this.feedPosts = allPosts
             this.convertToPost();
+          } else {
+            this.posts = []
+            this.searchedPosts = this.posts;
+            this.loaded = true;
           }
-          this.posts = []
       })
     }
   }
 
   convertToPost(){  
     for(let feedPost of this.feedPosts){
-      let post = new Post();
+      let post = new Post;
 
       post.id = feedPost.Id
       post.text = feedPost.Text;
@@ -145,14 +150,26 @@ export class UserFeedComponent implements OnInit {
         post.comments = []
       }
 
+      //console.log(post)
+
       this.posts.push(post); 
+      //console.log(this.posts.length)
+
     }
-  }
+  
+    this.searchedPosts = this.posts;
+    this.loaded = true;
+
+  //   for (let p of this.posts){
+  //     // console.log(p.user['user'].name, p.user['user'].lastName) 
+  //     console.log(this.posts)
+  //   } 
+ }
 
   loadMyPosts(){
     this.feedActive = false;
     this.profileActive = true;
-    let userId =  localStorage.getItem("user");
+    let userId = localStorage.getItem("user");
     
     if (userId != undefined){
       this.postService.getByUserId(userId).subscribe(
@@ -179,6 +196,7 @@ export class UserFeedComponent implements OnInit {
 
           this.posts = []
           this.posts = posts
+          this.searchedPosts = this.posts
       })
     }
   }
@@ -261,10 +279,6 @@ export class UserFeedComponent implements OnInit {
       data: {},
     });
     dialogRef.componentInstance.post.id = postId;
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   window.location.reload();
-    // });
   }
 
   seeDislikes(postId: string){
@@ -274,63 +288,7 @@ export class UserFeedComponent implements OnInit {
       data: {},
     });
     dialogRef.componentInstance.post.id = postId;
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   window.location.reload();
-    // });
   }
-
-  // userLikedPost(postId: string){
-  //   let userId =  localStorage.getItem("user");
-
-  //   this.postService.getById(postId).subscribe(
-  //     (data: Post) => {
-  //       console.log(data)
-  //       for(let like of data.likes){
-  //         if (like.userId == userId){
-  //           return true;
-  //         }
-  //       }
-  //       return false;
-  //     }
-  //   )
-  //   return false;
-  // }
-
-  // userDislikedPost(postId: string){
-  //   let userId =  localStorage.getItem("user");
-
-  //   this.postService.getById(postId).subscribe(
-  //     (data: Post) => {
-  //       console.log(data)
-  //       for(let like of data.dislikes){
-  //         if (like.userId == userId){
-  //           return true;
-  //         }
-  //       }
-  //       return false;
-  //     }
-  //   )
-  //   return false;
-
-  // }
-
-  // userNeutral(postId: string){
-  //   let userId =  localStorage.getItem("user");
-
-  //   this.postService.getById(postId).subscribe(
-  //     (data: Post) => {
-  //       console.log(data)
-  //       for(let like of data.likes){
-  //         if (like.userId == userId){
-  //           return false;
-  //         }
-  //       }
-  //       return true;
-  //     }
-  //   )
-  //   return true;
-  // }
 
   newPost(){
     const dialogRef = this.dialog.open(NewPostComponent, {
@@ -346,5 +304,38 @@ export class UserFeedComponent implements OnInit {
   logout(){
     this.authService.logout();
     this.router.navigate(['']);  
+  }
+
+  search(){
+    this.posts = this.searchedPosts.filter(p =>
+      (p.text).toLowerCase().includes(this.searchCriteria.toLowerCase()) ||
+      (p.dateCreated).toLowerCase().includes(this.searchCriteria.toLowerCase())
+    )
+  }
+
+  searchFeed(){
+    this.feedActive = true;
+    this.profileActive = false;
+    this.posts = this.searchedPosts.filter(p =>
+      (p.text).toLowerCase().includes(this.searchCriteria.toLowerCase()) ||
+      (p.dateCreated).toLowerCase().includes(this.searchCriteria.toLowerCase())
+    )
+  }
+
+  searchProfile(){
+    this.feedActive = false;
+    this.profileActive = true;
+    this.posts = this.searchedPosts.filter(p =>
+      (p.text).toLowerCase().includes(this.searchCriteria.toLowerCase()) ||
+      (p.dateCreated).toLowerCase().includes(this.searchCriteria.toLowerCase())
+    )
+  }
+
+  seeProfile(id: string){
+    let userId =  localStorage.getItem("user");
+
+    if (id != userId){
+      this.router.navigate(['profile', id])
+    }
   }
 }
