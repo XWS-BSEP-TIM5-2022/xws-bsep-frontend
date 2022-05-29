@@ -17,7 +17,8 @@ export class UpdateBiographyComponent implements OnInit {
 
   user: User; 
   newBiography : string = ""
-
+  message : string = ""
+  
   ngOnInit(): void {
     this.loadUserData();
   }
@@ -58,12 +59,8 @@ export class UpdateBiographyComponent implements OnInit {
           }
         })
       this.dialogRef.close();
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Biography can not be empty!',
-      })  
+    } else { 
+      this.message = 'Biography can not be empty!';
     }
  
   }

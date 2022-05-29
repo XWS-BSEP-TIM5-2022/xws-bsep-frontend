@@ -19,6 +19,7 @@ import { PostLikesComponent } from '../post-likes/post-likes.component';
 import { PostDislikesComponent } from '../post-dislikes/post-dislikes.component';
 import { UpdateBiographyComponent } from '../update-user-modals/update-biography/update-biography.component'; 
 import { UpdateBasicInfoComponent } from '../update-user-modals/update-basic-info/update-basic-info.component'; 
+import { UpdateSkillsComponent } from '../update-user-modals/update-skills/update-skills.component'; 
 import { DatePipe } from '@angular/common'; 
 import Swal from 'sweetalert2'
 
@@ -47,6 +48,9 @@ export class UserFeedComponent implements OnInit {
   ngOnInit(): void {
     this.user.name = "";
     this.user.lastName = "";
+    this.feedActive = true;
+    this.profileActive = false;
+    this.informationsActive = false;
     this.loadUserData();
   }
 
@@ -61,7 +65,8 @@ export class UserFeedComponent implements OnInit {
         this.loaded = true; 
         const datepipe: DatePipe = new DatePipe('en-US')
         this.stringBirthday = datepipe.transform(this.user.birthday, 'dd-MMMM-YYYY')
-        this.loadFeed();
+        if(this.feedActive){
+        this.loadFeed();}
       })
     }
   }
@@ -379,6 +384,22 @@ export class UserFeedComponent implements OnInit {
     });
   }
 
+  addSkill(){ 
+
+    const dialogRef = this.dialog.open(UpdateSkillsComponent, {
+      width: '40vw',
+      data: {},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.loadUserData()
+      this.profileActive = false;
+      this.feedActive = false;
+      this.informationsActive = true;
+    });
+
+  }
+
   deleteSkill(id){ 
 
     this.user.skills.forEach((skill,index)=>{
@@ -410,7 +431,7 @@ export class UserFeedComponent implements OnInit {
           Swal.fire({
             icon: 'success',
             title: 'Yay!',
-            text: 'Successfully updates!',
+            text: 'Successfully updateD!',
           })    
         } else {
           Swal.fire({
