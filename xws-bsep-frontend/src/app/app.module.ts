@@ -36,6 +36,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { UnregisteredUserFeedComponent } from './components/unregistered-user-feed/unregistered-user-feed.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserProfilePublicComponent } from './components/user-profile-public/user-profile-public.component';
+import { UpdateBiographyComponent } from './components/update-user-modals/update-biography/update-biography.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { UserProfilePublicComponent } from './components/user-profile-public/use
     UnregisteredUserFeedComponent,
     UserProfileComponent,
     UserProfilePublicComponent,
+    UpdateBiographyComponent,
   ],
   imports: [
     BrowserModule,

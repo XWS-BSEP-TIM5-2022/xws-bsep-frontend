@@ -17,6 +17,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostLikesComponent } from '../post-likes/post-likes.component';
 import { PostDislikesComponent } from '../post-dislikes/post-dislikes.component';
+import { UpdateBiographyComponent } from '../update-user-modals/update-biography/update-biography.component';
 
 @Component({
   selector: 'app-user-feed',
@@ -35,6 +36,7 @@ export class UserFeedComponent implements OnInit {
   loaded: boolean = false;
   feedActive: boolean = true;
   profileActive: boolean = false;
+  informationsActive: boolean = false;
   visibleUserAcccountSettings: boolean = false;
   searchCriteria: string = "";
 
@@ -61,6 +63,7 @@ export class UserFeedComponent implements OnInit {
   loadFeed(){
     this.feedActive = true;
     this.profileActive = false;
+    this.informationsActive = false;
     let userId =  localStorage.getItem("user");
 
     if (userId != undefined){
@@ -169,6 +172,7 @@ export class UserFeedComponent implements OnInit {
   loadMyPosts(){
     this.feedActive = false;
     this.profileActive = true;
+    this.informationsActive = false;
     let userId = localStorage.getItem("user");
     
     if (userId != undefined){
@@ -301,6 +305,7 @@ export class UserFeedComponent implements OnInit {
     });
   }
 
+
   logout(){
     this.authService.logout();
     this.router.navigate(['']);  
@@ -337,5 +342,22 @@ export class UserFeedComponent implements OnInit {
     if (id != userId){
       this.router.navigate(['profile', id])
     }
+  }
+
+  loadMyInfo(){
+    this.feedActive = false;
+    this.profileActive = false;
+    this.informationsActive = true; 
+  }
+
+  updateBiography(){
+    const dialogRef = this.dialog.open(UpdateBiographyComponent, {
+      width: '40vw',
+      data: {},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      window.location.reload();
+    });
   }
 }
