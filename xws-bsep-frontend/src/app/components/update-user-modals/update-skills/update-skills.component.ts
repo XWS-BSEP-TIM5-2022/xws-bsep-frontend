@@ -37,34 +37,36 @@ export class UpdateSkillsComponent implements OnInit {
 
   update(){
 
+    this.newSkill = this.newSkill.trim()
+
+    if(this.newSkill == ""){
+      this.message = 'Skill name can not be empty!';
+      return
+    }
+
     var sanitize = require("mongo-sanitize");   
     var newSkill = new Skill;
     newSkill.name = sanitize(this.newSkill) 
-    this.user.skills.push(newSkill)
+    this.user.skills.push(newSkill) 
 
-    if (this.user.biography != undefined && this.user.biography != "" && this.user.biography.trim() != ""){
-
-      this.userService.update(this.user).subscribe(
-        (success: SuccessMessage) => {
-          console.log(success)
-          if (success.success == "success"){
-            Swal.fire({
-              icon: 'success',
-              title: 'Yay!',
-              text: 'Biography successfully changed!',
-            })    
-          } else {
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Something went wrong. Please try again.',
-            })   
-          }
-        })
-      this.dialogRef.close();
-    } else {
-      this.message = 'Skill name can not be empty!';
-    }
+    this.userService.update(this.user).subscribe(
+      (success: SuccessMessage) => {
+        console.log(success)
+        if (success.success == "success"){
+          Swal.fire({
+            icon: 'success',
+            title: 'Yay!',
+            text: 'Skill successfully added!',
+          })    
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong. Please try again.',
+          })   
+        }
+      })
+    this.dialogRef.close(); 
  
   }
  

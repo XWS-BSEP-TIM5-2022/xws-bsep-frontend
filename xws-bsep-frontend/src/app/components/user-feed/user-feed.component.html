@@ -315,9 +315,9 @@
 										</div><!--user-profile-ov end-->
 
 										<div class="user-profile-ov">
-											<h3><a href="#" title="" class="skills-open">Interests</a> <a><i class="fa fa-plus-square"></i></a></h3>
+											<h3><a (click)="addInterest()" title="" class="skills-open">Interests</a> <a (click)="addInterest()"><i class="fa fa-plus-square"></i></a></h3>
 											<ul>
-												<li *ngFor="let interest of user.interests"><a title="" style="color: black;" (click)="deleteInterest(interest.id)">{{interest.name}} ({{interest.description}}) <i class="fa fa-trash"></i></a></li> 
+												<li *ngFor="let interest of user.interests"><a title="" style="color: black;" (click)="deleteInterest(interest.id)">{{interest.name}}<i class="fa fa-trash"></i> <p *ngIf="interest.description != ''"> ({{interest.description}})</p> </a></li> 
 											</ul>
 										</div><!--user-profile-ov end-->
 

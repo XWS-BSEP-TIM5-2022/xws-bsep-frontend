@@ -20,6 +20,7 @@ import { PostDislikesComponent } from '../post-dislikes/post-dislikes.component'
 import { UpdateBiographyComponent } from '../update-user-modals/update-biography/update-biography.component'; 
 import { UpdateBasicInfoComponent } from '../update-user-modals/update-basic-info/update-basic-info.component'; 
 import { UpdateSkillsComponent } from '../update-user-modals/update-skills/update-skills.component'; 
+import { UpdateInterestsComponent } from '../update-user-modals/update-interests/update-interests.component'; 
 import { DatePipe } from '@angular/common'; 
 import Swal from 'sweetalert2'
 
@@ -380,7 +381,7 @@ export class UserFeedComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      window.location.reload();
+      this.loadUserData() 
     });
   }
 
@@ -392,10 +393,20 @@ export class UserFeedComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.loadUserData()
-      this.profileActive = false;
-      this.feedActive = false;
-      this.informationsActive = true;
+      this.loadUserData() 
+    });
+
+  }
+
+  addInterest(){ 
+
+    const dialogRef = this.dialog.open(UpdateInterestsComponent, {
+      width: '40vw',
+      data: {},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.loadUserData() 
     });
 
   }
