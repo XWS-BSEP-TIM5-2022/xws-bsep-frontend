@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>Edit biography</h2>
+<mat-divider></mat-divider>
+<div  style="margin-top: 0.5vw; margin-left: 1vw; margin-right: 1vw; margin-bottom: 0.5vw;">
+
+    <br><br>
+    <div class="row"  style="margin-bottom: -1.5vw;">
+        <div class="col-md-12 mb-4 pb-2">
+            <mat-form-field class="example-full-width" appearance="outline" style="width: 30vw;">  <!-- border-style: solid; border-color: gainsboro; border-width: 0.5px; -->
+                <textarea matInput class="example-full-width" appearance="outline"  [(ngModel)]="newBiography" name="text" placeholder="New biography..."></textarea>
+            </mat-form-field>
+            <label style="color: #e44d3a;">{{message}}</label>
+
+        </div>
+    </div>
+    <div class="mt-4 pt-2">
+        <input class="btn btn-lg center-div" style="margin-right: 3%; margin-left: 20%;" (click)="cancel()" type="button" value="Cancel" />
+        <input class="btn btn-success btn-lg center-div" style="background-color: #e44d3a; color:white" type="button" (click)="update()" value="Update" />
+        
+    </div>
+</div>

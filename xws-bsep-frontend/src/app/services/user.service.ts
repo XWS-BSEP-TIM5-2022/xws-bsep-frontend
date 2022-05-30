@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../model/user';
 import {map} from 'rxjs/operators';  
+import { SuccessMessage } from '../model/success-message';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,8 @@ export class UserService {
     return this.http.get<any[]>(`${this.userPath}`)    
   }
 
+  update(user: User): Observable<SuccessMessage>{
+    return this.http.put<SuccessMessage>(`${this.userPath}/update`, user)    
+  }
   
 }

@@ -114,7 +114,13 @@
 										<ul class="social_links">
 											<li><a title=""><i class="la la-user"></i> {{ user.name }} {{ user.lastName }} </a></li>
 											<li><a title=""><i class="la la-at"></i> {{ user.email }} </a></li>
-											<li><a title=""><i class="la la-phone"></i> {{ user.mobileNumber }}  </a></li>											
+											<li><a title=""><i class="la la-phone"></i> {{ user.mobileNumber }}  </a></li>	
+											<li><a title=""><i class="la la-heart"></i> {{ user.gender }}  </a></li>	
+											<li><a title=""><i class="la la-calendar"></i> {{ stringBirthday }}  </a></li>
+											<li> 
+												<button mat-raised-button class="edit-info" 
+												(click)="editInfo()" ><i class="fa fa-pencil"></i> Edit info</button>
+											</li>											
 										</ul>
 									</div><!--user_profile end-->
 								</div><!--main-left-sidebar end-->
@@ -141,6 +147,11 @@
 													<a routerLink="." (click)="loadMyPosts()">
 														<span> <i class="la la-user"></i> My Profile</span>
 													</a>
+												</li> 
+												<li data-tab="profile-dd">
+													<a routerLink="." (click)="loadMyInfo()">
+														<span> <i class="la la-question"></i> My informations</span>
+													</a>
 												</li>
 											</ul>
 										</div><!-- tab-feed end-->
@@ -156,12 +167,36 @@
 														<span> <i class="la la-user"></i> Profile</span>
 													</a>
 												</li>
+												<li data-tab="profile-dd">
+													<a routerLink="." (click)="loadMyInfo()">
+														<span> <i class="la la-question"></i> My informations</span>
+													</a>
+												</li>
+											</ul>
+										</div><!-- tab-feed end-->
+										<div class="tab-feed st2" *ngIf="informationsActive">
+											<ul>
+												<li data-tab="feed-dd">
+													<a routerLink="." (click)="loadFeed()">
+														<span> <i class="la la-home"></i> Feed </span>
+													</a>
+												</li>
+												<li data-tab="info-dd">
+													<a routerLink="." (click)="loadMyPosts()">
+														<span> <i class="la la-user"></i> Profile</span>
+													</a>
+												</li>
+												<li data-tab="profile-dd" class="active">
+													<a routerLink="." (click)="loadMyInfo()">
+														<span> <i class="la la-question"></i> My informations</span>
+													</a>
+												</li>
 											</ul>
 										</div><!-- tab-feed end-->
 									</div><!--user-tab-sec end-->
 							
 
-                                    <div class="product-feed-tab current" id="feed-dd">
+                                    <div *ngIf="profileActive" class="product-feed-tab current" id="feed-dd">
                                         <div class="posts-section">
                                             <ul *ngFor="let p of posts; let i=index"> <!--POSTS -->
                                                 <div class="post-bar">
@@ -244,6 +279,59 @@
 											<br> <br>
 										</div><!--posts-section end-->
 									</div><!--product-feed-tab end-->
+
+
+									<!--my informations section-->
+									<div *ngIf="informationsActive" class="product-feed-tab current" id="profile-dd">
+                                        <div class="user-profile-ov">
+											<h3><a title="" class="overview-open">Biography</a> <a (click)="updateBiography()" title="" class="overview-open" ><i class="fa fa-pencil"></i></a></h3>
+											<hr>
+											<p>{{user.biography}}</p>
+
+										</div><!--user-profile-ov end-->
+										<div class="user-profile-ov">
+											<h3><a (click)="addExperience()" title="" class="ed-box-open">Experience</a> <a  (click)="addExperience()" title=""><i class="fa fa-plus-square"></i></a></h3>
+											<div *ngFor="let e of user.experience">
+												<hr>
+												<h4> <a title="" style="color: black;" (click)="deleteExperience(e.id)"> {{e.name}}  <i class="fa fa-trash"></i></a> </h4>
+												<p *ngIf="e.startDate.substring(0,4) != e.endDate.substring(0,4)">{{e.startDate.substring(0, 4)}} - {{e.endDate.substring(0, 4)}}</p>
+												<p *ngIf="e.startDate.substring(0,4) == e.endDate.substring(0,4)">{{e.startDate.substring(0, 4)}}</p>
+												<p>Headline: {{e.headline}}</p>
+												<p>Place: {{e.place}}</p>
+											</div> 
+										</div><!--user-profile-ov end-->
+
+										<div class="user-profile-ov">
+											<h3><a  (click)="addEducation()" title="" class="ed-box-open">Education</a> <a (click)="addEducation()" title=""><i class="fa fa-plus-square"></i></a></h3>
+											<div *ngFor="let e of user.education">
+												<hr>
+												<h4> <a title="" style="color: black;" (click)="deleteEducation(e.id)"> {{e.name}}  <i class="fa fa-trash"></i></a> </h4>
+												<p *ngIf="e.startDate.substring(0,4) != e.endDate.substring(0,4)">{{e.startDate.substring(0, 4)}} - {{e.endDate.substring(0, 4)}}</p>
+												<p *ngIf="e.startDate.substring(0,4) == e.endDate.substring(0,4)">{{e.startDate.substring(0, 4)}}</p>
+												<p>Level: {{e.level}}</p>
+												<p>Place: {{e.place}}</p>
+											</div> 
+										</div><!--user-profile-ov end-->
+
+										<div class="user-profile-ov">
+											<h3><a (click)="addSkill()" title="" class="skills-open">Skills</a> <a (click)="addSkill()" ><i class="fa fa-plus-square"></i></a></h3>
+											<hr>
+											<ul>
+												<li *ngFor="let skill of user.skills"><a style="color: black;" (click)="deleteSkill(skill.id)" title="">{{skill.name}} <i class="fa fa-trash"></i></a></li> 
+											</ul>
+										</div><!--user-profile-ov end-->
+
+										<div class="user-profile-ov">
+											<h3><a (click)="addInterest()" title="" class="skills-open">Interests</a> <a (click)="addInterest()"><i class="fa fa-plus-square"></i></a></h3>
+											<hr>
+											<ul>
+												<li *ngFor="let interest of user.interests"><a title="" style="color: black;" (click)="deleteInterest(interest.id)">{{interest.name}}<i class="fa fa-trash"></i> <p *ngIf="interest.description != ''"> ({{interest.description}})</p> </a></li> 
+											</ul>
+										</div><!--user-profile-ov end-->
+
+									</div><!--my informations end-->
+
+
 								</div><!--main-ws-sec end-->
 							</div>
 							<div class="col-lg-3">
@@ -337,5 +425,7 @@
 			</div>
 		</footer><!--footer end-->
 	</div><!--theme-layout end-->
+
+
 </body>
 </html>

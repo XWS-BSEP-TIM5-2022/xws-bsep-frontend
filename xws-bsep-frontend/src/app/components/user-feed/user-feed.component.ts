@@ -17,6 +17,14 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostLikesComponent } from '../post-likes/post-likes.component';
 import { PostDislikesComponent } from '../post-dislikes/post-dislikes.component';
+import { UpdateBiographyComponent } from '../update-user-modals/update-biography/update-biography.component'; 
+import { UpdateBasicInfoComponent } from '../update-user-modals/update-basic-info/update-basic-info.component'; 
+import { UpdateSkillsComponent } from '../update-user-modals/update-skills/update-skills.component'; 
+import { UpdateInterestsComponent } from '../update-user-modals/update-interests/update-interests.component';  
+import { UpdateEducationComponent } from '../update-user-modals/update-education/update-education.component'; 
+import { UpdateExperienceComponent } from '../update-user-modals/update-experience/update-experience.component'; 
+import { DatePipe } from '@angular/common'; 
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-user-feed',
@@ -35,12 +43,17 @@ export class UserFeedComponent implements OnInit {
   loaded: boolean = false;
   feedActive: boolean = true;
   profileActive: boolean = false;
+  informationsActive: boolean = false;
   visibleUserAcccountSettings: boolean = false;
   searchCriteria: string = "";
+  stringBirthday : any;
 
   ngOnInit(): void {
     this.user.name = "";
     this.user.lastName = "";
+    this.feedActive = true;
+    this.profileActive = false;
+    this.informationsActive = false;
     this.loadUserData();
   }
 
@@ -53,9 +66,11 @@ export class UserFeedComponent implements OnInit {
         this.user = user['user']
         localStorage.setItem("loggedUserName", this.user.name)
         localStorage.setItem("email", this.user.email)
-
-        this.loaded = true;
-        this.loadFeed();
+        this.loaded = true; 
+        const datepipe: DatePipe = new DatePipe('en-US')
+        this.stringBirthday = datepipe.transform(this.user.birthday, 'dd-MMMM-YYYY')
+        if(this.feedActive){
+        this.loadFeed();} 
       })
     }
   }
@@ -63,6 +78,7 @@ export class UserFeedComponent implements OnInit {
   loadFeed(){
     this.feedActive = true;
     this.profileActive = false;
+    this.informationsActive = false;
     let userId =  localStorage.getItem("user");
 
     if (userId != undefined){
@@ -171,6 +187,7 @@ export class UserFeedComponent implements OnInit {
   loadMyPosts(){
     this.feedActive = false;
     this.profileActive = true;
+    this.informationsActive = false;
     let userId = localStorage.getItem("user");
     
     if (userId != undefined){
@@ -303,6 +320,7 @@ export class UserFeedComponent implements OnInit {
     });
   }
 
+
   logout(){
     this.authService.logout();
     this.router.navigate(['']);  
@@ -340,4 +358,151 @@ export class UserFeedComponent implements OnInit {
       this.router.navigate(['profile', id])
     }
   }
+
+  loadMyInfo(){
+    this.feedActive = false;
+    this.profileActive = false;
+    this.informationsActive = true; 
+  }
+
+  editInfo(){    
+    const dialogRef = this.dialog.open(UpdateBasicInfoComponent, {
+    width: '40vw',
+    data: {},
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    window.location.reload();
+  });
+
+  }
+
+  updateBiography(){
+    const dialogRef = this.dialog.open(UpdateBiographyComponent, {
+      width: '40vw',
+      data: {},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.loadUserData() 
+    });
+  }
+
+  addSkill(){ 
+
+    const dialogRef = this.dialog.open(UpdateSkillsComponent, {
+      width: '40vw',
+      data: {},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.loadUserData() 
+    });
+
+  }
+
+  addEducation(){ 
+
+    const dialogRef = this.dialog.open(UpdateEducationComponent, {
+      width: '40vw',
+      data: {},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.loadUserData() 
+    });
+
+  }
+
+  addExperience(){ 
+
+    const dialogRef = this.dialog.open(UpdateExperienceComponent, {
+      width: '40vw',
+      data: {},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.loadUserData() 
+    });
+
+  }
+
+  addInterest(){ 
+
+    const dialogRef = this.dialog.open(UpdateInterestsComponent, {
+      width: '40vw',
+      data: {},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.loadUserData() 
+    });
+
+  }
+
+  deleteSkill(id){ 
+
+    this.user.skills.forEach((skill,index)=>{
+      if(skill.id == id){
+        this.user.skills.splice(index,1);
+      } 
+    });
+    this.updateUser()
+
+  }
+
+  deleteInterest(id){ 
+
+    this.user.interests.forEach((interest,index)=>{
+      if(interest.id == id){
+        this.user.interests.splice(index,1);
+      } 
+    });
+    this.updateUser()
+
+  }
+
+  deleteEducation(id){
+
+    this.user.education.forEach((e,index)=>{
+      if(e.id == id){
+        this.user.education.splice(index,1);
+      } 
+    });
+    this.updateUser()
+
+  }
+
+  deleteExperience(id){
+
+    this.user.experience.forEach((e,index)=>{
+      if(e.id == id){
+        this.user.experience.splice(index,1);
+      } 
+    });
+    this.updateUser()
+
+  }
+
+  updateUser(){
+
+    this.userService.update(this.user).subscribe(
+      (success: SuccessMessage) => {
+        console.log(success)
+        if (success.success == "success"){
+          Swal.fire({
+            icon: 'success',
+            title: 'Yay!',
+            text: 'Successfully updateD!',
+          })    
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong. Please try again.',
+          })   
+        }
+      }) 
+  }
+
 }

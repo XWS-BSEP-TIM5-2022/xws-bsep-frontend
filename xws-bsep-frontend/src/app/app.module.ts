@@ -29,6 +29,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatDividerModule} from '@angular/material/divider';
 import { MatInputModule} from '@angular/material/input';
+import { MatSelectModule} from '@angular/material/select';
 import { PostLikesComponent } from './components/post-likes/post-likes.component';
 import { PostDislikesComponent } from './components/post-dislikes/post-dislikes.component';
 import { ProfilesComponent } from './components/profiles/profiles.component';
@@ -36,6 +37,12 @@ import { HeaderComponent } from './components/header/header.component';
 import { UnregisteredUserFeedComponent } from './components/unregistered-user-feed/unregistered-user-feed.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserProfilePublicComponent } from './components/user-profile-public/user-profile-public.component';
+import { UpdateBiographyComponent } from './components/update-user-modals/update-biography/update-biography.component';
+import { UpdateBasicInfoComponent } from './components/update-user-modals/update-basic-info/update-basic-info.component';
+import { UpdateSkillsComponent } from './components/update-user-modals/update-skills/update-skills.component';
+import { UpdateInterestsComponent } from './components/update-user-modals/update-interests/update-interests.component';
+import { UpdateExperienceComponent } from './components/update-user-modals/update-experience/update-experience.component';
+import { UpdateEducationComponent } from './components/update-user-modals/update-education/update-education.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +63,12 @@ import { UserProfilePublicComponent } from './components/user-profile-public/use
     UnregisteredUserFeedComponent,
     UserProfileComponent,
     UserProfilePublicComponent,
+    UpdateBiographyComponent,
+    UpdateBasicInfoComponent,
+    UpdateSkillsComponent,
+    UpdateInterestsComponent,
+    UpdateExperienceComponent,
+    UpdateEducationComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,6 +83,7 @@ import { UserProfilePublicComponent } from './components/user-profile-public/use
     MatButtonModule,
     MatDividerModule,
     MatInputModule,
+    MatSelectModule,
     MatSnackBarModule,
     RouterModule
   ],
