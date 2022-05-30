@@ -1,1 +1,41 @@
-<p>update-experience works!</p>
+<h2 mat-dialog-title>Add new experience</h2>
+<mat-divider></mat-divider>
+<div  style="margin-top: 0.5vw; margin-left: 1vw; margin-right: 1vw; margin-bottom: 0.5vw;">
+    <div class="row"  style="margin-bottom: -1.5vw;"> 
+    </div>
+    <br><br>
+    <div class="row"  style="margin-bottom: -1.5vw;">
+        <div class="col-md-12 mb-4 pb-2">
+            <mat-form-field class="example-full-width" appearance="outline" style="width: 33vw;">  <!-- border-style: solid; border-color: gainsboro; border-width: 0.5px; -->
+                <mat-label>Company name</mat-label>
+                <input matInput class="example-full-width" appearance="outline"  [(ngModel)]="name" name="text" > 
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="outline" style="width: 33vw;">  <!-- border-style: solid; border-color: gainsboro; border-width: 0.5px; -->
+                <mat-label>Start date</mat-label> 
+                <input matInput [max]="maxDate" (change)="end=''" class="example-full-width" appearance="outline" [(ngModel)]="start" name="birthday" class="textbox-n" type="date"  id="date">
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="outline" style="width: 33vw;">  <!-- border-style: solid; border-color: gainsboro; border-width: 0.5px; -->
+                <mat-label>End date</mat-label> 
+                <input [min]="start"  [max]="maxDate" matInput placeholder="pera"  class="example-full-width" appearance="outline"  [(ngModel)]="end" name="birthday" class="textbox-n" type="date"  id="date">
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="outline" style="width: 33vw;">  <!-- border-style: solid; border-color: gainsboro; border-width: 0.5px; -->
+                <mat-label>Headline</mat-label>
+                <input matInput class="example-full-width" appearance="outline"  [(ngModel)]="headline" name="text" > 
+            </mat-form-field> 
+            <mat-form-field class="example-full-width" appearance="outline" style="width: 33vw;">  <!-- border-style: solid; border-color: gainsboro; border-width: 0.5px; -->
+                <mat-label>Place</mat-label>
+                <input matInput class="example-full-width" appearance="outline"  [(ngModel)]="place" name="text" > 
+            </mat-form-field> 
+  
+
+            <label>{{message}} </label>
+        </div>
+        </div>
+
+
+    <div class="mt-4 pt-2">
+        <input class="btn btn-lg center-div" style="margin-right: 3%; margin-left: 30%;" (click)="cancel()" type="button" value="Cancel" />
+        <input class="btn btn-success btn-lg center-div" style="background-color: #e44d3a; color:white" type="button" (click)="update()" value="Update" />
+        
+    </div>
+</div>

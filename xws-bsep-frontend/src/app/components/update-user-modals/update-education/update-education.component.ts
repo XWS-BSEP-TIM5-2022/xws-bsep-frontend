@@ -6,6 +6,7 @@ import { UserService } from 'src/app/services/user.service';
 import { SuccessMessage } from 'src/app/model/success-message';
 import Swal from 'sweetalert2'; 
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { DatePipe } from '@angular/common'; 
 
 @Component({
   selector: 'app-update-education',
@@ -31,8 +32,11 @@ export class UpdateEducationComponent implements OnInit {
   end = ""
   options: FormGroup;
   levelControl  = new FormControl("Primary");  
+  maxDate : any;
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
+    const datepipe: DatePipe = new DatePipe('en-US')
+    this.maxDate = datepipe.transform(new Date(), 'YYYY-MM-dd') 
     this.loadUserData();  
   }
 
@@ -50,7 +54,7 @@ export class UpdateEducationComponent implements OnInit {
  
   validate() : boolean{
     if(!this.name){
-      this.message = "Company name can not be empty."
+      this.message = "School/university name can not be empty."
       return true
     } 
 
@@ -65,7 +69,7 @@ export class UpdateEducationComponent implements OnInit {
     }  
 
     if(!this.place){
-      this.message = "Place of company can not be empty."
+      this.message = "Place can not be empty."
       return true
     }  
 

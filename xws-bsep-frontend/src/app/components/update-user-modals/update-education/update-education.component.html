@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Edit biography</h2>
+<h2 mat-dialog-title>Add new education</h2>
 <mat-divider></mat-divider>
 <div  style="margin-top: 0.5vw; margin-left: 1vw; margin-right: 1vw; margin-bottom: 0.5vw;">
     <div class="row"  style="margin-bottom: -1.5vw;"> 
@@ -7,16 +7,16 @@
     <div class="row"  style="margin-bottom: -1.5vw;">
         <div class="col-md-12 mb-4 pb-2">
             <mat-form-field class="example-full-width" appearance="outline" style="width: 33vw;">  <!-- border-style: solid; border-color: gainsboro; border-width: 0.5px; -->
-                <mat-label>Company name</mat-label>
+                <mat-label>School/university name</mat-label>
                 <input matInput class="example-full-width" appearance="outline"  [(ngModel)]="name" name="text" > 
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="outline" style="width: 33vw;">  <!-- border-style: solid; border-color: gainsboro; border-width: 0.5px; -->
                 <mat-label>Start date</mat-label> 
-                <input matInput placeholder="pera" class="example-full-width" appearance="outline" [(ngModel)]="start" name="birthday" class="textbox-n" type="date"  id="date">
+                <input matInput [max]="maxDate" (change)="end=''" class="example-full-width" appearance="outline" [(ngModel)]="start" name="birthday" class="textbox-n" type="date"  id="date">
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="outline" style="width: 33vw;">  <!-- border-style: solid; border-color: gainsboro; border-width: 0.5px; -->
                 <mat-label>End date</mat-label> 
-                <input matInput placeholder="pera" class="example-full-width" appearance="outline"  [(ngModel)]="end" name="birthday" class="textbox-n" type="date"  id="date">
+                <input [min]="start"  [max]="maxDate" matInput placeholder="pera"  class="example-full-width" appearance="outline"  [(ngModel)]="end" name="birthday" class="textbox-n" type="date"  id="date">
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="outline" style="width: 33vw;" [color]="levelControl.value">
                 <mat-label>Level</mat-label>
