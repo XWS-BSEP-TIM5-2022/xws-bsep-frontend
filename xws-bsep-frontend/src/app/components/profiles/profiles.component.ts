@@ -1,7 +1,10 @@
+import { Observable } from 'rxjs';
 import { ConnectionService } from './../../services/connection.service';
 import { User } from './../../model/user';
 import { UserService } from 'src/app/services/user.service';
 import { Component, OnInit } from '@angular/core';
+import { catchError, map } from 'rxjs/operators';
+import { coerceStringArray } from '@angular/cdk/coercion';
 
 @Component({
   selector: 'app-profiles',
@@ -14,9 +17,13 @@ export class ProfilesComponent implements OnInit {
   users: User[]  = []
   pending: boolean = false
   loggedUser = localStorage.getItem("email")
-  loggedUserId = localStorage.getItem("user")
+  loggedUserId: any
+  loggedUserFull: User
 
   ngOnInit(): void {
+
+    this.loggedUserId = localStorage.getItem("user")
+
     this.userService.getAll().subscribe(
       (data: User[]) => {
         this.users = data['users']
@@ -31,8 +38,9 @@ export class ProfilesComponent implements OnInit {
          }
       })
 
-   
   }
+
+ 
 
   connect(user, id){
     var followDTO = {
@@ -45,6 +53,33 @@ export class ProfilesComponent implements OnInit {
        console.log(user.request)
        window.location.reload()
      })
+  }
+
+  findLoggedUser() : Observable<boolean>{
+    return this.userService.getById(this.loggedUserId).pipe(map((res: any) => {
+      this.loggedUserFull = res['user'];
+      console.log("public: " + this.loggedUserFull.isPublic);
+      return this.loggedUserFull.isPublic;
+    }))
+    
+
+  }
+
+  block(user){
+    this.findLoggedUser()    
+
+    var dto = {
+      "userIDb": user.id,
+      "isPublicA": false,
+      "isPublicB": user.isPublic
+    }
+
+    var u = this.findLoggedUser().subscribe(event => {
+      dto.isPublicA = event
+      this.connectionService.block(dto).subscribe((res: any) => {
+        window.location.reload()
+      })
+    })
   }
 
 }
