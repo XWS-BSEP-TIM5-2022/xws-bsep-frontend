@@ -65,11 +65,12 @@ export class UserFeedComponent implements OnInit {
         (user: any) => {
         this.user = user['user']
         localStorage.setItem("loggedUserName", this.user.name)
+        localStorage.setItem("email", this.user.email)
         this.loaded = true; 
         const datepipe: DatePipe = new DatePipe('en-US')
         this.stringBirthday = datepipe.transform(this.user.birthday, 'dd-MMMM-YYYY')
         if(this.feedActive){
-        this.loadFeed();}
+        this.loadFeed();} 
       })
     }
   }

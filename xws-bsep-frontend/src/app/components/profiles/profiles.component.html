@@ -14,15 +14,19 @@
 				<div class="companies-list">
 					<div class="row">
 						<div class="col-lg-3 col-md-4 col-sm-6 col-12" *ngFor="let u of users">
-							<div class="company_profile_info" >
+							<div class="company_profile_info" *ngIf="loggedUser !== u.email">
 								<div class="company-up-info">
 									<img src="http://via.placeholder.com/91x91" alt="">
 									<h3>{{u.name}} {{u.lastName}}</h3>
 									<h4>{{u.email}}</h4>
 									<ul>
-										<li><a (click)="connect(u)" style="cursor: pointer;" title="" class="follow">Connect</a></li>
+										<!-- *ngIf="!connected()" -->
+										<li><a (click)="connect(u, u.id)" *ngIf="!u.isConnected && !u.request" style="cursor: pointer;" title="" class="btn btn-primary">Connect</a></li>
+										<li><a  *ngIf="u.isConnected && !u.request" style="cursor: pointer; pointer-events: none" title="" class="btn btn-success">Connected</a></li>
+										<li><a  *ngIf="u.request" style="cursor: pointer; pointer-events: none" title="" class="btn btn-secondary">Pending</a></li>
+
 										<li><a href="#" title="" class="message-us"><i class="fa fa-envelope"></i></a></li>
-										<li><a href="#" title="" class="hire-us">Hire</a></li>
+										<li><a href="#" title="" class="hire-us">Block</a></li>
 									</ul>
 								</div>
 								<a href="#" title="" class="view-more-pro">View Profile</a>
