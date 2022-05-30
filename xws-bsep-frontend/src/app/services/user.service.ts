@@ -26,5 +26,13 @@ export class UserService {
   update(user: User): Observable<SuccessMessage>{
     return this.http.put<SuccessMessage>(`${this.userPath}/update`, user)    
   }
+
+  getAllPublic(){
+    return this.http.get<User[]>(`${this.userPath}/public`)    
+  }
+
+  searchPublic(criteria : string){
+    return this.http.get<User[]>(`${this.userPath}/search/${criteria}`)    
+  }
   
 }
