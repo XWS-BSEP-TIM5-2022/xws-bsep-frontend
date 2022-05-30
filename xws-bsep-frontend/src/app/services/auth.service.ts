@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import jwt_decode from "jwt-decode";
 import Swal from 'sweetalert2';
 import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
+import { ApiToken } from '../model/api-token';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,7 @@ export class AuthService {
   private readonly verifyRecoveryCodePath = environment.backend_api + 'api/auth/verifyCode'; 
   private readonly resetForgottenPasswordPath = environment.backend_api + 'api/auth/resetPassword';
   private readonly changePasswordPath = environment.backend_api + 'api/auth/changePassword';
+  private readonly generateApiToken = environment.backend_api + 'api/auth/newApiToken';
   logged: Boolean = false;
 
   private access_token = null;
@@ -163,5 +165,9 @@ export class AuthService {
 
   changePassword(body: {oldPassword: string, newPassword: string, newReenteredPassword: string}) {
     return this.http.post(this.changePasswordPath, JSON.stringify(body));
+  }
+
+  generateNewApiToken(username: string){
+    return this.http.get<ApiToken>(`${this.generateApiToken}/`+ username)    
   }
 }

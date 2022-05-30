@@ -21,4 +21,5 @@ export class User {
     role: string;
     isConnected: boolean;
     request: boolean;
+    username: string;
 }

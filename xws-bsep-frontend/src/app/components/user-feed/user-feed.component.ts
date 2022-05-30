@@ -25,6 +25,7 @@ import { UpdateEducationComponent } from '../update-user-modals/update-education
 import { UpdateExperienceComponent } from '../update-user-modals/update-experience/update-experience.component'; 
 import { DatePipe } from '@angular/common'; 
 import Swal from 'sweetalert2'
+import { ApiToken } from 'src/app/model/api-token';
 
 @Component({
   selector: 'app-user-feed',
@@ -505,4 +506,15 @@ export class UserFeedComponent implements OnInit {
       }) 
   }
 
+  generateAPIToken(){
+    this.authService.generateNewApiToken(this.user.username).subscribe(
+      (token: ApiToken) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Yay!',
+          text: 'Your API token is: ' + token.token,
+        })    
+      }
+    )
+  }
 }
