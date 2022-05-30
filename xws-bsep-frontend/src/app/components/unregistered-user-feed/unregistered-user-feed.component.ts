@@ -7,6 +7,7 @@ import { FeedComment } from 'src/app/model/feed/feed-comment';
 import { FeedPost } from 'src/app/model/feed/feed-post';
 import { Like } from 'src/app/model/like';
 import { Post } from 'src/app/model/post';
+import { User } from 'src/app/model/user';
 import { FeedService } from 'src/app/services/feed.service';
 import { PostService } from 'src/app/services/post.service';
 import { UserService } from 'src/app/services/user.service';
@@ -25,10 +26,26 @@ export class UnregisteredUserFeedComponent implements OnInit {
   posts: Post[] = [];
   feedPosts: FeedPost[] = [];
   searchCriteria: string = "";
-  searchedPosts: Post[] = [];
+  searchedPosts: Post[] = []; 
+
+  
+  searchCriteriaUsers: string = "";
+  users: User[] = [];
+  selectedPosts = true; 
 
   ngOnInit(): void {
     this.loadPostsFromPublicAccounts();
+    this.loadPublicUsers();
+  }
+
+  loadPublicUsers(){
+    this.userService.getAllPublic().subscribe(
+      (data: any[]) => {
+
+        this.users = data['users']
+        console.dir(this.users)
+        
+      })
   }
 
   loadPostsFromPublicAccounts(){
@@ -148,6 +165,17 @@ export class UnregisteredUserFeedComponent implements OnInit {
           (p.dateCreated).toLowerCase().includes(this.searchCriteria.toLowerCase())
     )
   }
+
+  searchUsers(){
+
+    this.userService.searchPublic(this.searchCriteriaUsers).subscribe(
+      (data: User[]) => {
+
+        this.users = data['users']
+        
+      })
+  }
+
 
   seeProfile(id: string){
     this.router.navigate(['public-profile', id])

@@ -57,7 +57,24 @@
 								</div><!--main-left-sidebar end-->
 
 							</div>
-							<div class="col-lg-6">
+							<div class="col-lg-6" style="margin-top: 3.5vh;">
+								<div class="tab-feed st2">
+									<ul>
+										<li data-tab="feed-dd" [ngClass]="{'active': selectedPosts}">
+											<a routerLink="." (click)="selectedPosts = true" >
+												<span> <i class="la la-home"></i> Posts </span>
+											</a>
+										</li>
+										<li data-tab="info-dd" [ngClass]="{'active': !selectedPosts}">
+											<a routerLink="." (click)="selectedPosts = false" >
+												<span> <i class="la la-user"></i> Users </span>
+											</a>
+										</li>  
+									</ul>
+								</div><!-- tab-feed end-->
+
+								<!--SECTION POSTS-->
+								<div *ngIf="selectedPosts"> 
 								<div class="search-bar posts-section" style="margin-bottom: 2vw;">
 									<form>
 										<input type="text" [(ngModel)]="searchCriteria" name="searchCriteria" placeholder="Search by post text...">
@@ -113,7 +130,7 @@
 																<li>
 																	<div class="comment-list">
 																		<div class="bg-img">
-																			<img src="http://via.placeholder.com/40x40" alt="">
+																			<img src="assets\cv__29__generated.jpg" style="width: 40px; height: 40px;" alt=""> 
 																		</div>
 																		<div class="comment">
 																			<h3> {{ c.user['user'].name }} {{ c.user['user'].lastName }} </h3> <!-- {{ c.user['user'].name }} {{ c.user['user'].lastName }} -->
@@ -130,6 +147,38 @@
 										</div><!--posts-section end-->
 									</div><!--product-feed-tab end-->
 								</div><!--main-ws-sec end-->
+							</div> <!--SECTION POSTS END-->
+
+
+								<!--SECTION users-->
+								<div *ngIf="!selectedPosts"> 
+									<div class="search-bar posts-section" style="margin-bottom: 2vw;">
+										<form>
+											<input type="text" [(ngModel)]="searchCriteriaUsers" name="searchUsers" placeholder="Search users...">
+											<button style="background-color: #e44d3a; color: white;" (click)="searchUsers()"><i class="la la-search" style="color: white;"></i></button>
+										</form>
+										<br>
+									</div> 
+
+									<div class="posts-section">
+										<ul *ngFor="let p of users; let i=index"> <!--POSTS -->
+											<div class="post-bar">
+												<div class="post_topbar">
+													<div class="usy-dt">
+														<img src="assets\cv__29__generated.jpg" style="width: 50px; height: 50px;" alt=""> 
+														<div class="usy-name">
+															<a routerLink="." title="Show profile" (click)="seeProfile(p.id)">
+																 <h3>{{p.name}} {{p.lastName}}</h3> </a>   
+															<span> <i class="la la-mail"></i> {{ p.email }} </span>
+														</div> 
+													</div>
+												</div>
+											</div>
+										</ul>
+									</div> 
+									
+								</div> <!--SECTION USERSS END-->
+
 							</div>
 							
 							<!-- Suggestions -->
