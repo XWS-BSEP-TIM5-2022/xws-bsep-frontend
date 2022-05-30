@@ -5,6 +5,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators, ValidatorFn, FormC
 import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
 import { MatSnackBar} from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account-settings',
@@ -18,7 +19,8 @@ export class AccountSettingsComponent implements OnInit {
       private formBuilder: FormBuilder,
       private userService: UserService,
       private _snackBar: MatSnackBar,
-      private connectionService: ConnectionService) { }
+      private connectionService: ConnectionService, 
+      private router: Router) { }
       
   user: User;
   oldPassword: string = "";
@@ -196,5 +198,10 @@ export class AccountSettingsComponent implements OnInit {
     this.connectionService.rejectRequest(dto).subscribe((res: any) => {
       window.location.reload()
     })
+  }
+
+  logout(){
+    this.authService.logout();
+    this.router.navigate(['']);  
   }
 }
