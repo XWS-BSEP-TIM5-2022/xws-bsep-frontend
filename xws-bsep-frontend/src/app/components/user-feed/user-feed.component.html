@@ -117,17 +117,26 @@
 											<li><a title=""><i class="la la-phone"></i> {{ user.mobileNumber }}  </a></li>	
 											<li><a title=""><i class="la la-heart"></i> {{ user.gender }}  </a></li>	
 											<li><a title=""><i class="la la-calendar"></i> {{ stringBirthday }}  </a></li>
-											<li> 
-												<button mat-raised-button class="edit-info" 
-												(click)="editInfo()" ><i class="fa fa-pencil"></i> Edit info</button>
-											</li>											
+																				
 										</ul>
+						
+										<div >
+											<div class="sign_link" style="background-color: #e44d3a;">
+												<a routerLink="."  style="color:white; font-size: large" (click)="editInfo()"><i class="fa fa-pencil"></i> Edit info</a>
+											</div>
+										</div>	
+										<div >
+											<div class="sign_link" style="background-color: #e44d3a;">
+												<a routerLink="."  style="color:white; font-size: large" (click)="newPost()"><i class="la la-upload"></i> New Post</a>
+											</div>
+										</div>	
+										<div >
+											<div class="sign_link" style="background-color: #e44d3a; margin: auto;">
+												<a routerLink="." style="color:white; font-size: large" (click)="generateAPIToken()"><i class="la la-plus-circle"></i> Generate API token</a>
+											</div>
+										</div>	
 									</div><!--user_profile end-->
 								</div><!--main-left-sidebar end-->
-
-								<div class="message-btn" style="display: flex; justify-content: center; margin: auto; float: left;">
-									<button mat-raised-button style="background-color: #e44d3a; color:white; font-weight: lighter;" (click)="newPost()" ><i class="la la-upload"></i> New Post</button>
-								</div>
 							</div>
 							<div class="col-lg-6">
 								<div class="main-ws-sec">
