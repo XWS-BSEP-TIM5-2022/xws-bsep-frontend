@@ -433,6 +433,17 @@ export class UserFeedComponent implements OnInit {
 
   }
 
+  deleteEducation(id){
+
+    this.user.education.forEach((e,index)=>{
+      if(e.id == id){
+        this.user.education.splice(index,1);
+      } 
+    });
+    this.updateUser()
+
+  }
+
   updateUser(){
 
     this.userService.update(this.user).subscribe(
