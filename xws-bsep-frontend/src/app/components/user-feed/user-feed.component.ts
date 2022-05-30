@@ -444,6 +444,17 @@ export class UserFeedComponent implements OnInit {
 
   }
 
+  deleteExperience(id){
+
+    this.user.experience.forEach((e,index)=>{
+      if(e.id == id){
+        this.user.experience.splice(index,1);
+      } 
+    });
+    this.updateUser()
+
+  }
+
   updateUser(){
 
     this.userService.update(this.user).subscribe(

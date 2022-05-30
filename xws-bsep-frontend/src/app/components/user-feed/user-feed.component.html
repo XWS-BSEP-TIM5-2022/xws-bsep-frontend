@@ -287,16 +287,20 @@
 											<h3><a title="" class="overview-open">Biography</a> <a (click)="updateBiography()" title="" class="overview-open" ><i class="fa fa-pencil"></i></a></h3>
 											<hr>
 											<p>{{user.biography}}</p>
+
 										</div><!--user-profile-ov end-->
-										<div class="user-profile-ov st2">
-											<h3><a href="#" title="" class="exp-bx-open">Experience </a><a href="#" title="" class="exp-bx-open"><i class="fa fa-pencil"></i></a> <a href="#" title="" class="exp-bx-open"><i class="fa fa-plus-square"></i></a></h3>
-											<h4>Web designer <a href="#" title=""><i class="fa fa-pencil"></i></a></h4>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempor aliquam felis, nec condimentum ipsum commodo id. Vivamus sit amet augue nec urna efficitur tincidunt. Vivamus consectetur aliquam lectus commodo viverra. </p>
-											<h4>UI / UX Designer <a href="#" title=""><i class="fa fa-pencil"></i></a></h4>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempor aliquam felis, nec condimentum ipsum commodo id.</p>
-											<h4>PHP developer <a href="#" title=""><i class="fa fa-pencil"></i></a></h4>
-											<p class="no-margin">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempor aliquam felis, nec condimentum ipsum commodo id. Vivamus sit amet augue nec urna efficitur tincidunt. Vivamus consectetur aliquam lectus commodo viverra. </p>
+										<div class="user-profile-ov">
+											<h3><a  title="" class="ed-box-open">Experience</a> <a  title="" class="ed-box-open"><i class="fa fa-pencil"></i></a> <a href="#" title=""><i class="fa fa-plus-square"></i></a></h3>
+											<div *ngFor="let e of user.experience">
+												<hr>
+												<h4> <a title="" style="color: black;" (click)="deleteExperience(e.id)"> {{e.name}}  <i class="fa fa-trash"></i></a> </h4>
+												<p *ngIf="e.startDate.substring(0,4) != e.endDate.substring(0,4)">{{e.startDate.substring(0, 4)}} - {{e.endDate.substring(0, 4)}}</p>
+												<p *ngIf="e.startDate.substring(0,4) == e.endDate.substring(0,4)">{{e.startDate.substring(0, 4)}}</p>
+												<p>Headline: {{e.headline}}</p>
+												<p>Place: {{e.place}}</p>
+											</div> 
 										</div><!--user-profile-ov end-->
+
 										<div class="user-profile-ov">
 											<h3><a  title="" class="ed-box-open">Education</a> <a  title="" class="ed-box-open"><i class="fa fa-pencil"></i></a> <a href="#" title=""><i class="fa fa-plus-square"></i></a></h3>
 											<div *ngFor="let e of user.education">
