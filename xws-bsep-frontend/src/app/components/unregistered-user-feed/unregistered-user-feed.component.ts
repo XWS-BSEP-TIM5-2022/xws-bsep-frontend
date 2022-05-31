@@ -52,6 +52,7 @@ export class UnregisteredUserFeedComponent implements OnInit {
     this.feedService.getPublicPosts().subscribe(
       (data: any[]) => {
         let allPosts = data['AllPosts']
+          console.log(allPosts)
 
           if (allPosts != undefined && allPosts != null){
             for (let p of allPosts){
@@ -130,6 +131,22 @@ export class UnregisteredUserFeedComponent implements OnInit {
       if (post.comments == null || post.comments == undefined){
         post.comments = []
       }
+
+      post.isJobOffer = feedPost.IsJobOffer;
+      post.jobOffer.id = feedPost.JobOffer.Id;
+      post.jobOffer.companyId = feedPost.JobOffer.CompanyId;
+      post.jobOffer.dailyActivities = feedPost.JobOffer.DailyActivities;
+      post.jobOffer.jobDescription = feedPost.JobOffer.JobDescription;
+      post.jobOffer.preconditions = feedPost.JobOffer.Preconditions;
+      post.jobOffer.position.id = feedPost.JobOffer.Position.Id;
+      post.jobOffer.position.name = feedPost.JobOffer.Position.Name;
+      post.jobOffer.position.pay = feedPost.JobOffer.Position.Pay;
+
+      post.company.id = feedPost.Company.Id;
+      post.company.name = feedPost.Company.Name;
+      post.company.description = feedPost.Company.Description;
+      post.company.isActive = feedPost.Company.IsActive;
+      post.company.phoneNumber = feedPost.Company.PhoneNumber;
 
       this.posts.push(post); 
     }

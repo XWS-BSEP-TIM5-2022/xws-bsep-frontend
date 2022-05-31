@@ -91,19 +91,34 @@
                                                     <div class="post_topbar">
                                                         <div class="usy-dt">
 															<img src="assets\cv__29__generated.jpg" style="width: 50px; height: 50px;" alt=""> 
-															<div class="usy-name">
-																<a routerLink="." title="Show profile" (click)="seeProfile(p.userId)"> <h3>  {{ p.user['user'].name }} {{ p.user['user'].lastName }} </h3> </a>  <!-- {{ p.user['user'].name }} {{ p.user['user'].lastName }} --> 
+															<div class="usy-name" *ngIf="!p.isJobOffer">
+																<a routerLink="." title="Show profile" (click)="seeProfile(p.userId)"> <h3> {{ p.user['user'].name }} {{ p.user['user'].lastName }}  </h3> </a>   <!-- {{ p.user['user'].name }} {{ p.user['user'].lastName }} -->
+																<span> <i class="la la-calendar"></i> {{ p.dateCreated }} </span>
+                                                            </div>
+															<div class="usy-name" *ngIf="p.isJobOffer">
+																<a routerLink="." title="Show profile" (click)="seeProfile(p.userId)"> <h3> {{ p.user['user'].name }} {{ p.user['user'].lastName }} ** {{ p.company.name }} ** </h3> </a>   <!-- {{ p.user['user'].name }} {{ p.user['user'].lastName }} -->
 																<span> <i class="la la-calendar"></i> {{ p.dateCreated }} </span>
                                                             </div>
                                                         </div>
                                                     </div>
 													
                                                     <div class="job_descp">
-                                                        <p> {{ p.text }} </p>
-														
-														<ul *ngFor="let link of p.links"> <!--POSTS -->
+                                                        <p  *ngIf="p.isJobOffer" style="font-weight: bold;"> {{ p.text }} ! </p>
+														<p  *ngIf="!p.isJobOffer"> {{ p.text }} </p>
+
+														<ul *ngFor="let link of p.links"> <!-- LINKS -->
 															<a href="{{link}}" > {{ link }} </a>
 														</ul>
+
+														<div *ngIf="p.isJobOffer">
+															<p style="font-size: medium;"> Position:  {{ p.jobOffer.position.name }} </p>
+															<ul class="job-dt">
+																<li><a title="pay"> ${{ p.jobOffer.position.pay }}</a></li>
+															</ul>
+															<p style="font-size: medium;"> Job description:   {{ p.jobOffer.jobDescription }} </p>
+															<p style="font-size: medium;"> Daily activities: {{ p.jobOffer.dailyActivities }} </p>
+															<p style="font-size: medium;"> Preconditions:   {{ p.jobOffer.preconditions }} </p>
+														</div>
                                                     </div>
                                                     <div class="job-status-bar">
 														<ul class="like-com">

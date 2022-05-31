@@ -116,10 +116,9 @@
 											<li><a title=""><i class="la la-at"></i> {{ user.email }} </a></li>
 											<li><a title=""><i class="la la-phone"></i> {{ user.mobileNumber }}  </a></li>	
 											<li><a title=""><i class="la la-heart"></i> {{ user.gender }}  </a></li>	
-											<li><a title=""><i class="la la-calendar"></i> {{ stringBirthday }}  </a></li>
-																				
+											<li><a title=""><i class="la la-calendar"></i> {{ stringBirthday }}  </a></li>												
 										</ul>
-						
+					
 										<div >
 											<div class="sign_link" style="background-color: #e44d3a;">
 												<a routerLink="."  style="color:white; font-size: large" (click)="editInfo()"><i class="fa fa-pencil"></i> Edit info</a>
@@ -192,7 +191,7 @@
 												</li>
 												<li data-tab="info-dd">
 													<a routerLink="." (click)="loadMyPosts()">
-														<span> <i class="la la-user"></i> Profile</span>
+														<span> <i class="la la-user"></i> My Profile</span>
 													</a>
 												</li>
 												<li data-tab="profile-dd" class="active">
@@ -208,32 +207,40 @@
                                     <div *ngIf="profileActive" class="product-feed-tab current" id="feed-dd">
                                         <div class="posts-section">
                                             <ul *ngFor="let p of posts; let i=index"> <!--POSTS -->
-                                                <div class="post-bar">
+												<div class="post-bar">
                                                     <div class="post_topbar">
                                                         <div class="usy-dt">
 															<img src="assets\cv__29__generated.jpg" style="width: 50px; height: 50px;" alt=""> 
-															<div class="usy-name">
-																<a routerLink="." title="Show profile" (click)="seeProfile(p.userId)"> <h3> {{ p.user['user'].name }} {{ p.user['user'].lastName }}  </h3> </a>   <!-- {{ p.user['user'].name }} {{ p.user['user'].lastName }} -->
+															<div class="usy-name" *ngIf="!p.isJobOffer">
+																<a routerLink="." title="Show profile" (click)="seeProfile(p.userId)"> <h3> {{ p.user['user'].name }} {{ p.user['user'].lastName }}  </h3> </a> 
+																<span> <i class="la la-calendar"></i> {{ p.dateCreated }} </span>
+                                                            </div> 
+															<div class="usy-name" *ngIf="p.isJobOffer">
+																<a routerLink="." title="Show profile" (click)="seeProfile(p.userId)"> <h3> {{ p.user['user'].name }} {{ p.user['user'].lastName }} ** {{ p.company.name }} ** </h3> </a> 
 																<span> <i class="la la-calendar"></i> {{ p.dateCreated }} </span>
                                                             </div>
                                                         </div>
                                                     </div>
-													
 
                                                     <div class="job_descp">
-                                                        <p> {{ p.text }} </p>
-														
-														<ul *ngFor="let link of p.links"> <!-- LINKS -->
+                                                        <p  *ngIf="p.isJobOffer" style="font-weight: bold;"> {{ p.text }} ! </p>
+														<p  *ngIf="!p.isJobOffer"> {{ p.text }} </p>
+
+														<ul *ngFor="let link of p.links"> 
 															<a href="{{link}}" > {{ link }} </a>
 														</ul>
-                                                        <!-- <ul class="skill-tags">
-                                                            <li><a href="#" title="">HTML</a></li>
-                                                            <li><a href="#" title="">PHP</a></li>
-                                                            <li><a href="#" title="">CSS</a></li>
-                                                            <li><a href="#" title="">Javascript</a></li>
-                                                            <li><a href="#" title="">Wordpress</a></li> 	
-                                                        </ul> -->
+
+														<div *ngIf="p.isJobOffer">
+															<p style="font-size: medium;"> Position:  {{ p.jobOffer.position.name }} </p>
+															<ul class="job-dt">
+																<li><a title="pay"> ${{ p.jobOffer.position.pay }}</a></li>
+															</ul>
+															<p style="font-size: medium;"> Job description:   {{ p.jobOffer.jobDescription }} </p>
+															<p style="font-size: medium;"> Daily activities: {{ p.jobOffer.dailyActivities }} </p>
+															<p style="font-size: medium;"> Preconditions:   {{ p.jobOffer.preconditions }} </p>
+														</div>
                                                     </div>
+
                                                     <div class="job-status-bar">
 														<ul class="like-com">
                                                             <li>
@@ -289,6 +296,97 @@
 										</div><!--posts-section end-->
 									</div><!--product-feed-tab end-->
 
+									<div *ngIf="feedActive" class="product-feed-tab current" id="feed-dd">
+                                        <div class="posts-section">
+                                            <ul *ngFor="let p of posts; let i=index"> <!--POSTS -->
+												<div class="post-bar">
+                                                    <div class="post_topbar">
+                                                        <div class="usy-dt">
+															<img src="assets\cv__29__generated.jpg" style="width: 50px; height: 50px;" alt=""> 
+															<div class="usy-name" *ngIf="!p.isJobOffer">
+																<a routerLink="." title="Show profile" (click)="seeProfile(p.userId)"> <h3> {{ p.user['user'].name }} {{ p.user['user'].lastName }}  </h3> </a> 
+																<span> <i class="la la-calendar"></i> {{ p.dateCreated }} </span>
+                                                            </div> 
+															<div class="usy-name" *ngIf="p.isJobOffer">
+																<a routerLink="." title="Show profile" (click)="seeProfile(p.userId)"> <h3> {{ p.user['user'].name }} {{ p.user['user'].lastName }} ** {{ p.company.name }} ** </h3> </a> 
+																<span> <i class="la la-calendar"></i> {{ p.dateCreated }} </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="job_descp">
+                                                        <p  *ngIf="p.isJobOffer" style="font-weight: bold;"> {{ p.text }} ! </p>
+														<p  *ngIf="!p.isJobOffer"> {{ p.text }} </p>
+
+														<ul *ngFor="let link of p.links"> 
+															<a href="{{link}}" > {{ link }} </a>
+														</ul>
+
+														<div *ngIf="p.isJobOffer">
+															<p style="font-size: medium;"> Position:  {{ p.jobOffer.position.name }} </p>
+															<ul class="job-dt">
+																<li><a title="pay"> ${{ p.jobOffer.position.pay }}</a></li>
+															</ul>
+															<p style="font-size: medium;"> Job description:   {{ p.jobOffer.jobDescription }} </p>
+															<p style="font-size: medium;"> Daily activities: {{ p.jobOffer.dailyActivities }} </p>
+															<p style="font-size: medium;"> Preconditions:   {{ p.jobOffer.preconditions }} </p>
+														</div>
+                                                    </div>
+
+                                                    <div class="job-status-bar">
+														<ul class="like-com">
+                                                            <li>
+                                                                <a routerLink="." title="Like" (click)="like(p.id)"><i class="la la-heart"></i> Likes ({{ p.likes.length }}) </a>
+																<a routerLink="." title="See likes" (click)="seeLikes(p.id)"><i class="la la-expand"></i>  </a>
+															</li> 
+															<li>
+                                                                <a routerLink="." title="Dislike" (click)="dislike(p.id)"><i class="la la-thumbs-o-down"></i> Dislikes ({{ p.dislikes.length }})</a>
+																<a routerLink="." title="See dislikes" (click)="seeDislikes(p.id)"><i class="la la-expand"></i>  </a>
+															</li> 
+															<li>
+                                                                <a routerLink="." title="Neutral reaction" (click)="neutral(p.id)"><i class="la la-meh-o"></i> </a>
+                                                            </li>
+                                                        </ul>
+                                                        <a><i class="la la-comments"></i>Comments ({{ p.comments.length }})</a>
+                                                    </div>
+                                                </div>
+											
+												<ul *ngFor="let c of p.comments"> 
+													<div class="comment-section" style="margin-bottom: -2vw; margin-top: -1vw; ">
+														<div class="comment-sec">
+															<ul>
+																<li>
+																	<div class="comment-list">
+																		<div class="bg-img">
+																			<img src="assets\cv__29__generated.jpg" style="width: 40px; height: 40px;" alt=""> 
+																		</div>
+																		<div class="comment">
+																			<h3>  {{ c.user['user'].name }} {{ c.user['user'].lastName }} </h3> <!-- {{ c.user['user'].name }} {{ c.user['user'].lastName }} -->
+																			<p> {{ c.text }} </p>
+																		</div>
+																	</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</ul>
+												<div class="comment-section" style="margin-bottom: 2vw; margin-top: -1vw; ">
+													<div class="post-comment">
+														<div class="cm_img">
+															<img src="assets\cv__29__generated.jpg" style="width: 40px; height: 40px;" alt=""> 
+														</div>
+														<div class="comment_box">
+															<form (ngSubmit)="comment(p.id, $event)">
+																<input type="text" placeholder="Post a comment" name="comment">
+																<button type="submit">Send</button>
+															</form>
+														</div>
+													</div>
+												</div>
+											</ul>
+											<br> <br>
+										</div><!--posts-section end-->
+									</div><!--product-feed-tab end-->
 
 									<!--my informations section-->
 									<div *ngIf="informationsActive" class="product-feed-tab current" id="profile-dd">
