@@ -169,20 +169,32 @@ export class UserFeedComponent implements OnInit {
         post.comments = []
       }
 
-      //console.log(post)
+      post.isJobOffer = feedPost.IsJobOffer;
+      post.jobOffer.id = feedPost.JobOffer.Id;
+      post.jobOffer.companyId = feedPost.JobOffer.CompanyId;
+      post.jobOffer.dailyActivities = feedPost.JobOffer.DailyActivities;
+      post.jobOffer.jobDescription = feedPost.JobOffer.JobDescription;
+      post.jobOffer.preconditions = feedPost.JobOffer.Preconditions;
+      post.jobOffer.position.id = feedPost.JobOffer.Position.Id;
+      post.jobOffer.position.name = feedPost.JobOffer.Position.Name;
+      post.jobOffer.position.pay = feedPost.JobOffer.Position.Pay;
 
-      this.posts.push(post); 
-      //console.log(this.posts.length)
+      post.company.id = feedPost.Company.Id;
+      post.company.name = feedPost.Company.Name;
+      post.company.description = feedPost.Company.Description;
+      post.company.isActive = feedPost.Company.IsActive;
+      post.company.phoneNumber = feedPost.Company.PhoneNumber;
 
+      this.posts.push(post);
     }
   
     this.searchedPosts = this.posts;
     this.loaded = true;
 
-  //   for (let p of this.posts){
-  //     // console.log(p.user['user'].name, p.user['user'].lastName) 
-  //     console.log(this.posts)
-  //   } 
+    // for (let p of this.posts){
+    //   // console.log(p.user['user'].name, p.user['user'].lastName) 
+    //   console.log(p.jobOffer)
+    // } 
  }
 
   loadMyPosts(){
@@ -195,7 +207,8 @@ export class UserFeedComponent implements OnInit {
       this.postService.getByUserId(userId).subscribe(
         (data: any[]) => {
           let posts = data['posts']
-          
+          console.log(posts)
+
           for (let p of posts){
             let dateTime = p.dateCreated.split('T')
             let time = dateTime[1].split('.')
@@ -212,6 +225,8 @@ export class UserFeedComponent implements OnInit {
                   c.user = user
               })            
             }
+
+            //if (p.isJobOffer)
           }
 
           this.posts = []
