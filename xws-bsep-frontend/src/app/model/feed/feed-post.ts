@@ -9,6 +9,7 @@ export class FeedPost {
     Id: string;
     Text: string;
     Images: string[];
+    Image : string = "";
     Links: string[];
     DateCreated: string;
     Likes: FeedLike[];

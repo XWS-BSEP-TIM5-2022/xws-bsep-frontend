@@ -231,6 +231,7 @@
 														</ul>
 
 														<ul *ngIf="p.image != ''"> 
+															&nbsp;
 															<img style="max-height: 100%; max-width: 100%;" [src] = "p.image"> 
 														</ul>
 
@@ -325,6 +326,12 @@
 														<ul *ngFor="let link of p.links"> 
 															<a href="{{link}}" > {{ link }} </a>
 														</ul>
+
+														<ul *ngIf="p.image != ''"> 
+															&nbsp;
+															<img style="max-height: 100%; max-width: 100%;" [src] = "p.image"> 
+														</ul>
+
 
 														<div *ngIf="p.isJobOffer">
 															<p style="font-size: medium;"> Position:  {{ p.jobOffer.position.name }} </p>
