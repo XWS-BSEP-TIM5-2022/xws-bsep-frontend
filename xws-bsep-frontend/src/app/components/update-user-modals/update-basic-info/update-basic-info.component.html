@@ -31,7 +31,8 @@
               </mat-form-field>
             <mat-form-field class="example-full-width" appearance="outline" style="width: 33vw;">  <!-- border-style: solid; border-color: gainsboro; border-width: 0.5px; -->
                 <mat-label>Birthday*</mat-label> 
-                <input matInput placeholder="pera" class="example-full-width" appearance="outline" (change)="selectBirth()" [(ngModel)]="user.birthday" name="birthday" class="textbox-n" type="date"  id="date">
+                <input matInput placeholder="pera" class="example-full-width" appearance="outline" (change)="selectBirth()" [(ngModel)]="stringBirthday" name="birthday" class="textbox-n" 
+                onfocus="(this.type='date')" type="text"  id="date"> 
             </mat-form-field>
 
             <label>{{message}} </label>

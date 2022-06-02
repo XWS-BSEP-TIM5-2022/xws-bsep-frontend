@@ -6,8 +6,9 @@ import { User } from "./user";
 export class InsertPost {
     id: string;
     text: string = "";
+    image : string = "";
     images: string[] = [];
     links: string[] = [];
     userId: string;
-    user: User = new User;
+    user: User = new User; 
 }

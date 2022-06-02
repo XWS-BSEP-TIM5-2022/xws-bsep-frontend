@@ -119,6 +119,7 @@ export class UserFeedComponent implements OnInit {
       post.dislikes = [];
       post.comments = [];
       post.userId = feedPost.UserId
+      post.image = feedPost.Image
     
       if (feedPost.Likes != undefined && feedPost.Likes != null){
         for (let l of feedPost.Likes){
@@ -232,6 +233,7 @@ export class UserFeedComponent implements OnInit {
           this.posts = []
           this.posts = posts
           this.searchedPosts = this.posts
+          console.dir(this.posts)
       })
     }
   }

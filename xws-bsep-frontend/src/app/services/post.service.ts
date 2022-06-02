@@ -7,7 +7,7 @@ import { InsertPost } from '../model/insert-post';
 import { Like } from '../model/like';
 import { Post } from '../model/post';
 import { PostDto } from '../model/post-dto';
-import { SuccessMessage } from '../model/success-message';
+import { SuccessMessage } from '../model/success-message'; 
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +46,9 @@ export class PostService {
     return this.http.post<SuccessMessage>(`${this.postPath}/comment`, dto)    
   }
 
-  addPost(post: InsertPost): Observable<SuccessMessage>{
+  addPost(post: InsertPost): Observable<SuccessMessage>{ 
+    
     return this.http.post<SuccessMessage>(`${this.postPath}`, post)    
-  }
+  } 
+ 
 }

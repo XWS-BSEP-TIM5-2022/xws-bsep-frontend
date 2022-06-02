@@ -19,6 +19,7 @@ export class Post {
     jobOffer: JobOffer = new JobOffer;
     company: Company = new Company;
     isJobOffer: boolean;
+    image : string = ""
 }
 
 

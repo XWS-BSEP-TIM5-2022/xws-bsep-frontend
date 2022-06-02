@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { read } from 'fs';
 import { InsertPost } from 'src/app/model/insert-post';
 import { Post } from 'src/app/model/post';
 import { SuccessMessage } from 'src/app/model/success-message';
@@ -22,6 +23,14 @@ export class NewPostComponent implements OnInit {
   newPost: InsertPost = new InsertPost;
   link: string = "";
   invalidLink: boolean = false;
+  invalidImage: boolean = false;
+  image : any;
+  shortLink: string = "";
+  loading: boolean = false; // Flag variable
+  file: File; // Variable to store file
+
+  url = ""
+  path : any= ""
 
   ngOnInit(): void {
     this.loadUserData();
@@ -50,9 +59,20 @@ export class NewPostComponent implements OnInit {
     this.link = ""
   }
 
-  addImage(){
-    // TODO
+  uploadImage(e){
+    if(e.target.files){
+      var reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);   
+      reader.onload = (event:any) => {
+        this.url = event.target.result;   
+      }
+    }
   }
+
+  clearImage(){
+    this.url = ""
+  }
+
 
   validURL(str) {
     var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
@@ -93,7 +113,11 @@ export class NewPostComponent implements OnInit {
     for (let link of this.post.links){
       this.newPost.links.push(sanitize(link));
     }    
-    this.newPost.images = this.post.images
+    // this.newPost.images = this.post.images
+
+    if(this.url != ""){ 
+      this.newPost.image = this.url
+    }
   }
 
   onNoClick(){
