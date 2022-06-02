@@ -1,3 +1,5 @@
+<div style="    max-height: calc(100vh - 200px);
+overflow-y: auto;">
 <h2 mat-dialog-title>Create a post</h2>
 <mat-divider></mat-divider>
 <form #registrationForm = "ngForm" style="margin-top: 0.5vw; margin-left: 1vw; margin-right: 1vw; margin-bottom: 0.5vw;">
@@ -57,7 +59,7 @@
     
         </div> 
         
-        <div *ngIf="url != '' " class="row col-md-12 mb-4 pb-2"><img style="width: 100%; height: 100%;" [src]="url"></div>
+        <div *ngIf="url != '' " class="row col-md-12 mb-4 pb-2" style="width: 100%; height: 100%; max-height: 100%; max-width: 100%;"><img style="width: 100%; height: 100%; max-height: 100%; max-width: 100%;" [src]="url"></div>
  
     </div>
 
@@ -66,3 +68,4 @@
         <input class="btn btn-lg center-div" (click)="onNoClick()" type="button" value="Cancel" />
     </div>
 </form>
+</div>

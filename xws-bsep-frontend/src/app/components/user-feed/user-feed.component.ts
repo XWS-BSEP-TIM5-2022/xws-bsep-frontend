@@ -232,6 +232,7 @@ export class UserFeedComponent implements OnInit {
           this.posts = []
           this.posts = posts
           this.searchedPosts = this.posts
+          console.dir(this.posts)
       })
     }
   }
