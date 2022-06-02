@@ -22,6 +22,13 @@ export class NewPostComponent implements OnInit {
   newPost: InsertPost = new InsertPost;
   link: string = "";
   invalidLink: boolean = false;
+  invalidImage: boolean = false;
+  image : any;
+  shortLink: string = "";
+  loading: boolean = false; // Flag variable
+  file: File; // Variable to store file
+
+  url = ""
 
   ngOnInit(): void {
     this.loadUserData();
@@ -50,9 +57,21 @@ export class NewPostComponent implements OnInit {
     this.link = ""
   }
 
-  addImage(){
-    // TODO
+  uploadImage(e){
+    if(e.target.files){
+      var reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = (event:any) => {
+        this.url = event.target.result;
+        console.dir(this.url)
+      }
+    }
   }
+
+  clearImage(){
+    this.url = ""
+  }
+
 
   validURL(str) {
     var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
