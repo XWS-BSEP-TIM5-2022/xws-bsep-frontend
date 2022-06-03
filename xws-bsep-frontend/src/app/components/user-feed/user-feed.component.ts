@@ -511,7 +511,7 @@ export class UserFeedComponent implements OnInit {
           Swal.fire({
             icon: 'success',
             title: 'Yay!',
-            text: 'Successfully updateD!',
+            text: 'Successfully updated!',
           })    
         } else {
           Swal.fire({
