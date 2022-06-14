@@ -534,7 +534,6 @@ export class UserFeedComponent implements OnInit {
         //   title: 'Yay!',
         //   text: 'Your API token is: ' + token.token,
         // })    
-        alert("Your API token is: " + token.token)
         this.generatedToken = token.token; 
         this.visible = true;
       }
