@@ -1,7 +1,6 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core'; 
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -162,15 +161,16 @@ export class LoginComponent implements OnInit {
       console.log("rodj: " + this.user.birthday)
       this.authService.signUp(this.user).subscribe((posts: any) => {
         
-        Swal.fire({
-          title: 'Please check your email',
-          showClass: {
-            popup: 'animate__animated animate__fadeInDown'
-          },
-          hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
-        })
+        // Swal.fire({
+        //   title: 'Please check your email',
+        //   showClass: {
+        //     popup: 'animate__animated animate__fadeInDown'
+        //   },
+        //   hideClass: {
+        //     popup: 'animate__animated animate__fadeOutUp'
+        //   }
+        // })
+        alert("Please check your email")
 
         window.location.reload()
       })

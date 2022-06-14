@@ -24,7 +24,6 @@ import { UpdateInterestsComponent } from '../update-user-modals/update-interests
 import { UpdateEducationComponent } from '../update-user-modals/update-education/update-education.component'; 
 import { UpdateExperienceComponent } from '../update-user-modals/update-experience/update-experience.component'; 
 import { DatePipe } from '@angular/common'; 
-import Swal from 'sweetalert2'
 import { ApiToken } from 'src/app/model/api-token';
 
 @Component({
@@ -508,17 +507,19 @@ export class UserFeedComponent implements OnInit {
       (success: SuccessMessage) => {
         console.log(success)
         if (success.success == "success"){
-          Swal.fire({
-            icon: 'success',
-            title: 'Yay!',
-            text: 'Successfully updated!',
-          })    
+          // Swal.fire({
+          //   icon: 'success',
+          //   title: 'Yay!',
+          //   text: 'Successfully updated!',
+          // })
+          alert("Successfully updated!")    
         } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong. Please try again.',
-          })   
+          // Swal.fire({
+          //   icon: 'error',
+          //   title: 'Oops...',
+          //   text: 'Something went wrong. Please try again.',
+          // })   
+          alert("Something went wrong. Please try again.")
         }
       }) 
   }
@@ -526,11 +527,12 @@ export class UserFeedComponent implements OnInit {
   generateAPIToken(){
     this.authService.generateNewApiToken(this.user.username).subscribe(
       (token: ApiToken) => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Yay!',
-          text: 'Your API token is: ' + token.token,
-        })    
+        // Swal.fire({
+        //   icon: 'success',
+        //   title: 'Yay!',
+        //   text: 'Your API token is: ' + token.token,
+        // })    
+        alert("Your API token is: " + token.token)
       }
     )
   }
