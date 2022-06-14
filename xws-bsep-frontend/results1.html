@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Snyk test report</title>
-  <meta name="description" content="0 known vulnerabilities found in 0 vulnerable dependency paths.">
+  <meta name="description" content="1 known vulnerabilities found in 1 vulnerable dependency paths.">
   <base target="_blank">
   <link rel="icon" type="image/png" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.png"
     sizes="194x194">
@@ -456,7 +456,7 @@
               <div class="header-wrap">
                   <h1 class="project__header__title">Snyk test report</h1>
     
-                <p class="timestamp">June 14th 2022, 7:51:26 pm</p>
+                <p class="timestamp">June 12th 2022, 3:19:29 pm</p>
               </div>
               <div class="source-panel">
                 <span>Scanned the following path:</span>
@@ -466,9 +466,9 @@
               </div>
     
               <div class="meta-counts">
-                <div class="meta-count"><span>0</span> <span>known vulnerabilities</span></div>
-                <div class="meta-count"><span>0 vulnerable dependency paths</span></div>
-                <div class="meta-count"><span>17</span> <span>dependencies</span></div>
+                <div class="meta-count"><span>1</span> <span>known vulnerabilities</span></div>
+                <div class="meta-count"><span>1 vulnerable dependency paths</span></div>
+                <div class="meta-count"><span>18</span> <span>dependencies</span></div>
               </div><!-- .meta-counts -->
             </div><!-- .layout-container--short -->
           </header><!-- .project__header -->
@@ -484,7 +484,87 @@
           </table>
       </section>
     <div class="layout-container" style="padding-top: 35px;">
-      No known vulnerabilities detected.
+      <div class="cards--vuln filter--patch filter--ignore">
+        <div class="card card--vuln  disclosure--not-new severity--low" data-snyk-test="low">
+            <h2 class="card__title">Undesired Behavior</h2>
+            <div class="card__section">
+        
+                <div class="label label--low">
+                    <span class="label__text">low severity</span>
+                </div>
+        
+                <hr/>
+        
+                <ul class="card__meta">
+                    <li class="card__meta__item">
+                        Package Manager: npm
+                    </li>
+                    <li class="card__meta__item">
+                            Vulnerable module:
+        
+                            sweetalert2
+                    </li>
+        
+                    <li class="card__meta__item">Introduced through:
+        
+                                xws-bsep-frontend@0.0.0 and sweetalert2@11.4.15
+        
+                    </li>
+                </ul>
+        
+                <hr/>
+        
+        
+                        <h3 class="card__section__title">Detailed paths</h3>
+        
+                    <ul class="card__meta__paths">
+                                <li>
+                                <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                        xws-bsep-frontend@0.0.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        sweetalert2@11.4.15
+                                        
+                                </span>
+        
+                            </li>
+                    </ul><!-- .list-paths -->
+        
+            </div><!-- .card__section -->
+        
+              <hr/>
+              <!-- Overview -->
+              <h2 id="overview">Overview</h2>
+        <p><a href="https://www.npmjs.org/package/sweetalert2">sweetalert2</a> is an accessible (WAI-ARIA) replacement for JavaScript&#39;s popup boxes, supported fork of sweetalert</p>
+        <p>Affected versions of this package are vulnerable to Undesired Behavior as it displays pop-up messages that affect Russian users when visiting Russian sites.</p>
+        <h2 id="poc">PoC:</h2>
+        <pre><code class="language-js"> if (navigator.language === &#39;ru&#39; &amp;&amp; location.host.match(/\.(ru|su|xn--p1ai)$/)) {
+            const noWar = document.createElement(&#39;div&#39;)
+            noWar.className = swalClasses[&#39;no-war&#39;]
+            setInnerHtml(
+              noWar,
+              `&lt;a href=&quot;https://www.youtube.com/watch?v=${message.youtubeId}&quot; target=&quot;_blank&quot;&gt;${message.text}&lt;/a&gt;`
+            )
+            container.appendChild(noWar)
+            container.style.paddingTop = &#39;4em&#39;
+        </code></pre>
+        <h2 id="remediation">Remediation</h2>
+        <p>There is no fixed version for <code>sweetalert2</code>.</p>
+        <h2 id="references">References</h2>
+        <ul>
+        <li><a href="https://github.com/sweetalert2/sweetalert2/pull/2428/commits/86d5af1686a5270a593f14ec90c6943884447824">GitHub Commit</a></li>
+        <li><a href="https://github.com/sweetalert2/sweetalert2/pull/2428">GitHub PR</a></li>
+        <li><a href="https://github.com/sweetalert2/sweetalert2/releases/tag/v11.4.9">GitHub Release</a></li>
+        <li><a href="https://snyk.io/blog/protestware-open-source-types-impact/">Snyk Explainer - Protestware</a></li>
+        </ul>
+        
+              <hr/>
+        
+            <div class="cta card__cta">
+                <p><a href="https://snyk.io/vuln/SNYK-JS-SWEETALERT2-2774674">More about this vulnerability</a></p>
+            </div>
+        
+        </div><!-- .card -->
+      </div><!-- cards -->
     </div>
   </main><!-- .layout-stacked__content -->
 </body>

@@ -7,7 +7,6 @@ import {environment} from "../../environments/environment";
 import { catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import jwt_decode from "jwt-decode";
-import Swal from 'sweetalert2';
 import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
 import { ApiToken } from '../model/api-token';
 
@@ -114,11 +113,12 @@ export class AuthService {
   }
 
   private checkError(error: any): any {
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: error.error.message,
-    })
+    // Swal.fire({
+    //   icon: 'error',
+    //   title: 'Oops...',
+    //   text: error.error.message,
+    // })
+    alert("Oops..." + error.error.message)
     // setTimeout(
     //   function(){ 
     //   location.reload(); 

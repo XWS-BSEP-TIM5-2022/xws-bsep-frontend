@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { read } from 'fs';
 import { InsertPost } from 'src/app/model/insert-post';
 import { Post } from 'src/app/model/post';
 import { SuccessMessage } from 'src/app/model/success-message';

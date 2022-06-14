@@ -4,7 +4,6 @@ import { User } from 'src/app/model/user';
 import { Interest } from 'src/app/model/interest';
 import { UserService } from 'src/app/services/user.service';
 import { SuccessMessage } from 'src/app/model/success-message';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-update-interests',
@@ -59,17 +58,19 @@ export class UpdateInterestsComponent implements OnInit {
       (success: SuccessMessage) => {
         console.log(success)
         if (success.success == "success"){
-          Swal.fire({
-            icon: 'success',
-            title: 'Yay!',
-            text: 'Interest successfully added!',
-          })    
+          // Swal.fire({
+          //   icon: 'success',
+          //   title: 'Yay!',
+          //   text: 'Interest successfully added!',
+          // })
+          alert("Interest successfully added!")    
         } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong. Please try again.',
-          })   
+          // Swal.fire({
+          //   icon: 'error',
+          //   title: 'Oops...',
+          //   text: 'Something went wrong. Please try again.',
+          // })   
+          alert("Something went wrong. Please try again.")
         }
       })
     this.dialogRef.close(); 

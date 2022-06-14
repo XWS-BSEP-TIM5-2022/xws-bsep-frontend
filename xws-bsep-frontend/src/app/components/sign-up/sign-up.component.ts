@@ -1,7 +1,6 @@
 import { AuthService } from './../../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sign-up',
@@ -84,11 +83,12 @@ export class SignUpComponent implements OnInit {
   // }
 
   if(this.user.name === "" || this.user.lastName === "" || this.user.email === "" || this.user.username === "" || this.user.password === "" || this.user.gender === "" || this.user.birthday === ""){
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: 'Enter required fields!',
-    })
+    // Swal.fire({
+    //   icon: 'error',
+    //   title: 'Oops...',
+    //   text: 'Enter required fields!',
+    // })
+    alert("Enter required fields!")
   }
   else{
     // this.user.birthday = this.user.birthday + "T00:00:00Z"
@@ -96,17 +96,17 @@ export class SignUpComponent implements OnInit {
     console.log("rodj: " + this.user.birthday)
     this.authService.signUp(this.user).subscribe((posts: any) => {
       
-      Swal.fire({
-        title: 'Please check your email',
-        showClass: {
-          popup: 'animate__animated animate__fadeInDown'
-        },
-        hideClass: {
-          popup: 'animate__animated animate__fadeOutUp'
-        }
-      })
+      // Swal.fire({
+      //   title: 'Please check your email',
+      //   showClass: {
+      //     popup: 'animate__animated animate__fadeInDown'
+      //   },
+      //   hideClass: {
+      //     popup: 'animate__animated animate__fadeOutUp'
+      //   }
+      // })
+      alert("Please check your email")
       this.router.navigate(['/login']);
-
     })
   }
 

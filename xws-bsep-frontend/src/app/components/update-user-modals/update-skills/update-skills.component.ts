@@ -4,7 +4,6 @@ import { User } from 'src/app/model/user';
 import { Skill } from 'src/app/model/skill';
 import { UserService } from 'src/app/services/user.service';
 import { SuccessMessage } from 'src/app/model/success-message';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-update-skills',
@@ -53,17 +52,19 @@ export class UpdateSkillsComponent implements OnInit {
       (success: SuccessMessage) => {
         console.log(success)
         if (success.success == "success"){
-          Swal.fire({
-            icon: 'success',
-            title: 'Yay!',
-            text: 'Skill successfully added!',
-          })    
+          // Swal.fire({
+          //   icon: 'success',
+          //   title: 'Yay!',
+          //   text: 'Skill successfully added!',
+          // })    
+          alert("Skill successfully added!")
         } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong. Please try again.',
-          })   
+          // Swal.fire({
+          //   icon: 'error',
+          //   title: 'Oops...',
+          //   text: 'Something went wrong. Please try again.',
+          // })   
+          alert("Something went wrong. Please try again.")
         }
       })
     this.dialogRef.close(); 

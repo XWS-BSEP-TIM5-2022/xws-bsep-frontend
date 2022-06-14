@@ -3,7 +3,6 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
 import { SuccessMessage } from 'src/app/model/success-message';
-import Swal from 'sweetalert2';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { DatePipe } from '@angular/common'; 
 
@@ -104,22 +103,23 @@ export class UpdateBasicInfoComponent implements OnInit {
       (success: SuccessMessage) => {
         console.log(success)
         if (success.success == "success"){
-          Swal.fire({
-            icon: 'success',
-            title: 'Yay!',
-            text: 'Informations successfully changed!',
-          })    
+          // Swal.fire({
+          //   icon: 'success',
+          //   title: 'Yay!',
+          //   text: 'Informations successfully changed!',
+          // })
+          alert("Informations successfully changed!")    
         } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong. Please try again.',
-          })   
+          // Swal.fire({
+          //   icon: 'error',
+          //   title: 'Oops...',
+          //   text: 'Something went wrong. Please try again.',
+          // }) 
+          alert("Something went wrong. Please try again.")  
         }
       })
     this.dialogRef.close();
 
- 
   }
  
   cancel(){
