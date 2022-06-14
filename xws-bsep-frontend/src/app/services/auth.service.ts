@@ -51,7 +51,7 @@ export class AuthService {
 
         let decoded: any = jwt_decode(res.token)
         localStorage.setItem("user", decoded.sub)
-        localStorage.setItem("role", decoded.role)
+        localStorage.setItem("role", decoded.roles)
         localStorage.setItem("jwt", res.token);
       }));
   }
@@ -69,7 +69,7 @@ export class AuthService {
 
       let decoded: any = jwt_decode(res.token)
       localStorage.setItem("user", decoded.sub)
-      localStorage.setItem("role", decoded.role)
+      localStorage.setItem("role", decoded.roles)
       localStorage.setItem("jwt", res.token);
     }));
   }
