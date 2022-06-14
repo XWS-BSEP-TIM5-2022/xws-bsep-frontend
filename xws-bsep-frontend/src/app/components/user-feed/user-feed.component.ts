@@ -47,6 +47,8 @@ export class UserFeedComponent implements OnInit {
   visibleUserAcccountSettings: boolean = false;
   searchCriteria: string = "";
   stringBirthday : any;
+  generatedToken: string;
+  visible: boolean = false;
 
   ngOnInit(): void {
     this.user.name = "";
@@ -533,7 +535,17 @@ export class UserFeedComponent implements OnInit {
         //   text: 'Your API token is: ' + token.token,
         // })    
         alert("Your API token is: " + token.token)
+        this.generatedToken = token.token; 
+        this.visible = true;
       }
     )
+  }
+
+  changeVisibility(){
+    if (this.visible){
+      this.visible = false;
+    } else {
+      this.visible = true;
+    }
   }
 }

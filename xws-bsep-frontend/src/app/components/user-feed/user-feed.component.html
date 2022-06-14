@@ -11,7 +11,6 @@
 
 <body *ngIf="loaded">
 	<div class="wrapper">
-		
 		<header>
 			<div class="container">
 				<div class="header-data">
@@ -95,8 +94,16 @@
 			</div>
 		</header><!--header end-->	
 
-		<section class="cover-sec">
-            <br> <br><br><br><br><br> <br><br><br><br>
+		<section *ngIf="visible" class="cover-sec">			
+			<div class="alert" style="width: 600px; height: 200px; word-break: break-all;
+			white-space: pre-wrap;">
+				<span class="closebtn" (click)="changeVisibility()">&times;</span>
+				<p style="width: 580px;">Your API token: {{ generatedToken }}</p> 		
+			</div>
+		</section>
+		
+		<section *ngIf="!visible" class="cover-sec">			
+			<br> <br><br><br><br><br> <br><br> <br> <br><br> <br> <br> 
 		</section>
 
 		<main>
