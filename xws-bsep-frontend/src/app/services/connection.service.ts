@@ -31,4 +31,10 @@ export class ConnectionService {
   rejectRequest(dto){
     return this.http.put(`${this.connectionPath}/reject`, JSON.stringify(dto));
   }
+
+  
+  block(dto){
+    console.log(dto)
+    return this.http.post(`${this.connectionPath}/block`, JSON.stringify(dto));
+  }
 }
