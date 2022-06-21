@@ -22,4 +22,5 @@ export class User {
     isConnected: boolean;
     request: boolean;
     username: string;
+    blocked: boolean
 }
