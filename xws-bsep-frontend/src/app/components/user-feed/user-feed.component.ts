@@ -25,6 +25,7 @@ import { UpdateEducationComponent } from '../update-user-modals/update-education
 import { UpdateExperienceComponent } from '../update-user-modals/update-experience/update-experience.component'; 
 import { DatePipe } from '@angular/common'; 
 import { ApiToken } from 'src/app/model/api-token';
+import { ConnectionService } from 'src/app/services/connection.service';
 
 @Component({
   selector: 'app-user-feed',
@@ -34,7 +35,7 @@ import { ApiToken } from 'src/app/model/api-token';
 export class UserFeedComponent implements OnInit {
 
   constructor(private userService: UserService, private feedService: FeedService, private postService: PostService, public dialog: MatDialog,
-    private router: Router, private authService: AuthService) { }
+    private router: Router, private authService: AuthService,private connectionService: ConnectionService) { }
 
   user: User = new User; // current user
   feedPosts: FeedPost[] = [];
@@ -49,6 +50,7 @@ export class UserFeedComponent implements OnInit {
   stringBirthday : any;
   generatedToken: string;
   visible: boolean = false;
+  users: User[]  = []
 
   ngOnInit(): void {
     this.user.name = "";
@@ -57,7 +59,36 @@ export class UserFeedComponent implements OnInit {
     this.profileActive = false;
     this.informationsActive = false;
     this.loadUserData();
+
+    this.getRecommendation()
   }
+
+  getRecommendation(){
+    let userId =  localStorage.getItem("user");
+
+      this.connectionService.getRecommendation(userId).subscribe(
+        (data) => {
+          console.log(data)
+          this.getUsersFromRecommendation(data['users'])
+      })
+
+  }
+
+  getUsersFromRecommendation(data){
+    this.users = []
+
+    for(let u of data){
+      this.userService.getById(u.userID).subscribe((data: User) => {
+        this.users.push(data['user'])
+      })
+    }
+
+    console.log("preporuke:")
+    console.log(this.users)
+
+  }
+
+
 
   loadUserData(){
     let userId =  localStorage.getItem("user");
