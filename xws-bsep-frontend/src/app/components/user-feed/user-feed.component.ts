@@ -88,7 +88,17 @@ export class UserFeedComponent implements OnInit {
 
   }
 
+  follow(user){
+    var followDTO = {
+      "userID": user.id,
+      "isPublic": user.isPublic,
+      "isPublicLogged": false    
+    }
 
+    this.connectionService.connect(followDTO).subscribe((res: any) => {
+      window.location.reload()
+    })
+  }
 
   loadUserData(){
     let userId =  localStorage.getItem("user");
