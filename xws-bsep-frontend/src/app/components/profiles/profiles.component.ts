@@ -42,40 +42,44 @@ export class ProfilesComponent implements OnInit {
    
   }
 
-  connect(user, id){
-    var followDTO = {
-      "userID": user.id,
-      "isPublic": user.isPublic
-    }
-
-     this.connectionService.connect(followDTO).subscribe((res: any) => {
-       user.request = res.connected
-       console.log(user.request)
-       window.location.reload()
-     })
-  }
-
   findLoggedUser() : Observable<boolean>{
+
     return this.userService.getById(this.loggedUserId).pipe(map((res: any) => {
       this.loggedUserFull = res['user'];
-      console.log("public: " + this.loggedUserFull.isPublic);
       return this.loggedUserFull.isPublic;
     }))
     
 
   }
 
+  connect(user, id){
+    var followDTO = {
+      "userID": user.id,
+      "isPublic": user.isPublic,
+      "isPublicLogged": false    
+    }
+
+    var u = this.findLoggedUser().subscribe(event => {
+      followDTO.isPublicLogged = event
+        this.connectionService.connect(followDTO).subscribe((res: any) => {
+          window.location.reload()
+        })
+     })
+  }
+
+
+
   block(user){
     this.findLoggedUser()    
 
     var dto = {
       "userID": user.id,
-      "isPublic": user.isPublic
-
+      "isPublic": user.isPublic,
+      "isPublicLogged": false    
     }
 
     var u = this.findLoggedUser().subscribe(event => {
-     // dto.isPublicA = event
+      dto.isPublicLogged = event
       this.connectionService.block(dto).subscribe((res: any) => {
         window.location.reload()
       })
