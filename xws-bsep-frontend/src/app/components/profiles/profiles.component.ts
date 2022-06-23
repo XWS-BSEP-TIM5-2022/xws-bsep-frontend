@@ -74,12 +74,12 @@ export class ProfilesComponent implements OnInit {
 
     var dto = {
       "userID": user.id,
-      "isPublic": user.isPublic
-
+      "isPublic": user.isPublic,
+      "isPublicLogged": false    
     }
 
     var u = this.findLoggedUser().subscribe(event => {
-     // dto.isPublicA = event
+      dto.isPublicLogged = event
       this.connectionService.block(dto).subscribe((res: any) => {
         window.location.reload()
       })
