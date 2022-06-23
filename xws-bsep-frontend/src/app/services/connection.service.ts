@@ -37,4 +37,8 @@ export class ConnectionService {
     console.log(dto)
     return this.http.post(`${this.connectionPath}/block`, JSON.stringify(dto));
   }
+
+  getRecommendation(userID){
+    return this.http.get<any[]>(`${this.connectionPath}/recommendation/` + `${userID}`)
+  }
 }
