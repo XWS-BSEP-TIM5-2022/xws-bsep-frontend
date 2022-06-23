@@ -475,7 +475,9 @@
 											<div class="suggestion-usd" *ngFor="let u of users">
 												<!-- <img src="http://via.placeholder.com/35x35" alt=""> -->
 												<div class="sgt-text">
-													<h4>{{u.name}} {{u.lastName}}</h4>
+													<!-- <h4>{{u.name}} {{u.lastName}}</h4> -->
+													<a routerLink="." title="Show profile" (click)="seeProfile(u.id)"> <h3> {{ u.name }} {{ u.lastName }}</h3> </a> 
+
 													<span>{{u.email}}</span>
 												</div>
 												<span><i class="la la-plus" (click)="follow(u)"></i></span>
