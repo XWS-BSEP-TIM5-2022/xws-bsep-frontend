@@ -1,21 +1,20 @@
 version: '3.3'
 services:
   dislinkt-frontend:
-    # build: 
-    #   context: .
-    #   args:
-    #     API_URL: "  backend_api: 'https://localhost:8080/'"
-    # build:
-    #   context: https://github.com/XWS-BSEP-TIM5-2022/xws-bsep-frontend#v1.0.0
-    #   target: execute
-    #   args:
-    #     API_URL: "  backend_api: 'https://localhost:8080/'"
-    restart: on-failure
-    image: darkelfff/dislinkt-frontend:latest
+    build: 
+      context: .
+      args:
+        API_URL: "  backend_api: 'https://localhost:8080/'"
     ports:
       - '4200:4200'
     volumes:
       - ./docker/nginx.conf:/etc/nginx/nginx.conf
-      # - ./front/api_gateway.conf:/etc/nginx/api_gateway.conf
+
+    # restart: on-failure
+    # image: darkelfff/dislinkt-frontend:latest
+    # ports:
+    #   - '4200:4200'
+    # volumes:
+    #   - ./docker/nginx.conf:/etc/nginx/nginx.conf
 
     
