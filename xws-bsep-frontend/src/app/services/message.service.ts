@@ -12,5 +12,23 @@ import { SuccessMessage } from '../model/success-message';
 })
 export class MessageService {
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
+
+  private readonly messagePath = environment.backend_api + 'api/message';
+
+  getConversationById(id: string): Observable<Conversation> {
+    return this.http.get<Conversation>(`${this.messagePath}/`+ id)    
+  }
+
+  getAllConversationsForUser(){
+    return this.http.get<Conversation[]>(`${this.messagePath}/user`)    
+  }
+
+  getConversation(receiver: string): Observable<Conversation> {
+    return this.http.get<Conversation>(`${this.messagePath}/`+ receiver)    
+  }
+
+  newMessage(message: Message): Observable<Conversation>{
+    return this.http.post<Conversation>(`${this.messagePath}`, message)    
+  }
 }
