@@ -5,4 +5,5 @@ export class Conversation {
     user1: string = "";
     user2: string = ""; 
     messages: Message[];  
+    participant: string = ""
 }
