@@ -44,6 +44,7 @@ import { UpdateInterestsComponent } from './components/update-user-modals/update
 import { UpdateExperienceComponent } from './components/update-user-modals/update-experience/update-experience.component';
 import { UpdateEducationComponent } from './components/update-user-modals/update-education/update-education.component';
 import { MessagesComponent } from './components/messages/messages.component';
+import { NewMessageComponent } from './components/new-message/new-message.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { MessagesComponent } from './components/messages/messages.component';
     UpdateExperienceComponent,
     UpdateEducationComponent,
     MessagesComponent,
+    NewMessageComponent,
   ],
   imports: [
     BrowserModule,

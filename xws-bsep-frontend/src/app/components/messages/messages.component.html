@@ -30,35 +30,38 @@
 								<div class="msg-title">
 									<h3>Messages</h3>
 									<ul>
-										<li><a href="#" title=""><i class="fa fa-plus"></i></a></li> 
+										<li><a (click)="newMessage()" title=""><i class="fa fa-plus"></i></a></li> 
 									</ul>
 								</div><!--msg-title end-->
 								<div class="conversationContainer">
 								<div class="messages-list ">
 									<ul>
-										<li class="active">
-											<div class="usr-msg-details" *ngFor="let item of conversations">
-												<div class="usr-ms-img">
-													<img src="assets\cv__29__generated.jpg" style="width: 50px; height: 50px;" alt="">
-													<span class="msg-status"></span>
-												</div>
-												<div class="usr-mg-info">
-													<h3>{{item.participant}}</h3>
-													<!-- <p>Lorem ipsum dolor></p> -->
-												</div><!--usr-mg-info end-->
-												<!-- <span class="posted_time">1:55 PM</span>
-												<span class="msg-notifc">1</span> -->
-											</div><!--usr-msg-details end-->
-										</li>
+										<div *ngFor="let item of conversations">
+											<li [ngClass]="{'active': (openedConversation && openedConversation.id === item.id)}"
+											(click)="openedConversation = item">
+												<div class="usr-msg-details active" >
+													<div class="usr-ms-img">
+														<img src="assets\cv__29__generated.jpg" style="width: 50px; height: 50px;" alt="">
+														<span class="msg-status"></span>
+													</div>
+													<div class="usr-mg-info">
+														<h3>{{item.participant}}</h3>
+														<!-- <p>Lorem ipsum dolor></p> -->
+													</div><!--usr-mg-info end-->
+													<!-- <span class="posted_time">1:55 PM</span>
+													<span class="msg-notifc">1</span> -->
+												</div><!--usr-msg-details end-->
+											</li>
+										</div>
 									</ul>
 								</div><!--messages-list end-->
 							</div>
 							</div><!--msgs-list end-->
 						</div>
-						<div class="col-lg-8 col-md-12 pd-right-none pd-left-none">
+						<div class="col-lg-8 col-md-12 pd-right-none pd-left-none" >
 							<div class="main-conversation-box">
 								<div class="message-bar-head">
-									<div class="usr-msg-details">
+									<div class="usr-msg-details" *ngIf="openedConversation != undefined">
 										<div class="usr-ms-img">
 											<img src="assets\cv__29__generated.jpg" style="width: 50px; height: 50px;" alt="">
 										</div>
@@ -67,38 +70,36 @@
 										</div><!--usr-mg-info end-->
 									</div> 
 								</div><!--message-bar-head end-->
-								<div class="messages-line">
-									<div class="inboxContainer"> 
-										<div class="main-message-box ta-right">
-											<div class="message-dt">
-												<div class="message-inner-dt">
-													<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum congue leo eget malesuada. Vivamus suscipit tortor eget felis porttitor.</p>
+								<div class="messages-line" >
+									<div class="inboxContainer" *ngIf="openedConversation != undefined" style="overflow: scroll; height: xyz;" #scrollMe [scrollTop]="scrollMe.scrollHeight"> 
+									
+										<div *ngFor="let mess of openedConversation.messages" >
+										<div class="main-message-box " [ngClass]="{'ta-right': mess.receiver !== userId, 'st3' : mess.receiver === userId }">
+											<div class="message-dt "  [ngClass]="{'message': mess.receiver !== userId, 'st3' : mess.receiver === userId }">
+												<div class="message-inner-dt " [ngClass]="{'content': mess.receiver !== userId}">
+													<p>{{mess.content}}</p>
 												</div><!--message-inner-dt end-->
-												<span>Sat, Aug 23, 1:08 PM</span>
+												<span>{{formatDate(mess.time)}}</span>
 											</div><!--message-dt end-->
 											<div class="messg-usr-img">
 												<img src="assets\cv__29__generated.jpg" style="width: 50px; height: 50px;" alt="">
 											</div><!--messg-usr-img end-->
 										</div><!--main-message-box end-->
-										<div class="main-message-box st3">
-											<div class="message-dt st3">
-												<div class="message-inner-dt">
-													<p>Cras ultricies ligula.</p>
-												</div><!--message-inner-dt end-->
-												<span>5 minutes ago</span>
-											</div><!--message-dt end-->
-											<div class="messg-usr-img">
-												<img src="assets\cv__29__generated.jpg" style="width: 50px; height: 50px;" alt="">
-											</div><!--messg-usr-img end-->
-										</div><!--main-message-box end-->
+										</div>
+ 
 									</div><!--main-message-box end-->
+
 								</div><!--messages-line end-->
 								<div class="message-send-area">
 									<form>
 										<div class="mf-field">
-											<input type="text" name="message" placeholder="Type a message here">
-											<button type="submit">Send</button>
+											<input matInput type="text" name="message" placeholder="Type a message here" [(ngModel)]="newMess">
+											<button type="submit" (click)="sendMessage()" [disabled]="!openedConversation">Send</button>
 										</div>
+										
+										<!-- <mat-form-field class="example-full-width" appearance="outline" style="width: 33vw; height: 10vh;">  
+											<input matInput class="example-full-width" appearance="outline" style="width: 33vw; height: 10vh; text-align: start;"  [(ngModel)]="newMess" name="text" placeholder="New message..."> 
+										</mat-form-field> -->
 										<!-- <ul>
 											<li><a href="#" title=""><i class="fa fa-smile-o"></i></a></li>
 											<li><a href="#" title=""><i class="fa fa-camera"></i></a></li>

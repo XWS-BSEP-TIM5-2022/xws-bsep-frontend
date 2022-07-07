@@ -46,5 +46,5 @@ export class ConnectionService {
     let userID = localStorage.getItem('user')
     return this.http.get<any[]>(`${this.connectionPath}/user/${userID}/friends`)
   }
- 
+  
 }
