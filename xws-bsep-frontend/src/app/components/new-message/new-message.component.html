@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>New message</h2>
+<mat-divider></mat-divider>
+<div  style="margin-top: 0.5vw; margin-left: 1vw; margin-right: 1vw; margin-bottom: 0.5vw;">
+    <div class="row"  style="margin-bottom: -1.5vw;"> 
+    </div>
+    <br><br>
+    <div class="row"  style="margin-bottom: -1.5vw;">
+        <div class="col-md-12 mb-4 pb-2">
+            <mat-form-field class="example-full-width" appearance="outline" style="width: 33vw;" [color]="connectionControl.value">
+                <mat-label>To:</mat-label>
+                <mat-select [formControl]="connectionControl" class="example-full-width" appearance="outline" >  
+                  <mat-option *ngFor="let item of connections" [value]="item.id">
+                    {{item.name}} {{item.lastName}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="example-full-width" appearance="outline" style="width: 33vw; height: 10vh;">  
+                <mat-label>Message:</mat-label>
+                <input matInput class="example-full-width" appearance="outline" style="width: 33vw; height: 10vh; text-align: start;"  [(ngModel)]="newMessage" name="text" placeholder="New message..."> 
+            </mat-form-field>
+
+            <label>{{errorMessage}} </label>
+        </div>
+        </div>
+
+
+    <div class="mt-4 pt-2">
+        <input class="btn btn-lg center-div" style="margin-right: 3%; margin-left: 30%;" (click)="cancel()" type="button" value="Cancel" />
+        <input class="btn btn-success btn-lg center-div" style="background-color: #e44d3a; color:white" type="button" (click)="sendMessage()" value="Send" />
+        
+    </div>
+</div>

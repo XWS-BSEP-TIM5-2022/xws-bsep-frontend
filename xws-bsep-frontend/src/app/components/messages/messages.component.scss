@@ -1,0 +1,36 @@
+.inboxContainer { 
+    height: 68vh; 
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: auto;
+    
+}
+
+.conversationContainer { 
+    height: 78vh; 
+    margin: auto;
+    position: absolute;  
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: auto;
+    background-color: white;
+}
+
+.content{
+    max-width: 50vw;
+    
+}
+
+.message{
+    float:right
+}
+
+p {
+    word-break: break-all;
+    white-space: normal;
+}

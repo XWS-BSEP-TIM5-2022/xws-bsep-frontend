@@ -17,6 +17,7 @@ import { AccountSettingsComponent } from './components/account-settings/account-
 import { UnregisteredUserFeedComponent } from './components/unregistered-user-feed/unregistered-user-feed.component';
 import { UserProfilePublicComponent } from './components/user-profile-public/user-profile-public.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { MessagesComponent } from './components/messages/messages.component'
 
 const routes: Routes = [
   {
@@ -85,6 +86,14 @@ const routes: Routes = [
     canActivate: [RoleGuard], 
     data: { 
       expectedRole: 'User' //['User', 'Admin']
+    }
+  },
+  {
+    path: 'messages',
+    component: MessagesComponent,
+    canActivate: [RoleGuard], 
+    data: { 
+      expectedRole: 'User'  
     }
   },
 

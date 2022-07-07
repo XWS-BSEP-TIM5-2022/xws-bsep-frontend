@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>WorkWise Html Template</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="" />
+<meta name="keywords" content="" />    
+</head>
+
+
+<body>
+	
+
+	<div class="wrapper">
+
+		<app-header> 
+
+		</app-header><!--header end-->	
+
+
+
+		<section class="messages-page">
+			<div class="container">
+				<div class="messages-sec">
+					<div class="row">
+						<div class="col-lg-4 col-md-12 no-pdd">
+							<div class="msgs-list">
+								<div class="msg-title">
+									<h3>Messages</h3>
+									<ul>
+										<li><a (click)="newMessage()" title=""><i class="fa fa-plus"></i></a></li> 
+									</ul>
+								</div><!--msg-title end-->
+								<div class="conversationContainer">
+								<div class="messages-list ">
+									<ul>
+										<div *ngFor="let item of conversations">
+											<li [ngClass]="{'active': (openedConversation && openedConversation.id === item.id)}"
+											(click)="openedConversation = item">
+												<div class="usr-msg-details active" >
+													<div class="usr-ms-img">
+														<img src="assets\cv__29__generated.jpg" style="width: 50px; height: 50px;" alt="">
+														<span class="msg-status"></span>
+													</div>
+													<div class="usr-mg-info">
+														<h3>{{item.participant}}</h3>
+														<!-- <p>Lorem ipsum dolor></p> -->
+													</div><!--usr-mg-info end-->
+													<!-- <span class="posted_time">1:55 PM</span>
+													<span class="msg-notifc">1</span> -->
+												</div><!--usr-msg-details end-->
+											</li>
+										</div>
+									</ul>
+								</div><!--messages-list end-->
+							</div>
+							</div><!--msgs-list end-->
+						</div>
+						<div class="col-lg-8 col-md-12 pd-right-none pd-left-none" >
+							<div class="main-conversation-box">
+								<div class="message-bar-head">
+									<div class="usr-msg-details" *ngIf="openedConversation != undefined">
+										<div class="usr-ms-img">
+											<img src="assets\cv__29__generated.jpg" style="width: 50px; height: 50px;" alt="">
+										</div>
+										<div class="usr-mg-info">
+											<h3>{{ openedConversation.participant }}</h3> 
+										</div><!--usr-mg-info end-->
+									</div> 
+								</div><!--message-bar-head end-->
+								<div class="messages-line" >
+									<div class="inboxContainer" *ngIf="openedConversation != undefined" style="overflow: scroll; height: xyz;" #scrollMe [scrollTop]="scrollMe.scrollHeight"> 
+									
+										<div *ngFor="let mess of openedConversation.messages" >
+										<div class="main-message-box " [ngClass]="{'ta-right': mess.receiver !== userId, 'st3' : mess.receiver === userId }">
+											<div class="message-dt "  [ngClass]="{'message': mess.receiver !== userId, 'st3' : mess.receiver === userId }">
+												<div class="message-inner-dt " [ngClass]="{'content': mess.receiver !== userId}">
+													<p>{{mess.content}}</p>
+												</div><!--message-inner-dt end-->
+												<span>{{formatDate(mess.time)}}</span>
+											</div><!--message-dt end-->
+											<div class="messg-usr-img">
+												<img src="assets\cv__29__generated.jpg" style="width: 50px; height: 50px;" alt="">
+											</div><!--messg-usr-img end-->
+										</div><!--main-message-box end-->
+										</div>
+ 
+									</div><!--main-message-box end-->
+
+								</div><!--messages-line end-->
+								<div class="message-send-area">
+									<form>
+										<div class="mf-field">
+											<input matInput type="text" name="message" placeholder="Type a message here" [(ngModel)]="newMess">
+											<button type="submit" (click)="sendMessage()" [disabled]="!openedConversation">Send</button>
+										</div>
+										
+										<!-- <mat-form-field class="example-full-width" appearance="outline" style="width: 33vw; height: 10vh;">  
+											<input matInput class="example-full-width" appearance="outline" style="width: 33vw; height: 10vh; text-align: start;"  [(ngModel)]="newMess" name="text" placeholder="New message..."> 
+										</mat-form-field> -->
+										<!-- <ul>
+											<li><a href="#" title=""><i class="fa fa-smile-o"></i></a></li>
+											<li><a href="#" title=""><i class="fa fa-camera"></i></a></li>
+											<li><a href="#" title=""><i class="fa fa-paperclip"></i></a></li>
+										</ul> -->
+									</form>
+								</div><!--message-send-area end-->
+							</div><!--main-conversation-box end-->
+						</div>
+					</div>
+				</div><!--messages-sec end-->
+			</div>
+		</section><!--messages-page end-->
+
+
+
+		<footer>
+			<div class="footy-sec mn no-margin">
+				<div class="container">
+					<ul>
+						<li><a href="#" title="">Help Center</a></li>
+						<li><a href="#" title="">Privacy Policy</a></li>
+						<li><a href="#" title="">Community Guidelines</a></li>
+						<li><a href="#" title="">Cookies Policy</a></li>
+						<li><a href="#" title="">Career</a></li>
+						<li><a href="#" title="">Forum</a></li>
+						<li><a href="#" title="">Language</a></li>
+						<li><a href="#" title="">Copyright Policy</a></li>
+					</ul>
+					<p><img src="images/copy-icon2.png" alt="">Copyright 2018</p>
+					<img class="fl-rgt" src="images/logo2.png" alt="">
+				</div>
+			</div>
+		</footer>
+
+	</div><!--theme-layout end-->
+
+
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/popper.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery.mCustomScrollbar.js"></script>
+<script type="text/javascript" src="lib/slick/slick.min.js"></script>
+<script type="text/javascript" src="js/scrollbar.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+
+</body>
+</html>
