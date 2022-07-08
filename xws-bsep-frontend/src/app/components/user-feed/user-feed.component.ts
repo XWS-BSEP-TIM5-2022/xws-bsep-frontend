@@ -1,3 +1,4 @@
+import { JobOfferService } from './../../services/job-offer.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FeedPost } from 'src/app/model/feed/feed-post';
@@ -35,7 +36,7 @@ import { ConnectionService } from 'src/app/services/connection.service';
 export class UserFeedComponent implements OnInit {
 
   constructor(private userService: UserService, private feedService: FeedService, private postService: PostService, public dialog: MatDialog,
-    private router: Router, private authService: AuthService,private connectionService: ConnectionService) { }
+    private router: Router, private authService: AuthService,private connectionService: ConnectionService, private jobOfferService: JobOfferService) { }
 
   user: User = new User; // current user
   feedPosts: FeedPost[] = [];
@@ -45,22 +46,27 @@ export class UserFeedComponent implements OnInit {
   feedActive: boolean = true;
   profileActive: boolean = false;
   informationsActive: boolean = false;
+  recommendationActive: boolean = false;
+
   visibleUserAcccountSettings: boolean = false;
   searchCriteria: string = "";
   stringBirthday : any;
   generatedToken: string;
   visible: boolean = false;
   users: User[]  = []
-
+  jobOffers: Post[] = []
   ngOnInit(): void {
     this.user.name = "";
     this.user.lastName = "";
     this.feedActive = true;
     this.profileActive = false;
     this.informationsActive = false;
+    this.recommendationActive = false;
     this.loadUserData();
 
     this.getRecommendation()
+
+    //this.loadJobRecommendations()
   }
 
   getRecommendation(){
@@ -122,6 +128,7 @@ export class UserFeedComponent implements OnInit {
     this.feedActive = true;
     this.profileActive = false;
     this.informationsActive = false;
+    this.recommendationActive = false;
     let userId =  localStorage.getItem("user");
 
     if (userId != undefined){
@@ -229,6 +236,7 @@ export class UserFeedComponent implements OnInit {
       post.company.phoneNumber = feedPost.Company.PhoneNumber;
 
       this.posts.push(post);
+      
     }
   
     this.searchedPosts = this.posts;
@@ -244,6 +252,7 @@ export class UserFeedComponent implements OnInit {
     this.feedActive = false;
     this.profileActive = true;
     this.informationsActive = false;
+    this.recommendationActive = false;
     let userId = localStorage.getItem("user");
     
     if (userId != undefined){
@@ -280,6 +289,47 @@ export class UserFeedComponent implements OnInit {
     }
   }
 
+  loadJobRecommendations(){
+    this.feedActive = false;
+    this.profileActive = false;
+    this.informationsActive = false;
+    this.recommendationActive = true;
+
+    console.log("cao")
+    let userId =  localStorage.getItem("user");
+
+    this.jobOfferService.getJobRecommendations(userId).subscribe(
+      (data) => {
+        console.log(data)
+        this.getJobOffersFromRecommendation(data['jobOffers'])
+    })
+  }
+
+  getJobOffersFromRecommendation(data){
+    this.jobOffers = []
+
+    for(let u of data){
+      this.postService.getById(u.id).subscribe((data: Post) => {
+        this.userService.getById(data['post'].userId).subscribe(
+          (user: any) => { 
+            data['post'].user = user
+        })
+
+        for(let c of data['post'].comments){
+          this.userService.getById(c.userId).subscribe(
+            (user: any) => { 
+              c.user = user
+          })
+        }
+
+        this.jobOffers.push(data['post'])
+
+      })
+     
+    }
+
+  }
+
   makeVisibleUserAcccountSettings() {
     this.visibleUserAcccountSettings = !this.visibleUserAcccountSettings
   }
@@ -299,8 +349,11 @@ export class UserFeedComponent implements OnInit {
         (data: SuccessMessage) => {
           if (this.feedActive){
             this.loadFeed();
-          } else {
+          } else if(this.profileActive){
             this.loadMyPosts();
+          }
+          else if(this.recommendationActive){
+            this.loadJobRecommendations();
           }
         }
       )
@@ -316,8 +369,11 @@ export class UserFeedComponent implements OnInit {
       (data: SuccessMessage) => {
         if (this.feedActive){
           this.loadFeed();
-        } else {
+        } else if(this.profileActive){
           this.loadMyPosts();
+        }
+        else if(this.recommendationActive){
+          this.loadJobRecommendations();
         }
       }
     )
@@ -330,8 +386,11 @@ export class UserFeedComponent implements OnInit {
       (data: SuccessMessage) => {
         if (this.feedActive){
           this.loadFeed();
-        } else {
+        } else if(this.profileActive){
           this.loadMyPosts();
+        }
+        else if(this.recommendationActive){
+          this.loadJobRecommendations();
         }
       }
     )
@@ -344,8 +403,11 @@ export class UserFeedComponent implements OnInit {
       (data: SuccessMessage) => {
         if (this.feedActive){
           this.loadFeed();
-        } else {
+        }else if(this.profileActive){
           this.loadMyPosts();
+        }
+        else if(this.recommendationActive){
+          this.loadJobRecommendations();
         }
       }
     )
@@ -396,6 +458,7 @@ export class UserFeedComponent implements OnInit {
   searchFeed(){
     this.feedActive = true;
     this.profileActive = false;
+    this.recommendationActive = false;
     this.posts = this.searchedPosts.filter(p =>
       (p.text).toLowerCase().includes(this.searchCriteria.toLowerCase()) ||
       (p.dateCreated).toLowerCase().includes(this.searchCriteria.toLowerCase())
@@ -422,6 +485,7 @@ export class UserFeedComponent implements OnInit {
   loadMyInfo(){
     this.feedActive = false;
     this.profileActive = false;
+    this.recommendationActive = false;
     this.informationsActive = true; 
   }
 
