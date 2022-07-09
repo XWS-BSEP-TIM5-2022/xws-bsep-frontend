@@ -24,7 +24,15 @@ export class UserService {
   }
 
   update(user: User): Observable<SuccessMessage>{
+    console.log(user.isPublic)
+
     return this.http.put<SuccessMessage>(`${this.userPath}/update`, user)    
+  }
+
+  updatePrivacy(user: User): Observable<SuccessMessage>{
+    console.log("treba da bude" + user.isPublic)
+
+    return this.http.put<SuccessMessage>(`${this.userPath}/updatePrivacy`, user)    
   }
 
   getAllPublic(){

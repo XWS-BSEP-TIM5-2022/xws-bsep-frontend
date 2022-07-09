@@ -1,3 +1,4 @@
+import { SuccessMessage } from './../../model/success-message';
 import { ConnectionService } from './../../services/connection.service';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
@@ -71,9 +72,33 @@ export class AccountSettingsComponent implements OnInit {
           (user: any) => {
             window.location.reload()  
           })
+
+
+        this.user.isPublic = false
+
+
+        this.userService.updatePrivacy(this.user).subscribe(
+          (success: SuccessMessage) => {
+            console.log(success)
+            if (success.success == "success"){
+              // Swal.fire({
+              //   icon: 'success',
+              //   title: 'Yay!',
+              //   text: 'Informations successfully changed!',
+              // })
+              alert("Informations successfully changed!")    
+            } else {
+              // Swal.fire({
+              //   icon: 'error',
+              //   title: 'Oops...',
+              //   text: 'Something went wrong. Please try again.',
+              // }) 
+              alert("Something went wrong. Please try again.")  
+            }
+          })
         
       }
-      else if(!this.user.isPublic){
+      else {
         console.log("mijenja u public")
         var dto= {
           "private": true
@@ -82,7 +107,35 @@ export class AccountSettingsComponent implements OnInit {
           (user: any) => {
             window.location.reload()  
           })
+
+
+        
+          this.user.isPublic = true
+
+          this.userService.updatePrivacy(this.user).subscribe(
+            (success: SuccessMessage) => {
+              console.log(success)
+              if (success.success == "success"){
+                // Swal.fire({
+                //   icon: 'success',
+                //   title: 'Yay!',
+                //   text: 'Informations successfully changed!',
+                // })
+                alert("Informations successfully changed!")    
+              } else {
+                // Swal.fire({
+                //   icon: 'error',
+                //   title: 'Oops...',
+                //   text: 'Something went wrong. Please try again.',
+                // }) 
+                alert("Something went wrong. Please try again.")  
+              }
+            })
+
         }
+
+
+
       }
     
 
