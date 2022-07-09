@@ -27,6 +27,8 @@ import { UpdateExperienceComponent } from '../update-user-modals/update-experien
 import { DatePipe } from '@angular/common'; 
 import { ApiToken } from 'src/app/model/api-token';
 import { ConnectionService } from 'src/app/services/connection.service';
+import { NotificationService } from 'src/app/services/notification.service';
+import { Notification } from 'src/app/model/notification';
 
 @Component({
   selector: 'app-user-feed',
@@ -36,7 +38,8 @@ import { ConnectionService } from 'src/app/services/connection.service';
 export class UserFeedComponent implements OnInit {
 
   constructor(private userService: UserService, private feedService: FeedService, private postService: PostService, public dialog: MatDialog,
-    private router: Router, private authService: AuthService,private connectionService: ConnectionService, private jobOfferService: JobOfferService) { }
+    private router: Router, private authService: AuthService,private connectionService: ConnectionService, private jobOfferService: JobOfferService,
+    private notificationService: NotificationService) { }
 
   user: User = new User; // current user
   feedPosts: FeedPost[] = [];
@@ -65,8 +68,16 @@ export class UserFeedComponent implements OnInit {
     this.loadUserData();
 
     this.getRecommendation()
+    this.loadNotifications();
 
     //this.loadJobRecommendations()
+  }
+
+  loadNotifications(){
+    this.notificationService.getAll().subscribe(
+      (data: Notification[]) => {
+        console.log(data)
+    })
   }
 
   getRecommendation(){
