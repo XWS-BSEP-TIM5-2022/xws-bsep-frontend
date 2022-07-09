@@ -7,7 +7,6 @@ import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
 import { MatSnackBar} from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { SuccessMessage } from 'src/app/model/success-message';
 
 @Component({
   selector: 'app-account-settings',
