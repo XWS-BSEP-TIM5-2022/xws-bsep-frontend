@@ -7,6 +7,7 @@ import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
 import { MatSnackBar} from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { SuccessMessage } from 'src/app/model/success-message';
 
 @Component({
   selector: 'app-account-settings',
@@ -39,6 +40,9 @@ export class AccountSettingsComponent implements OnInit {
   changePassTab = true;
   accSetignsTab = false;
   privacyTab = false;
+
+  notificationTab = false;
+
   users: User[]  = []
 
   ngOnInit(): void {
@@ -253,6 +257,7 @@ export class AccountSettingsComponent implements OnInit {
     this.changePassTab = false;
     this.accSetignsTab = false;
     this.privacyTab = false;
+    this.notificationTab = false;
 
     console.log(this.privacyTab)
   }
@@ -262,6 +267,8 @@ export class AccountSettingsComponent implements OnInit {
     this.changePassTab = false;
     this.accSetignsTab = true;
     this.privacyTab = false;
+    this.notificationTab = false;
+
   }
 
   privacy(){
@@ -270,9 +277,19 @@ export class AccountSettingsComponent implements OnInit {
     this.accSetignsTab = false;
     this.privacyTab = true;
     console.log(this.privacyTab)
+    this.notificationTab = false;
 
 
     
+  }
+
+  notifications(){
+    this.requestTab = false;
+    this.changePassTab = false;
+    this.accSetignsTab = false;
+    this.privacyTab = false;
+    this.notificationTab = true;
+
   }
 
   changePass(){
@@ -280,9 +297,8 @@ export class AccountSettingsComponent implements OnInit {
     this.requestTab = false;
     this.accSetignsTab = false;
     this.privacyTab = false;
-
+    this.notificationTab = false;
     console.log(this.requestTab)
-
   }
 
   acceptRequest(id){
@@ -311,4 +327,32 @@ export class AccountSettingsComponent implements OnInit {
     this.authService.logout();
     this.router.navigate(['']);  
   }
+
+  turnOnPostNotifications(){
+    this.user.postNotification = true; 
+    console.log(this.user)
+    this.userService.updatePostNotification(this.user).subscribe(
+      (success: SuccessMessage) => {
+        console.log(success)
+        if (success.success == "success"){
+          alert("Successfully updated!")    
+        } else {
+          alert("Something went wrong. Please try again.")
+        }
+      }) 
+  }
+
+  turnOffPostNotifications(){
+    this.user.postNotification = false;
+    this.userService.updatePostNotification(this.user).subscribe(
+      (success: SuccessMessage) => {
+        console.log(success)
+        if (success.success == "success"){
+          alert("Successfully updated!")    
+        } else {
+          alert("Something went wrong. Please try again.")
+        }
+      }) 
+  }
+
 }

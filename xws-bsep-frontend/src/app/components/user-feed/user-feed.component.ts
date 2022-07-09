@@ -74,10 +74,14 @@ export class UserFeedComponent implements OnInit {
   }
 
   loadNotifications(){
-    this.notificationService.getAll().subscribe(
-      (data: Notification[]) => {
-        console.log(data)
-    })
+    let userId =  localStorage.getItem("user");
+
+    if (userId != undefined){
+      this.notificationService.getByUserId(userId).subscribe(
+        (data: Notification[]) => {
+          console.log(data)
+      })
+    }
   }
 
   getRecommendation(){
