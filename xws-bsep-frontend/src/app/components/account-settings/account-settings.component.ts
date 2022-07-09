@@ -36,7 +36,8 @@ export class AccountSettingsComponent implements OnInit {
   inputType3: string = "password";
   requestTab = false;
   changePassTab = true;
-
+  accSetignsTab = false;
+  privacyTab = false;
   users: User[]  = []
 
   ngOnInit(): void {
@@ -50,9 +51,40 @@ export class AccountSettingsComponent implements OnInit {
       this.userService.getById(userId).subscribe(
         (user: any) => {
         this.user = user['user']
+        console.log(this.user)
+
         })
       }
+
+      console.log(this.user)
+
+
     }
+
+    changePrivacy(){
+      if(this.user.isPublic){
+        console.log("mijenja u private")
+        var dto= {
+          "private": false
+        }
+        this.connectionService.changePrivacy(dto).subscribe(
+          (user: any) => {
+            window.location.reload()  
+          })
+        
+      }
+      else if(!this.user.isPublic){
+        console.log("mijenja u public")
+        var dto= {
+          "private": true
+        }
+        this.connectionService.changePrivacy(dto).subscribe(
+          (user: any) => {
+            window.location.reload()  
+          })
+        }
+      }
+    
 
     getAllRequests(){
       let userId =  localStorage.getItem("user");
@@ -166,14 +198,36 @@ export class AccountSettingsComponent implements OnInit {
   requests(){
     this.requestTab = true;
     this.changePassTab = false;
+    this.accSetignsTab = false;
+    this.privacyTab = false;
 
-    console.log(this.requestTab)
+    console.log(this.privacyTab)
   }
 
+  accSetings(){
+    this.requestTab = false;
+    this.changePassTab = false;
+    this.accSetignsTab = true;
+    this.privacyTab = false;
+  }
+
+  privacy(){
+    this.requestTab = false;
+    this.changePassTab = false;
+    this.accSetignsTab = false;
+    this.privacyTab = true;
+    console.log(this.privacyTab)
+
+
+    
+  }
 
   changePass(){
     this.changePassTab = true;
     this.requestTab = false;
+    this.accSetignsTab = false;
+    this.privacyTab = false;
+
     console.log(this.requestTab)
 
   }
