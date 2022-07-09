@@ -220,7 +220,7 @@
 								    <a class="nav-item nav-link" id="nav-acc-tab" data-toggle="tab" href="#nav-acc" role="tab" aria-controls="nav-acc" aria-selected="true"><i class="la la-cogs"></i>Account Setting</a>
 								    <a class="nav-item nav-link" id="nav-status-tab" data-toggle="tab" href="#nav-status" role="tab" aria-controls="nav-status" aria-selected="false"><i class="fa fa-line-chart"></i>Status</a>
 								    <a class="nav-item nav-link" style="cursor: pointer;" [ngClass]="{'active': this.changePassTab === true}" id="nav-password-tab" data-toggle="tab" (click)="changePass()" role="tab" aria-controls="nav-password" aria-selected="false"><i class="fa fa-lock"></i>Change Password</a>
-								    <a class="nav-item nav-link" id="nav-notification-tab" data-toggle="tab" href="#nav-notification" role="tab" aria-controls="nav-notification" aria-selected="false"><i class="fa fa-flash"></i>Notifications</a>
+								    <a class="nav-item nav-link" style="cursor: pointer;" [ngClass]="{'active': this.notificationTab === true}" id="nav-requests-tab" data-toggle="tab" (click)="notifications()" role="tab" aria-controls="nav-requests" aria-selected="false"><i class="fa fa-flash"></i>Notifications</a>
 								    <a class="nav-item nav-link" style="cursor: pointer;" [ngClass]="{'active': this.requestTab === true}" id="nav-requests-tab" data-toggle="tab" (click)="requests()" role="tab" aria-controls="nav-requests" aria-selected="false"><i class="fa fa-group"></i>Requests</a>
 								    <a class="nav-item nav-link" id="security-login" data-toggle="tab" href="#security-login" role="tab" aria-controls="security-login" aria-selected="false"><i class="fa fa-user-secret"></i>Security and Login</a>
 								    <a class="nav-item nav-link" id="privacy" data-toggle="tab" href="#privacy" role="tab" aria-controls="privacy" aria-selected="false"><i class="fa fa-paw"></i>Privacy</a>
@@ -468,6 +468,24 @@
 							  			</div><!--requests-list end-->
 							  		</div><!--acc-setting end-->
 							  	</div>
+
+								  <div class="tab-pane fade" [ngClass]="{'show': this.notificationTab === true, 'active': this.notificationTab === true}" id="nav-requests active" role="tabpanel" aria-labelledby="nav-requests-tab">
+									<div class="acc-setting">
+										<h3>Notifications</h3>
+										<div class="requests-list">
+													<div *ngIf="user.postNotification; else elseTemplate">
+														Post notifications are turned ON
+														<button type="submit" class="accept-req" (click)="turnOffPostNotifications()">Turn off</button>
+													</div>
+													<ng-template #elseTemplate>
+														Post notifications are turned OFF and you will not recieve any new notifications
+														<button type="submit" class="accept-req" (click)="turnOnPostNotifications()"> Turn on</button>
+													</ng-template>
+
+										</div><!--requests-list end-->
+									</div><!--acc-setting end-->
+								</div>
+
 							  	<div class="tab-pane fade" id="nav-deactivate" role="tabpanel" aria-labelledby="nav-deactivate-tab">
 							  		<div class="acc-setting">
 										<h3>Deactivate Account</h3>
