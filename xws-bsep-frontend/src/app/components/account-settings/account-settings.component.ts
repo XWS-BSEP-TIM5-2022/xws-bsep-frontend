@@ -6,6 +6,7 @@ import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
 import { MatSnackBar} from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { SuccessMessage } from 'src/app/model/success-message';
 
 @Component({
   selector: 'app-account-settings',
@@ -36,6 +37,7 @@ export class AccountSettingsComponent implements OnInit {
   inputType3: string = "password";
   requestTab = false;
   changePassTab = true;
+  notificationTab = false;
 
   users: User[]  = []
 
@@ -166,16 +168,24 @@ export class AccountSettingsComponent implements OnInit {
   requests(){
     this.requestTab = true;
     this.changePassTab = false;
+    this.notificationTab = false;
 
     console.log(this.requestTab)
   }
 
 
+  notifications(){
+    this.requestTab = false;
+    this.changePassTab = false;
+    this.notificationTab = true;
+
+  }
+
   changePass(){
     this.changePassTab = true;
     this.requestTab = false;
+    this.notificationTab = false;
     console.log(this.requestTab)
-
   }
 
   acceptRequest(id){
@@ -204,4 +214,32 @@ export class AccountSettingsComponent implements OnInit {
     this.authService.logout();
     this.router.navigate(['']);  
   }
+
+  turnOnPostNotifications(){
+    this.user.postNotification = true; 
+    console.log(this.user)
+    this.userService.updatePostNotification(this.user).subscribe(
+      (success: SuccessMessage) => {
+        console.log(success)
+        if (success.success == "success"){
+          alert("Successfully updated!")    
+        } else {
+          alert("Something went wrong. Please try again.")
+        }
+      }) 
+  }
+
+  turnOffPostNotifications(){
+    this.user.postNotification = false;
+    this.userService.updatePostNotification(this.user).subscribe(
+      (success: SuccessMessage) => {
+        console.log(success)
+        if (success.success == "success"){
+          alert("Successfully updated!")    
+        } else {
+          alert("Something went wrong. Please try again.")
+        }
+      }) 
+  }
+
 }

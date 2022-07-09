@@ -35,4 +35,7 @@ export class UserService {
     return this.http.get<User[]>(`${this.userPath}/search/${criteria}`)    
   }
   
+  updatePostNotification(user: User): Observable<SuccessMessage>{
+    return this.http.put<SuccessMessage>(`${this.userPath}/postNotification`, user)    
+  }
 }
