@@ -16,4 +16,8 @@ export class NotificationService {
     return this.http.get<Notification[]>(`${this.notificationPath}`)    
   }
 
+  getByUserId(id: string) {
+    return this.http.get<Notification[]>(`${this.notificationPath}/user/` + id)    
+  }
+
 }
