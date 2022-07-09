@@ -32,6 +32,9 @@ export class ConnectionService {
     return this.http.put(`${this.connectionPath}/reject`, JSON.stringify(dto));
   }
 
+  changePrivacy(dto){
+    return this.http.put(`${this.connectionPath}/changePrivacy`, JSON.stringify(dto));
+  }
   
   block(dto){
     console.log(dto)

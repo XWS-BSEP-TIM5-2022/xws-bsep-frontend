@@ -1,3 +1,4 @@
+import { SuccessMessage } from './../../model/success-message';
 import { ConnectionService } from './../../services/connection.service';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
@@ -37,6 +38,9 @@ export class AccountSettingsComponent implements OnInit {
   inputType3: string = "password";
   requestTab = false;
   changePassTab = true;
+  accSetignsTab = false;
+  privacyTab = false;
+
   notificationTab = false;
 
   users: User[]  = []
@@ -52,9 +56,92 @@ export class AccountSettingsComponent implements OnInit {
       this.userService.getById(userId).subscribe(
         (user: any) => {
         this.user = user['user']
+        console.log(this.user)
+
         })
       }
+
+      console.log(this.user)
+
+
     }
+
+    changePrivacy(){
+      if(this.user.isPublic){
+        console.log("mijenja u private")
+        var dto= {
+          "private": false
+        }
+        this.connectionService.changePrivacy(dto).subscribe(
+          (user: any) => {
+            window.location.reload()  
+          })
+
+
+        this.user.isPublic = false
+
+
+        this.userService.updatePrivacy(this.user).subscribe(
+          (success: SuccessMessage) => {
+            console.log(success)
+            if (success.success == "success"){
+              // Swal.fire({
+              //   icon: 'success',
+              //   title: 'Yay!',
+              //   text: 'Informations successfully changed!',
+              // })
+              alert("Informations successfully changed!")    
+            } else {
+              // Swal.fire({
+              //   icon: 'error',
+              //   title: 'Oops...',
+              //   text: 'Something went wrong. Please try again.',
+              // }) 
+              alert("Something went wrong. Please try again.")  
+            }
+          })
+        
+      }
+      else {
+        console.log("mijenja u public")
+        var dto= {
+          "private": true
+        }
+        this.connectionService.changePrivacy(dto).subscribe(
+          (user: any) => {
+            window.location.reload()  
+          })
+
+
+        
+          this.user.isPublic = true
+
+          this.userService.updatePrivacy(this.user).subscribe(
+            (success: SuccessMessage) => {
+              console.log(success)
+              if (success.success == "success"){
+                // Swal.fire({
+                //   icon: 'success',
+                //   title: 'Yay!',
+                //   text: 'Informations successfully changed!',
+                // })
+                alert("Informations successfully changed!")    
+              } else {
+                // Swal.fire({
+                //   icon: 'error',
+                //   title: 'Oops...',
+                //   text: 'Something went wrong. Please try again.',
+                // }) 
+                alert("Something went wrong. Please try again.")  
+              }
+            })
+
+        }
+
+
+
+      }
+    
 
     getAllRequests(){
       let userId =  localStorage.getItem("user");
@@ -168,15 +255,39 @@ export class AccountSettingsComponent implements OnInit {
   requests(){
     this.requestTab = true;
     this.changePassTab = false;
+    this.accSetignsTab = false;
+    this.privacyTab = false;
     this.notificationTab = false;
 
-    console.log(this.requestTab)
+    console.log(this.privacyTab)
   }
 
+  accSetings(){
+    this.requestTab = false;
+    this.changePassTab = false;
+    this.accSetignsTab = true;
+    this.privacyTab = false;
+    this.notificationTab = false;
+
+  }
+
+  privacy(){
+    this.requestTab = false;
+    this.changePassTab = false;
+    this.accSetignsTab = false;
+    this.privacyTab = true;
+    console.log(this.privacyTab)
+    this.notificationTab = false;
+
+
+    
+  }
 
   notifications(){
     this.requestTab = false;
     this.changePassTab = false;
+    this.accSetignsTab = false;
+    this.privacyTab = false;
     this.notificationTab = true;
 
   }
@@ -184,6 +295,8 @@ export class AccountSettingsComponent implements OnInit {
   changePass(){
     this.changePassTab = true;
     this.requestTab = false;
+    this.accSetignsTab = false;
+    this.privacyTab = false;
     this.notificationTab = false;
     console.log(this.requestTab)
   }
