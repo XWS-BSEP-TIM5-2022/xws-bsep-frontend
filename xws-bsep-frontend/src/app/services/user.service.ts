@@ -46,4 +46,12 @@ export class UserService {
   updatePostNotification(user: User): Observable<SuccessMessage>{
     return this.http.put<SuccessMessage>(`${this.userPath}/postNotification`, user)    
   }
+
+  updateMessageNotification(user: User): Observable<SuccessMessage>{
+    return this.http.put<SuccessMessage>(`${this.userPath}/messageNotification`, user)    
+  }
+
+  updateFollowNotification(user: User): Observable<SuccessMessage>{
+    return this.http.put<SuccessMessage>(`${this.userPath}/followNotification`, user)    
+  }
 }

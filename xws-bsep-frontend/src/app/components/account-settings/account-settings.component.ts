@@ -7,6 +7,8 @@ import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
 import { MatSnackBar} from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { NotificationService } from 'src/app/services/notification.service';
+import { Notification } from 'src/app/model/notification';
 
 @Component({
   selector: 'app-account-settings',
@@ -21,7 +23,8 @@ export class AccountSettingsComponent implements OnInit {
       private userService: UserService,
       private _snackBar: MatSnackBar,
       private connectionService: ConnectionService, 
-      private router: Router) { }
+      private router: Router,
+      private notificationService: NotificationService) { }
       
   user: User;
   oldPassword: string = "";
@@ -39,14 +42,14 @@ export class AccountSettingsComponent implements OnInit {
   changePassTab = true;
   accSetignsTab = false;
   privacyTab = false;
-
   notificationTab = false;
-
   users: User[]  = []
+  allNotifications: Notification[] = []
 
   ngOnInit(): void {
     this.loadUserData();
     this.getAllRequests();
+    this.loadNotifications();
   }
 
   loadUserData(){
@@ -354,4 +357,67 @@ export class AccountSettingsComponent implements OnInit {
       }) 
   }
 
+  turnOffMessageNotifications(){
+    this.user.messageNotification = false;
+    this.userService.updateMessageNotification(this.user).subscribe(
+      (success: SuccessMessage) => {
+        console.log(success)
+        if (success.success == "success"){
+          alert("Successfully updated!")    
+        } else {
+          alert("Something went wrong. Please try again.")
+        }
+      }) 
+  }
+
+  turnOnMessageNotifications(){
+    this.user.messageNotification = true; 
+    this.userService.updateMessageNotification(this.user).subscribe(
+      (success: SuccessMessage) => {
+        console.log(success)
+        if (success.success == "success"){
+          alert("Successfully updated!")    
+        } else {
+          alert("Something went wrong. Please try again.")
+        }
+      }) 
+  }
+
+  turnOffFollowNotifications(){
+    this.user.followNotification = false; 
+    this.userService.updateFollowNotification(this.user).subscribe(
+      (success: SuccessMessage) => {
+        console.log(success)
+        if (success.success == "success"){
+          alert("Successfully updated!")    
+        } else {
+          alert("Something went wrong. Please try again.")
+        }
+      }) 
+  }
+
+  turnOnFollowNotifications(){
+    this.user.followNotification = true; 
+    this.userService.updateFollowNotification(this.user).subscribe(
+      (success: SuccessMessage) => {
+        console.log(success)
+        if (success.success == "success"){
+          alert("Successfully updated!")    
+        } else {
+          alert("Something went wrong. Please try again.")
+        }
+      }) 
+  }
+
+  loadNotifications(){
+    let userId =  localStorage.getItem("user");
+
+    if (userId != undefined){
+      this.notificationService.getByUserId(userId).subscribe(
+        (data: Notification[]) => {
+          this.allNotifications = data
+          console.log(data)
+      })
+    }
+  }
 }

@@ -477,7 +477,7 @@
 								  <div class="tab-pane fade" [ngClass]="{'show': this.notificationTab === true, 'active': this.notificationTab === true}" id="nav-requests active" role="tabpanel" aria-labelledby="nav-requests-tab">
 									<div class="acc-setting">
 										<h3>Notifications</h3>
-										<div class="requests-list">
+										<div class="requests-list" style="margin-left: 2vw;">
 													<div *ngIf="user.postNotification; else elseTemplate">
 														Post notifications are turned ON
 														<button type="submit" class="accept-req" (click)="turnOffPostNotifications()">Turn off</button>
@@ -486,9 +486,39 @@
 														Post notifications are turned OFF and you will not recieve any new notifications
 														<button type="submit" class="accept-req" (click)="turnOnPostNotifications()"> Turn on</button>
 													</ng-template>
-
+													<br>
+													<div *ngIf="user.messageNotification; else elseTemplate1">
+														Message notifications are turned ON
+														<button type="submit" class="accept-req" (click)="turnOffMessageNotifications()">Turn off</button>
+													</div>
+													<ng-template #elseTemplate1>
+														Message notifications are turned OFF and you will not recieve any new notifications
+														<button type="submit" class="accept-req" (click)="turnOnMessageNotifications()"> Turn on</button>
+													</ng-template>
+													<br>
+													<div *ngIf="user.followNotification; else elseTemplate2">
+														Follow notifications are turned ON
+														<button type="submit" class="accept-req" (click)="turnOffFollowNotifications()">Turn off</button>
+													</div>
+													<ng-template #elseTemplate2>
+														Follow notifications are turned OFF and you will not recieve any new notifications
+														<button type="submit" class="accept-req" (click)="turnOnFollowNotifications()"> Turn on</button>
+													</ng-template>
 										</div><!--requests-list end-->
-									</div><!--acc-setting end-->
+										<br><br>
+										<h3>Your notifications</h3>
+										<div class="requests-list" style="margin-left: 2vw; margin-bottom: 1vw;">
+											<div *ngFor="let n of this.allNotifications['notifications']; let i=index" style="margin-bottom: 1vw;">
+												<div>{{ n.text }} ({{ n.date }}), {{ n.type }} notification
+													<!-- <ul class="skill-tags">
+														<li>
+															<a title=""> {{ n.type }} </a>
+														</li>	
+													</ul>  -->
+												</div>
+											</div>
+										</div>
+									</div><!--acc-setting end-->					
 								</div>
 
 							  	<div class="tab-pane fade" id="nav-deactivate" role="tabpanel" aria-labelledby="nav-deactivate-tab">
