@@ -55,7 +55,12 @@ export class LoginComponent implements OnInit {
 
     console.log(user.username)
     this.authService.login(user).subscribe((posts: any) => {
-      this.router.navigate(['/feed']);
+      var role = localStorage.getItem('role')
+      if(role === 'Admin'){
+        this.router.navigate(['/admin-events']); 
+      }else{
+        this.router.navigate(['/feed']); 
+      }
     })
 
   }

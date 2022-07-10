@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>WorkWise Html Template</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="" />
+<meta name="keywords" content="" />    
+</head>
+
+
+<body>
+	
+
+	<div class="wrapper">
+
+        <header>
+            <div class="container">
+                <div class="header-data">
+                    <div class="logo">
+                        <a href="/feed" title=""><img src="assets/logo.png" alt="" height="40px" width="50px"></a>
+                        <!-- <a href="index.html" title=""><img src="images/logo.png" alt=""></a> -->
+                    </div>
+                
+                    <div class="user-account">
+                        <div class="user-info" (click)="logout()" style="cursor: pointer;">
+                            <img src="assets\cv__29__generated.jpg" style="width: 30px; height: 30px;" alt=""> 
+                            <a routerLink="." >Logout</a>
+                            
+                        </div>
+                    </div>
+                </div><!--header-data end-->
+            </div>
+        </header><!--header end-->	
+
+		<section class="messages-page">
+			<div class="container">
+				<div class="messages-sec">
+					<div class="row">
+						<div class="msgs-list">
+                            <div class="msg-title" style="height: 20px;">
+                                <h3>Events</h3> 
+                            </div><!--msg-title end--> 
+								<div class="messages-list ">
+									<ul>
+										<div *ngFor="let item of events">
+											<li>
+												<div > 
+													<div class="usr-mg-info">
+														<h3>{{item.text}}</h3> 
+                                                        <p *ngIf="item.userId != ''">User id: {{item.userId}}</p>
+                                                        <span style="color: gray;">{{formatDate(item.date)}}</span>
+													</div> 
+												</div> 
+											</li>
+										</div>
+									</ul> 
+							</div>
+						</div>
+					</div>
+				</div><!--messages-sec end-->
+			</div>
+		</section><!--messages-page end-->
+
+
+
+		<footer>
+			<div class="footy-sec mn no-margin">
+				<div class="container">
+					<ul>
+						<li><a href="#" title="">Help Center</a></li>
+						<li><a href="#" title="">Privacy Policy</a></li>
+						<li><a href="#" title="">Community Guidelines</a></li>
+						<li><a href="#" title="">Cookies Policy</a></li>
+						<li><a href="#" title="">Career</a></li>
+						<li><a href="#" title="">Forum</a></li>
+						<li><a href="#" title="">Language</a></li>
+						<li><a href="#" title="">Copyright Policy</a></li>
+					</ul>
+					<p><img src="images/copy-icon2.png" alt="">Copyright 2018</p>
+					<img class="fl-rgt" src="images/logo2.png" alt="">
+				</div>
+			</div>
+		</footer>
+
+	</div><!--theme-layout end-->
+
+
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/popper.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery.mCustomScrollbar.js"></script>
+<script type="text/javascript" src="lib/slick/slick.min.js"></script>
+<script type="text/javascript" src="js/scrollbar.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+
+</body>
+</html>
