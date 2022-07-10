@@ -2,13 +2,14 @@ import { AfterViewChecked, Component, OnInit, ViewChild } from '@angular/core';
 import { Conversation } from '../../model/conversation';
 import { User } from '../../model/user'; 
 import { Message } from '../../model/message'; 
-import { MessageService } from '../../services/message.service';
+import { MessageService } from '../../services/message.service'; 
 import { UserService } from '../../services/user.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NewMessageComponent } from '../new-message/new-message.component'; 
 import { DatePipe } from '@angular/common'; 
 import { ElementRef } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
+import { Event } from '../../model/event';
 
 @Component({
   selector: 'app-messages',
@@ -28,12 +29,12 @@ export class MessagesComponent implements OnInit, AfterViewChecked {
     private messageService: MessageService,
     private userService : UserService, 
     public dialog: MatDialog,
-    private cdr: ChangeDetectorRef) { }
+    private cdr: ChangeDetectorRef,) { }
 
     
   ngOnInit(): void {
     this.loadConversations()  
-    this.scrollToBottom();      
+    this.scrollToBottom(); 
   }
   
   ngAfterViewChecked() {        

@@ -45,6 +45,7 @@ import { UpdateExperienceComponent } from './components/update-user-modals/updat
 import { UpdateEducationComponent } from './components/update-user-modals/update-education/update-education.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { NewMessageComponent } from './components/new-message/new-message.component';
+import { AdminEventsComponent } from './components/admin-events/admin-events.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { NewMessageComponent } from './components/new-message/new-message.compon
     UpdateEducationComponent,
     MessagesComponent,
     NewMessageComponent,
+    AdminEventsComponent,
   ],
   imports: [
     BrowserModule,

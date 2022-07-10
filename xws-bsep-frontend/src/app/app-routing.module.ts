@@ -18,6 +18,7 @@ import { UnregisteredUserFeedComponent } from './components/unregistered-user-fe
 import { UserProfilePublicComponent } from './components/user-profile-public/user-profile-public.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { MessagesComponent } from './components/messages/messages.component'
+import { AdminEventsComponent } from './components/admin-events/admin-events.component'
 
 const routes: Routes = [
   {
@@ -94,6 +95,14 @@ const routes: Routes = [
     canActivate: [RoleGuard], 
     data: { 
       expectedRole: 'User'  
+    }
+  },
+  {
+    path: 'admin-events',
+    component: AdminEventsComponent,
+    canActivate: [RoleGuard], 
+    data: { 
+      expectedRole: 'Admin' //['User', 'Admin']
     }
   },
 
