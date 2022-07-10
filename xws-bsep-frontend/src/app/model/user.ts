@@ -24,4 +24,6 @@ export class User {
     username: string;
     blocked: boolean;
     postNotification: boolean;
+    messageNotification: boolean;
+    followNotification: boolean;
 }
